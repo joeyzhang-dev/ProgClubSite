@@ -16,11 +16,7 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
     title: "Resources",
   },
   {
-    title: "Github",
-    href: "//github.com/" + GITHUB_USERNAME,
-  },
-  {
-    title: "Source",
-    href: "//github.com/ArnavK-09/token-template",
+    title: "Join",
+    href: "//discord.gg/your-discord-link",
   },
 ];

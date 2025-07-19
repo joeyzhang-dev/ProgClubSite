@@ -100,3 +100,29 @@ img,
   50% { opacity: 0.4; transform: scale(1.1) translateY(20px); }
   100% { opacity: 0; transform: scale(0.9) translateY(40px); }
 }
+
+.glow-pulse-title {
+  color: #fff;
+  text-shadow:
+    0 0 6px rgba(59, 130, 246, 0.18),
+    0 0 12px rgba(255, 255, 255, 0.10),
+    0 0 24px rgba(59, 130, 246, 0.08);
+  animation: titlePulse 2.5s infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% {
+    text-shadow:
+      0 0 6px rgba(59, 130, 246, 0.18),
+      0 0 12px rgba(255, 255, 255, 0.10),
+      0 0 24px rgba(59, 130, 246, 0.08);
+    color: #fff;
+  }
+  50% {
+    text-shadow:
+      0 0 12px rgba(59, 130, 246, 0.22),
+      0 0 24px rgba(255, 255, 255, 0.13),
+      0 0 36px rgba(59, 130, 246, 0.10);
+    color: #f4faff;
+  }
+}
