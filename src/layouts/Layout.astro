@@ -17,5 +17,83 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     <header class="fixed top-0 w-screen z-[9999]"><Navbar /></header>
     <main class="pt-28 md:pt-20"><slot /></main>
     <footer class="w-screen bottom-0 overflow-x-hidden"><Footer /></footer>
+    
+    <!-- Cursor glow element -->
+    <div id="cursor-glow" class="cursor-glow"></div>
+    
+    <!-- Background glow effect -->
+    <div id="bg-glow" class="fixed inset-0 pointer-events-none z-0 opacity-0 transition-opacity duration-300"></div>
   </body>
 </html>
+
+<script>
+  // Cursor glow effect
+  const cursorGlow = document.getElementById('cursor-glow');
+  const bgGlow = document.getElementById('bg-glow');
+  let mouseX = 0;
+  let mouseY = 0;
+  let trailElements = [];
+
+  // Update cursor position
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    if (cursorGlow) {
+      cursorGlow.style.left = mouseX + 'px';
+      cursorGlow.style.top = mouseY + 'px';
+    }
+    
+    // Create background glow effect
+    if (bgGlow) {
+      const rect = document.body.getBoundingClientRect();
+      const x = (mouseX / rect.width) * 100;
+      const y = (mouseY / rect.height) * 100;
+      
+      bgGlow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(147, 51, 234, 0.08) 0%, rgba(147, 51, 234, 0.03) 50%, transparent 75%)`;
+      bgGlow.style.opacity = '1';
+    }
+    
+    // Create binary trail
+    if (Math.random() > 0.8) { // 20% chance to create trail element
+      createBinaryTrail(e.clientX, e.clientY);
+    }
+  });
+
+  // Create binary trail element
+  function createBinaryTrail(x, y) {
+    const trail = document.createElement('div');
+    trail.className = 'binary-trail';
+    trail.textContent = Math.random() > 0.5 ? '1' : '0';
+    trail.style.left = x + 'px';
+    trail.style.top = y + 'px';
+    document.body.appendChild(trail);
+    
+    // Remove trail element after animation
+    setTimeout(() => {
+      if (trail.parentNode) {
+        trail.parentNode.removeChild(trail);
+      }
+    }, 2000);
+  }
+
+  // Hide cursor glow when mouse leaves window
+  document.addEventListener('mouseleave', () => {
+    if (cursorGlow) {
+      cursorGlow.style.opacity = '0';
+    }
+    if (bgGlow) {
+      bgGlow.style.opacity = '0';
+    }
+  });
+
+  // Show cursor glow when mouse enters window
+  document.addEventListener('mouseenter', () => {
+    if (cursorGlow) {
+      cursorGlow.style.opacity = '1';
+    }
+    if (bgGlow) {
+      bgGlow.style.opacity = '1';
+    }
+  });
+</script>
