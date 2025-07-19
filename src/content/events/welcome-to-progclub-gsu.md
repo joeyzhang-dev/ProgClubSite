@@ -3,6 +3,9 @@ title: "Welcome to ProgClub@GSU!"
 description: "Join us for our first meeting of the semester and learn about upcoming events, workshops, and opportunities."
 pubDate: "Sep 8 2025"
 heroImage: "/image.jpg"
+hasVideo: false
+hasSlides: true
+hasRecording: false
 ---
 
 # Welcome to ProgClub@GSU! 🎉

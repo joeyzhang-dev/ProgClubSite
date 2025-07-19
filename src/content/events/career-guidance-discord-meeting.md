@@ -1,12 +1,10 @@
 ---
-title: "Career Guidance Discord Meeting - January 15th"
+title: "Career Guidance Discord Meeting - July 18th"
 description: "Join us for our first career guidance session of the semester! Get help with internships, resumes, LinkedIn, and career planning."
 pubDate: "July 18 2025"
-hasVideo: true
-hasSlides: true
+hasVideo: false
+hasSlides: false
 hasRecording: false
-videoUrl: "https://youtube.com/watch?v=example"
-slidesUrl: "https://docs.google.com/presentation/d/example"
 ---
 
 # Career Guidance Discord Meeting - January 15th 🎯

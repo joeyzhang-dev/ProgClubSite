@@ -68,38 +68,37 @@ const upcomingEvents = [
                   </a>
                   
                   {/* Dynamic buttons based on event data */}
-                  {event.data.hasVideo && (
+                  {event.data.hasVideo && event.data.videoUrl && (
                     <a href={event.data.videoUrl} target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
                       Video
                     </a>
                   )}
                   
-                  {event.data.hasSlides && (
-                    <a href={event.data.slidesUrl} target="_blank" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
-                      Slides
-                    </a>
-                  )}
-                  
-                  {event.data.hasRecording && (
-                    <a href={event.data.recordingUrl} target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
-                      Recording
-                    </a>
-                  )}
-                  
-                  {/* Show "Coming Soon" for missing resources */}
-                  {!event.data.hasVideo && (
+                  {event.data.hasVideo && !event.data.videoUrl && (
                     <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
                       Video (Coming Soon)
                     </span>
                   )}
                   
-                  {!event.data.hasSlides && (
+                  {event.data.hasSlides && event.data.slidesUrl && (
+                    <a href={event.data.slidesUrl} target="_blank" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
+                      Slides
+                    </a>
+                  )}
+                  
+                  {event.data.hasSlides && !event.data.slidesUrl && (
                     <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
                       Slides (Coming Soon)
                     </span>
                   )}
                   
-                  {!event.data.hasRecording && (
+                  {event.data.hasRecording && event.data.recordingUrl && (
+                    <a href={event.data.recordingUrl} target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
+                      Recording
+                    </a>
+                  )}
+                  
+                  {event.data.hasRecording && !event.data.recordingUrl && (
                     <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
                       Recording (Coming Soon)
                     </span>
@@ -124,43 +123,42 @@ const upcomingEvents = [
                     {event.date}
                   </span>
                   
-                  {/* Dynamic buttons based on event data */}
-                  {event.hasVideo && (
-                    <a href={event.videoUrl} target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-                      Video
-                    </a>
-                  )}
-                  
-                  {event.hasSlides && (
-                    <a href={event.slidesUrl} target="_blank" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
-                      Slides
-                    </a>
-                  )}
-                  
-                  {event.hasRecording && (
-                    <a href={event.recordingUrl} target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
-                      Recording
-                    </a>
-                  )}
-                  
-                  {/* Show "Coming Soon" for missing resources */}
-                  {!event.hasVideo && (
-                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
-                      Video (Coming Soon)
-                    </span>
-                  )}
-                  
-                  {!event.hasSlides && (
-                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
-                      Slides (Coming Soon)
-                    </span>
-                  )}
-                  
-                  {!event.hasRecording && (
-                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
-                      Recording (Coming Soon)
-                    </span>
-                  )}
+                                     {/* Dynamic buttons based on event data */}
+                   {event.hasVideo && event.videoUrl && (
+                     <a href={event.videoUrl} target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+                       Video
+                     </a>
+                   )}
+                   
+                   {event.hasVideo && !event.videoUrl && (
+                     <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                       Video (Coming Soon)
+                     </span>
+                   )}
+                   
+                   {event.hasSlides && event.slidesUrl && (
+                     <a href={event.slidesUrl} target="_blank" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
+                       Slides
+                     </a>
+                   )}
+                   
+                   {event.hasSlides && !event.slidesUrl && (
+                     <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                       Slides (Coming Soon)
+                     </span>
+                   )}
+                   
+                   {event.hasRecording && event.recordingUrl && (
+                     <a href={event.recordingUrl} target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
+                       Recording
+                     </a>
+                   )}
+                   
+                   {event.hasRecording && !event.recordingUrl && (
+                     <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                       Recording (Coming Soon)
+                     </span>
+                   )}
                 </div>
               </div>
             ))}
