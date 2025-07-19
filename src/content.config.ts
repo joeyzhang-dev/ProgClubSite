@@ -16,10 +16,12 @@ const events = defineCollection({
     hasVideo: z.boolean().optional().default(false),
     hasSlides: z.boolean().optional().default(false),
     hasRecording: z.boolean().optional().default(false),
+    hasArticle: z.boolean().optional().default(false),
     // Resource URLs
     videoUrl: z.string().optional(),
     slidesUrl: z.string().optional(),
     recordingUrl: z.string().optional(),
+    articleUrl: z.string().optional(),
   }),
 });
 

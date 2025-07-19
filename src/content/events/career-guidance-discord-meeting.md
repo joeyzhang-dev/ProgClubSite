@@ -5,6 +5,8 @@ pubDate: "July 18 2025"
 hasVideo: false
 hasSlides: false
 hasRecording: false
+hasArticle: true
+articleUrl: "https://docs.google.com/document/d/example-resume-tips"
 ---
 
 # Career Guidance Discord Meeting - January 15th 🎯

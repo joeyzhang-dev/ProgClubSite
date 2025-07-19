@@ -63,10 +63,6 @@ const upcomingEvents = [
                 <h3 class="text-xl font-semibold mb-3">{event.data.title}</h3>
                 <p class="text-white/80 mb-4">{event.data.description}</p>
                 <div class="flex flex-wrap gap-3">
-                  <a href={`/events/${event.id}`} class="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition-colors">
-                    Event Details
-                  </a>
-                  
                   {/* Dynamic buttons based on event data */}
                   {event.data.hasVideo && event.data.videoUrl && (
                     <a href={event.data.videoUrl} target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
@@ -101,6 +97,18 @@ const upcomingEvents = [
                   {event.data.hasRecording && !event.data.recordingUrl && (
                     <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
                       Recording (Coming Soon)
+                    </span>
+                  )}
+                  
+                  {event.data.hasArticle && event.data.articleUrl && (
+                    <a href={event.data.articleUrl} target="_blank" class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors">
+                      Article
+                    </a>
+                  )}
+                  
+                  {event.data.hasArticle && !event.data.articleUrl && (
+                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                      Article (Coming Soon)
                     </span>
                   )}
                 </div>
@@ -157,6 +165,18 @@ const upcomingEvents = [
                    {event.hasRecording && !event.recordingUrl && (
                      <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
                        Recording (Coming Soon)
+                     </span>
+                   )}
+                   
+                   {event.hasArticle && event.articleUrl && (
+                     <a href={event.articleUrl} target="_blank" class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors">
+                       Article
+                     </a>
+                   )}
+                   
+                   {event.hasArticle && !event.articleUrl && (
+                     <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                       Article (Coming Soon)
                      </span>
                    )}
                 </div>
