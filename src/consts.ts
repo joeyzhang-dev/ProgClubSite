@@ -10,7 +10,7 @@ export const GITHUB_USERNAME = "ArnavK-09";
 export const QUOTE = "everyone is welcome";
 export const NAV_LINKS: Array<{ title: string; href?: string }> = [
   {
-    title: "Blog",
+    title: "Events",
   },
   {
     title: "Github",
