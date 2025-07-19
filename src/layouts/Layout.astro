@@ -42,6 +42,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     if (cursorGlow) {
       cursorGlow.style.left = mouseX + 'px';
       cursorGlow.style.top = mouseY + 'px';
+      cursorGlow.style.opacity = '1';
     }
     
     // Create background glow effect
