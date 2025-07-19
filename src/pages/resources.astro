@@ -1,0 +1,345 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Section from "@/components/Section.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { getCollection } from "astro:content";
+
+// Get all events and sort by date
+const events = (await getCollection("events")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// Group events by semester (you can customize this logic)
+const currentEvents = events.filter(event => {
+  const eventDate = new Date(event.data.pubDate);
+  const now = new Date();
+  // Consider events from the last 6 months as "current"
+  return eventDate > new Date(now.getTime() - 6 * 30 * 24 * 60 * 60 * 1000);
+});
+
+const upcomingEvents = [
+  {
+    title: "Technical Interview Prep Workshop",
+    description: "Comprehensive guide to technical interviews, common questions, and problem-solving strategies.",
+    date: "January 22nd",
+    slug: "technical-interview-prep",
+    hasVideo: false,
+    hasSlides: false,
+    hasRecording: false,
+  },
+  {
+    title: "Project Portfolio Building Session", 
+    description: "Learn how to showcase your projects effectively and build a compelling portfolio.",
+    date: "January 29th",
+    slug: "portfolio-building",
+    hasVideo: false,
+    hasSlides: false,
+    hasRecording: false,
+  },
+  {
+    title: "Networking & Professional Branding",
+    description: "Master LinkedIn optimization, networking strategies, and building your professional brand.",
+    date: "February 5th",
+    slug: "networking-branding",
+    hasVideo: false,
+    hasSlides: false,
+    hasRecording: false,
+  }
+];
+---
+
+<Layout title="Resources">
+  <Section title="Resources">
+    <div class="w-full grid place-items-center">
+      <div class="max-w-6xl w-full space-y-12">
+        
+        <!-- Current Events -->
+        <div class="space-y-6">
+          <h2 class="text-3xl font-bold text-center mb-8">Fall 2025</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {currentEvents.map((event) => (
+              <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-3">{event.data.title}</h3>
+                <p class="text-white/80 mb-4">{event.data.description}</p>
+                <div class="flex flex-wrap gap-3">
+                  <a href={`/events/${event.slug}`} class="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition-colors">
+                    Event Details
+                  </a>
+                  
+                  {/* Dynamic buttons based on event data */}
+                  {event.data.hasVideo && (
+                    <a href={event.data.videoUrl} target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+                      Video
+                    </a>
+                  )}
+                  
+                  {event.data.hasSlides && (
+                    <a href={event.data.slidesUrl} target="_blank" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
+                      Slides
+                    </a>
+                  )}
+                  
+                  {event.data.hasRecording && (
+                    <a href={event.data.recordingUrl} target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
+                      Recording
+                    </a>
+                  )}
+                  
+                  {/* Show "Coming Soon" for missing resources */}
+                  {!event.data.hasVideo && (
+                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                      Video (Coming Soon)
+                    </span>
+                  )}
+                  
+                  {!event.data.hasSlides && (
+                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                      Slides (Coming Soon)
+                    </span>
+                  )}
+                  
+                  {!event.data.hasRecording && (
+                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                      Recording (Coming Soon)
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Upcoming Resources -->
+        <div class="space-y-6">
+          <h2 class="text-3xl font-bold text-center mb-8">Upcoming Resources</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {upcomingEvents.map((event) => (
+              <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-3">{event.title}</h3>
+                <p class="text-white/80 mb-4">{event.description}</p>
+                <div class="flex flex-wrap gap-3">
+                  <span class="bg-yellow-600 text-white px-4 py-2 rounded">
+                    {event.date}
+                  </span>
+                  
+                  {/* Dynamic buttons based on event data */}
+                  {event.hasVideo && (
+                    <a href={event.videoUrl} target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+                      Video
+                    </a>
+                  )}
+                  
+                  {event.hasSlides && (
+                    <a href={event.slidesUrl} target="_blank" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
+                      Slides
+                    </a>
+                  )}
+                  
+                  {event.hasRecording && (
+                    <a href={event.recordingUrl} target="_blank" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">
+                      Recording
+                    </a>
+                  )}
+                  
+                  {/* Show "Coming Soon" for missing resources */}
+                  {!event.hasVideo && (
+                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                      Video (Coming Soon)
+                    </span>
+                  )}
+                  
+                  {!event.hasSlides && (
+                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                      Slides (Coming Soon)
+                    </span>
+                  )}
+                  
+                  {!event.hasRecording && (
+                    <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+                      Recording (Coming Soon)
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Resource Categories -->
+        <div class="space-y-6">
+          <h2 class="text-3xl font-bold text-center mb-8">Resource Categories</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Interview Prep -->
+            <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+              <h3 class="text-lg font-semibold mb-3">Interview Prep</h3>
+              <p class="text-white/80 mb-4">Data Structures, Algorithms, and Technical Interview Resources</p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">DSA Review Materials</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Common Interview Questions</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Problem-Solving Strategies</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Career Development -->
+            <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+              <h3 class="text-lg font-semibold mb-3">Career Development</h3>
+              <p class="text-white/80 mb-4">Resume building, networking, and career planning resources</p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Resume Templates</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">LinkedIn Optimization</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Networking Strategies</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Technical Skills -->
+            <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+              <h3 class="text-lg font-semibold mb-3">Technical Skills</h3>
+              <p class="text-white/80 mb-4">Programming languages, frameworks, and development tools</p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Python Tutorials</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Web Development</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Git & GitHub</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Projects & Portfolio -->
+            <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+              <h3 class="text-lg font-semibold mb-3">Projects & Portfolio</h3>
+              <p class="text-white/80 mb-4">Project ideas, portfolio building, and showcase resources</p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Project Ideas</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Portfolio Templates</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Showcase Examples</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hackathons & Competitions -->
+            <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+              <h3 class="text-lg font-semibold mb-3">Hackathons & Competitions</h3>
+              <p class="text-white/80 mb-4">Competitive programming and hackathon resources</p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Competition Platforms</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Hackathon Tips</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Team Formation</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Industry Connections -->
+            <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+              <h3 class="text-lg font-semibold mb-3">Industry Connections</h3>
+              <p class="text-white/80 mb-4">Guest speakers, company visits, and industry insights</p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Guest Speaker Recordings</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Company Visit Resources</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-white rounded-full"></span>
+                  <span class="text-sm text-white/70">Industry Insights</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="space-y-6">
+          <h2 class="text-3xl font-bold text-center mb-8">Quick Links</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+              <h3 class="text-lg font-semibold mb-3">External Resources</h3>
+              <div class="space-y-3">
+                <a href="https://leetcode.com" target="_blank" class="block text-white/80 hover:text-white transition-colors">
+                  → LeetCode (Practice Problems)
+                </a>
+                <a href="https://github.com" target="_blank" class="block text-white/80 hover:text-white transition-colors">
+                  → GitHub (Code Hosting)
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="block text-white/80 hover:text-white transition-colors">
+                  → LinkedIn (Professional Networking)
+                </a>
+                <a href="https://hackerrank.com" target="_blank" class="block text-white/80 hover:text-white transition-colors">
+                  → HackerRank (Coding Challenges)
+                </a>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
+              <h3 class="text-lg font-semibold mb-3">Club Resources</h3>
+              <div class="space-y-3">
+                <a href="/events" class="block text-white/80 hover:text-white transition-colors">
+                  → All Events
+                </a>
+                <a href="#" class="block text-white/80 hover:text-white transition-colors">
+                  → Discord Server
+                </a>
+                <a href="#" class="block text-white/80 hover:text-white transition-colors">
+                  → Meeting Schedule
+                </a>
+                <a href="#" class="block text-white/80 hover:text-white transition-colors">
+                  → Contact Information
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </Section>
+</Layout> 

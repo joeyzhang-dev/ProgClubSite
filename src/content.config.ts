@@ -12,6 +12,14 @@ const events = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
+    // Resource availability flags
+    hasVideo: z.boolean().optional().default(false),
+    hasSlides: z.boolean().optional().default(false),
+    hasRecording: z.boolean().optional().default(false),
+    // Resource URLs
+    videoUrl: z.string().optional(),
+    slidesUrl: z.string().optional(),
+    recordingUrl: z.string().optional(),
   }),
 });
 
