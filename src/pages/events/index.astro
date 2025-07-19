@@ -4,7 +4,7 @@ import BlogPostCard from "@/components/BlogPostCard.astro";
 import Section from "@/components/Section.astro";
 import Layout from "@/layouts/Layout.astro";
 
-const posts = (await getCollection("blog")).sort(
+const posts = (await getCollection("events")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
