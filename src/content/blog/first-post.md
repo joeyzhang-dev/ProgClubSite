@@ -1,7 +1,7 @@
 ---
 title: "Welcome to ProgClub@GSU!"
 description: "Join us for our first meeting of the semester and learn about upcoming events, workshops, and opportunities."
-pubDate: "Jan 15 2025"
+pubDate: "Sep 8 2025"
 heroImage: "/image.jpg"
 ---
 
