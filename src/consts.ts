@@ -22,4 +22,4 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
 ];
 
 // Force deployment update - July 20, 2025
-export const DEPLOYMENT_VERSION = "1.0.1";
+export const DEPLOYMENT_VERSION = "1.0.2";
