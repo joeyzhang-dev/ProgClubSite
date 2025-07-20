@@ -26,14 +26,84 @@ import { QUOTE, SITE_TITLE } from "@/consts";
   </div>
 </section>
 
-<script is:inline>
-  const hero_bg = document.querySelector(".hero-bg-animate");
+<script>
+  // Global variables to track initialization
+  let heroAnimationInitialized = false;
+  let heroInterval = null;
 
-  setInterval(() => {
+  // Ensure DOM is loaded before initializing animations
+  function initHeroAnimation() {
+    // Don't reinitialize if already done
+    if (heroAnimationInitialized) return;
+    
+    const hero_bg = document.querySelector(".hero-bg-animate");
+    if (!hero_bg) {
+      // Retry after a short delay if element not found
+      setTimeout(initHeroAnimation, 100);
+      return;
+    }
+
+    // Clear any existing interval
+    if (heroInterval) {
+      clearInterval(heroInterval);
+    }
+
+    // Initialize with first binary text
     let binaryText = "";
     for (let i = 0; i < 1000; i++) {
       binaryText += Math.floor(Math.random() * 2).toString();
     }
     hero_bg.textContent = binaryText;
-  }, 300);
+
+    // Start the interval
+    heroInterval = setInterval(() => {
+      let binaryText = "";
+      for (let i = 0; i < 1000; i++) {
+        binaryText += Math.floor(Math.random() * 2).toString();
+      }
+      hero_bg.textContent = binaryText;
+    }, 300);
+
+    // Mark as initialized
+    heroAnimationInitialized = true;
+  }
+
+  // Function to reset hero animation for navigation
+  function resetHeroAnimation() {
+    heroAnimationInitialized = false;
+    
+    // Clear existing interval
+    if (heroInterval) {
+      clearInterval(heroInterval);
+      heroInterval = null;
+    }
+    
+    // Reinitialize after a short delay
+    setTimeout(initHeroAnimation, 50);
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroAnimation);
+  } else {
+    initHeroAnimation();
+  }
+
+  // Listen for Astro navigation events
+  document.addEventListener('astro:page-load', resetHeroAnimation);
+  document.addEventListener('astro:after-swap', resetHeroAnimation);
+  document.addEventListener('astro:effects-reset', resetHeroAnimation);
+
+  // Also initialize on page visibility change (for when user returns to tab)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      // Re-initialize animation when page becomes visible
+      setTimeout(resetHeroAnimation, 100);
+    }
+  });
+
+  // Fallback: also listen for popstate (browser back/forward)
+  window.addEventListener('popstate', () => {
+    setTimeout(resetHeroAnimation, 100);
+  });
 </script>
