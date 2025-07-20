@@ -42,10 +42,16 @@ import { QUOTE, SITE_TITLE } from "@/consts";
   const newTextDelay = 2000; // Delay between current and next text
   let textArrayIndex = 0;
   let charIndex = 0;
+  let typingComplete = false;
 
   // Initialize typing effect
   function initTypingEffect() {
     if (typingEffectInitialized) return;
+    
+    // Reset completion flag and indices
+    typingComplete = false;
+    textArrayIndex = 0;
+    charIndex = 0;
     
     const typedTextSpan = document.querySelector(".typed-text");
     const cursorSpan = document.querySelector(".cursor");
@@ -64,6 +70,11 @@ import { QUOTE, SITE_TITLE } from "@/consts";
       } 
       else {
         cursorSpan.classList.remove("typing");
+        // If we've completed the cycle and this is "welcome", don't erase
+        if (typingComplete && textArrayIndex === 0) {
+          // Stop here - keep "welcome" displayed
+          return;
+        }
         setTimeout(erase, newTextDelay);
       }
     }
@@ -78,8 +89,16 @@ import { QUOTE, SITE_TITLE } from "@/consts";
       else {
         cursorSpan.classList.remove("typing");
         textArrayIndex++;
-        if(textArrayIndex>=textArray.length) textArrayIndex=0;
-        setTimeout(type, typingDelay + 1100);
+        if(textArrayIndex >= textArray.length) {
+          // We've gone through all words, now type "welcome" and stop
+          textArrayIndex = 0; // Go back to "welcome"
+          typingComplete = true;
+          setTimeout(() => {
+            type();
+          }, typingDelay + 1100);
+        } else {
+          setTimeout(type, typingDelay + 1100);
+        }
       }
     }
 
@@ -204,6 +223,11 @@ import { QUOTE, SITE_TITLE } from "@/consts";
   function resetHeroAnimation() {
     heroAnimationInitialized = false;
     typingEffectInitialized = false;
+    
+    // Reset typing effect variables
+    textArrayIndex = 0;
+    charIndex = 0;
+    typingComplete = false;
     
     // Clear existing intervals
     if (heroInterval) {
