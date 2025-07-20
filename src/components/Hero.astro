@@ -50,19 +50,19 @@ import { QUOTE, SITE_TITLE } from "@/consts";
 
     // Initialize with first binary text
     let binaryText = "";
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1500; i++) {
       binaryText += Math.floor(Math.random() * 2).toString();
     }
     hero_bg.textContent = binaryText;
 
-    // Start the interval
+    // Start the interval - faster updates for more dynamic effect
     heroInterval = setInterval(() => {
       let binaryText = "";
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < 1500; i++) {
         binaryText += Math.floor(Math.random() * 2).toString();
       }
       hero_bg.textContent = binaryText;
-    }, 300);
+    }, 200);
 
     // Mark as initialized
     heroAnimationInitialized = true;
