@@ -36,6 +36,34 @@ function normalizeEventData(event) {
   };
 }
 
+// Smart sorting function for events
+function sortEvents(events) {
+  const now = new Date();
+  
+  return events.sort((a, b) => {
+    // Both have confirmed dates
+    if (a.date?.value && b.date?.value) {
+      const dateA = new Date(a.date.value);
+      const dateB = new Date(b.date.value);
+      
+      // Upcoming events first, then by date
+      if (dateA >= now && dateB >= now) {
+        return dateA - dateB; // Soonest first
+      }
+      if (dateA >= now) return -1; // A is upcoming
+      if (dateB >= now) return 1;  // B is upcoming
+      return dateB - dateA; // Past events: newest first
+    }
+    
+    // One has date, one doesn't
+    if (a.date?.value) return -1; // A has date, show first
+    if (b.date?.value) return 1;  // B has date, show first
+    
+    // Both TBD - keep original order
+    return 0;
+  });
+}
+
 // Helper function to fetch all events
 export async function getEvents() {
   const events = await sanityClient.fetch(`
@@ -63,7 +91,8 @@ export async function getEvents() {
     }
   `)
   
-  return events.map(normalizeEventData);
+  const normalizedEvents = events.map(normalizeEventData);
+  return sortEvents(normalizedEvents);
 }
 
 // Helper function to fetch a single event by slug
