@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import Section from "@/components/Section.astro";
 import ResourceButtons from "@/components/ResourceButtons.astro";
-import { getEvents } from "@/lib/sanity.js";
+import { getEvents, renderPortableText } from "@/lib/sanity.js";
 
 // Get all events and sort by date
 const events = await getEvents();
@@ -53,7 +53,7 @@ const upcomingEvents = [
             {currentEvents.map((event) => (
               <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
                 <h3 class="text-xl font-semibold mb-3">{event.title}</h3>
-                <p class="text-white/80 mb-4">{event.description}</p>
+                <div class="prose prose-invert prose-sm mb-4" set:html={renderPortableText(event.description)} />
                 <ResourceButtons resources={event.resources || []} />
               </div>
             ))}

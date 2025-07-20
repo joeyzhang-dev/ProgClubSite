@@ -7,9 +7,10 @@ interface Resource {
 
 interface Props {
   resources: Resource[];
+  class?: string;
 }
 
-const { resources } = Astro.props;
+const { resources, class: extraClass = "" } = Astro.props;
 
 const getButtonColor = (type: string) => {
   switch (type.toLowerCase()) {
@@ -22,20 +23,22 @@ const getButtonColor = (type: string) => {
 };
 ---
 
-<div class="flex flex-wrap gap-3">
+<div class={`flex flex-wrap ${extraClass.includes('compact') ? 'gap-1' : 'gap-3'}`.trim()}>
   {resources && resources.map((resource) => (
-    resource.url ? (
-      <a 
-        href={resource.url} 
-        target="_blank" 
-        class={`${getButtonColor(resource.type)} text-white px-4 py-2 rounded transition-colors`}
-      >
-        {resource.label || resource.type}
-      </a>
-    ) : (
-      <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
-        {resource.label || resource.type} (Coming Soon)
-      </span>
-    )
+    resource && typeof resource === 'object' && resource.type ? (
+      resource.url ? (
+        <a 
+          href={resource.url} 
+          target="_blank" 
+          class={`${getButtonColor(resource.type)} text-white ${extraClass.includes('compact') ? 'px-2 py-1 text-xs' : 'px-4 py-2'} rounded transition-colors`}
+        >
+          {resource.label || resource.type}
+        </a>
+      ) : (
+        <span class={`bg-gray-600 text-white ${extraClass.includes('compact') ? 'px-2 py-1 text-xs' : 'px-4 py-2'} rounded opacity-50`}>
+          {resource.label || resource.type} (Coming Soon)
+        </span>
+      )
+    ) : null
   ))}
 </div> 

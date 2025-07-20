@@ -127,3 +127,40 @@ img,
     color: #f4faff;
   }
 }
+
+.event-info-card {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  border-radius: 1.5rem;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  background: rgba(30, 27, 38, 0.85);
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.event-content-card {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  border-radius: 1.5rem;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  background: rgba(30, 27, 38, 0.85);
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.event-content-card,
+.event-content-card .prose,
+.event-content-card .prose-invert {
+  font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif !important;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.event-content-card h1,
+.event-content-card h2,
+.event-content-card h3,
+.event-content-card h4,
+.event-content-card h5,
+.event-content-card h6 {
+  font-family: "VCR", monospace !important;
+}

@@ -22,8 +22,18 @@ export async function getEvents() {
       _id,
       title,
       date,
+      time,
+      location,
       description,
+      post,
       slug,
+      gallery[] {
+        asset-> {
+          url,
+          metadata { lqip, dimensions }
+        },
+        alt
+      },
       resources[] {
         type,
         label,
@@ -40,8 +50,18 @@ export async function getEvent(slug) {
       _id,
       title,
       date,
+      time,
+      location,
       description,
+      post,
       slug,
+      gallery[] {
+        asset-> {
+          url,
+          metadata { lqip, dimensions }
+        },
+        alt
+      },
       resources[] {
         type,
         label,

@@ -12,17 +12,276 @@ export async function getStaticPaths() {
 
 const { event } = Astro.props;
 const descriptionHtml = renderPortableText(event.description);
+const postHtml = renderPortableText(event.post);
 ---
 
 <BlogPost 
   title={event.title}
   description={typeof event.description === 'string' ? event.description : 'Event description'}
-  pubDate={new Date(event.date)}
+  pubDate={event.date ? new Date(event.date) : undefined}
   resources={event.resources}
 >
-  <div class="prose prose-lg mx-auto">
-    <h1>{event.title}</h1>
-    <p class="text-gray-600 mb-6">{new Date(event.date).toLocaleDateString()}</p>
-    <div set:html={descriptionHtml} />
+  <div class="event-info-card flex flex-col items-center justify-center gap-2 p-3 md:p-4 mb-8 bg-gradient-to-br from-purple-900/80 to-purple-700/60 border border-purple-400/30 rounded-xl shadow max-w-xl mx-auto">
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <div class="flex items-center gap-1 text-sm text-purple-100 font-semibold px-3 py-1 rounded-full bg-purple-800/60 border border-purple-400/20">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+        {event.date ? new Date(event.date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : 'TBA'}
+      </div>
+      <div class="flex items-center gap-1 text-sm text-purple-100 font-semibold px-3 py-1 rounded-full bg-purple-800/60 border border-purple-400/20">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        {event.time || 'TBA'}
+      </div>
+      <div class="flex items-center gap-1 text-sm text-purple-100 font-semibold px-3 py-1 rounded-full bg-purple-800/60 border border-purple-400/20">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 12.414a4 4 0 10-1.414 1.414l4.243 4.243a1 1 0 001.414-1.414z" /></svg>
+        {event.location || 'TBA'}
+      </div>
+    </div>
+  </div>
+  <div class="event-content-card max-w-3xl mx-auto bg-white/10 backdrop-blur-md rounded-2xl shadow-xl pt-4 pb-8 px-6 md:pt-6 md:pb-12 md:px-10 mt-8 mb-12 border border-white/20">
+    <div>
+      <h2 class="text-2xl font-bold mb-1 text-purple-200">Event Details</h2>
+      <div class="prose prose-invert prose-lg max-w-none mb-0 [&>*:last-child]:mb-0 [&>p:last-child]:mb-0" set:html={descriptionHtml} />
+    </div>
+    
+    {event.gallery && event.gallery.length > 0 && (
+      <div class="mt-8 mb-6">
+        <h3 class="text-xl font-bold mb-4 text-purple-200">Event Gallery</h3>
+        <div class="image-slideshow relative w-full max-w-2xl mx-auto">
+          {/* Main Image Container */}
+          <div class="slideshow-viewport relative w-full h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden shadow-2xl">
+            {event.gallery.map((img, index) => (
+              img.asset?.url && (
+                <div
+                  class={`slide absolute inset-0 transition-all duration-700 ease-in-out ${
+                    index === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                  }`}
+                  data-slide={index}
+                >
+                  <img
+                    src={img.asset.url}
+                    alt={img.alt || `${event.title} - Image ${index + 1}`}
+                    class="w-full h-full object-cover object-center rounded-xl"
+                    style="margin: 0.5rem; width: calc(100% - 1rem); height: calc(100% - 1rem);"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                  
+                  {/* Navigation Arrows - Inside each slide */}
+                  {event.gallery.length > 1 && (
+                    <>
+                      <button 
+                        class="slideshow-nav-btn slideshow-prev absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center transition-all duration-200 backdrop-blur-sm border border-white/20 hover:scale-110"
+                        aria-label="Previous image"
+                      >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                      </button>
+                      <button 
+                        class="slideshow-nav-btn slideshow-next absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center transition-all duration-200 backdrop-blur-sm border border-white/20 hover:scale-110"
+                        aria-label="Next image"
+                      >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                      </button>
+                    </>
+                  )}
+                  
+                  {/* Image Counter - Inside each slide */}
+                  {event.gallery.length > 1 && (
+                    <div class="absolute top-4 right-4 z-20 bg-black/60 text-white text-sm px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/20">
+                      <span class="slideshow-counter">1</span> / <span class="slideshow-total">{event.gallery.length}</span>
+                    </div>
+                  )}
+                  
+                </div>
+              )
+            ))}
+            
+            {/* Navigation Dots - Single set positioned as overlay */}
+            {event.gallery.length > 1 && (
+              <div class="slideshow-dots absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                {event.gallery.map((_, dotIndex) => (
+                  <button
+                    class={`slideshow-dot w-3 h-3 rounded-full transition-all duration-200 cursor-pointer ${
+                      dotIndex === 0 
+                        ? 'bg-purple-400 scale-110' 
+                        : 'bg-white/50 hover:bg-white/70 hover:scale-110'
+                    }`}
+                    data-slide={dotIndex}
+                    aria-label={`Go to image ${dotIndex + 1}`}
+                  ></button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    )}
+    
+    {event.post && (
+      <div class="mt-12">
+        <h2 class="text-2xl font-bold mb-3 text-purple-200">Event Recap</h2>
+        <div class="prose prose-invert prose-lg max-w-none" set:html={postHtml} />
+      </div>
+    )}
   </div>
 </BlogPost>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const slideshow = document.querySelector('.image-slideshow');
+    if (!slideshow) return;
+
+    const slides = slideshow.querySelectorAll('.slide');
+    const dots = slideshow.querySelectorAll('.slideshow-dot');
+    const prevBtns = slideshow.querySelectorAll('.slideshow-prev');
+    const nextBtns = slideshow.querySelectorAll('.slideshow-next');
+    const counters = slideshow.querySelectorAll('.slideshow-counter');
+    
+    let currentSlide = 0;
+    let interval;
+    let isTransitioning = false;
+
+    function updateSlide(index) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      
+      // Update slides
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.remove('opacity-0', 'scale-95');
+          slide.classList.add('opacity-100', 'scale-100');
+        } else {
+          slide.classList.remove('opacity-100', 'scale-100');
+          slide.classList.add('opacity-0', 'scale-95');
+        }
+      });
+
+      // Update dots
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove('bg-white/50', 'hover:bg-white/70');
+          dot.classList.add('bg-purple-400', 'scale-110');
+        } else {
+          dot.classList.remove('bg-purple-400', 'scale-110');
+          dot.classList.add('bg-white/50', 'hover:bg-white/70');
+        }
+      });
+
+      // Update counters
+      counters.forEach(counter => {
+        counter.textContent = index + 1;
+      });
+
+      currentSlide = index;
+      
+      // Reset transition flag after animation
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 700);
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % slides.length;
+      updateSlide(next);
+    }
+
+    function prevSlide() {
+      const prev = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlide(prev);
+    }
+
+    // Auto-advance
+    if (slides.length > 1) {
+      interval = setInterval(nextSlide, 5000);
+    }
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        clearInterval(interval);
+        updateSlide(index);
+        // Restart auto-advance
+        interval = setInterval(nextSlide, 5000);
+      });
+    });
+
+    // Arrow navigation
+    prevBtns.forEach(prevBtn => {
+      prevBtn.addEventListener('click', () => {
+        clearInterval(interval);
+        prevSlide();
+        interval = setInterval(nextSlide, 5000);
+      });
+    });
+
+    nextBtns.forEach(nextBtn => {
+      nextBtn.addEventListener('click', () => {
+        clearInterval(interval);
+        nextSlide();
+        interval = setInterval(nextSlide, 5000);
+      });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (slides.length > 1) {
+        if (e.key === 'ArrowLeft') {
+          clearInterval(interval);
+          prevSlide();
+          interval = setInterval(nextSlide, 5000);
+        } else if (e.key === 'ArrowRight') {
+          clearInterval(interval);
+          nextSlide();
+          interval = setInterval(nextSlide, 5000);
+        }
+      }
+    });
+
+    // Pause on hover
+    slideshow.addEventListener('mouseenter', () => {
+      if (slides.length > 1) {
+        clearInterval(interval);
+      }
+    });
+    
+    slideshow.addEventListener('mouseleave', () => {
+      if (slides.length > 1) {
+        interval = setInterval(nextSlide, 5000);
+      }
+    });
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slideshow.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    slideshow.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          // Swipe left - next slide
+          clearInterval(interval);
+          nextSlide();
+          interval = setInterval(nextSlide, 5000);
+        } else {
+          // Swipe right - previous slide
+          clearInterval(interval);
+          prevSlide();
+          interval = setInterval(nextSlide, 5000);
+        }
+      }
+    }
+  });
+</script>
