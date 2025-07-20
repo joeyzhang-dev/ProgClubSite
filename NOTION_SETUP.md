@@ -127,3 +127,88 @@ Club officers can use the **Notion mobile app** to:
 ---
 
 **Need help?** Check the GitHub Actions logs or ask for support! 
+
+Your sync script expects the following from your Notion table:
+
+### How It Parses Resources and URLs
+
+- **Resources:** Multi-select field (e.g., Video, Slides, Article, Recording)
+- **ResourceURLs:** Rich text field, with each URL as a separate line (not a single comma-separated string)
+
+#### In the script:
+```js
+const resources = properties.Resources?.multi_select || []
+const resourceUrls = properties.ResourceURLs?.rich_text || []
+
+const videoUrl = resourceUrls[0]?.plain_text || ''
+const slidesUrl = resourceUrls[1]?.plain_text || ''
+const recordingUrl = resourceUrls[2]?.plain_text || ''
+const articleUrl = resourceUrls[3]?.plain_text || ''
+```
+
+**This means:**  
+- The script expects each URL to be entered as a new line in the ResourceURLs field in Notion, not as a single comma-separated string.
+- The order is:  
+  1. Video  
+  2. Slides  
+  3. Recording  
+  4. Article
+
+---
+
+## 🟢 How to Set Up Your Notion Database for Event Resources
+
+1. **Keep the Resources column** (multi-select):
+   - Add all resource types you want to show as buttons (e.g., Video, Slides, Article, Recording).
+   - Select all that apply for each event.
+
+2. **Use the ResourceURLs column** (rich text, key-value pairs):
+   - For each resource, add a line in the format: `ResourceName: URL`
+   - You can enter them in any order.
+   - If a resource is selected in Resources but has no URL, leave it blank after the colon (e.g., `Slides:`) to show a "Coming Soon" button.
+
+**Example:**
+
+| Resources (multi-select) | ResourceURLs (key-value, any order)         |
+|--------------------------|---------------------------------------------|
+| Video, Slides, Article   | Video: https://youtu.be/abc123              |
+|                          | Slides:                                     |
+|                          | Article: https://myblog.com/article         |
+
+- This will show a Video button (with link), a Slides button (Coming Soon), and an Article button (with link).
+
+**Step-by-step:**
+1. Open Notion and go to your Events database.
+2. Click "+ New" to add a new event.
+3. Fill in the following fields:
+   - **Title:** (e.g., "Python Workshop")
+   - **Date:** (e.g., 2025-01-22)
+   - **Description:** (e.g., "Learn Python basics")
+   - **Slug:** (e.g., "python-workshop")
+   - **Status:** (e.g., "Published")
+   - **Resources:** Select all that apply (e.g., Video, Slides, Article)
+   - **ResourceURLs:** For each resource, add a line: `ResourceName: URL` (leave blank after colon for Coming Soon)
+
+**Notes:**
+- Resource names are case-insensitive ("Video" and "video" are treated the same).
+- You can add/remove resources as needed; the script will always match them up correctly.
+- If you want to add more resource types, just add them to the Resources multi-select and use the same key in ResourceURLs.
+
+---
+
+## 🟣 **Summary Table Example**
+
+| Resources             | ResourceURLs (each on a new line)                |
+|-----------------------|--------------------------------------------------|
+| Video, Slides, Article| https://youtu.be/abc123<br>(blank)<br>(blank)<br>https://myblog.com/article |
+
+---
+
+## ⚠️ **Important**
+- The order of the URLs must match: Video, Slides, Recording, Article.
+- If you skip a resource, leave that line blank.
+
+---
+
+If you want to make this more flexible (e.g., not require blank lines), let me know and I can help you update the script!  
+Otherwise, you’re good to go with this format. 

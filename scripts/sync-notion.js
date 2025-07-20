@@ -44,19 +44,29 @@ async function syncEvents() {
                    title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
       
       // Extract resources
-      const resources = properties.Resources?.multi_select || []
-      const resourceUrls = properties.ResourceURLs?.rich_text || []
-      
-      const hasVideo = resources.some(r => r.name === 'Video')
-      const hasSlides = resources.some(r => r.name === 'Slides')
-      const hasRecording = resources.some(r => r.name === 'Recording')
-      const hasArticle = resources.some(r => r.name === 'Article')
-      
-      // Extract URLs (assuming they're in order: Video, Slides, Recording, Article)
-      const videoUrl = resourceUrls[0]?.plain_text || ''
-      const slidesUrl = resourceUrls[1]?.plain_text || ''
-      const recordingUrl = resourceUrls[2]?.plain_text || ''
-      const articleUrl = resourceUrls[3]?.plain_text || ''
+      const resources = properties.Resources?.multi_select || [];
+      const resourceUrls = properties.ResourceURLs?.rich_text || [];
+
+      // Parse ResourceURLs as key-value pairs
+      const urlMap = {};
+      resourceUrls.forEach(lineObj => {
+        const line = lineObj.plain_text.trim();
+        if (!line) return;
+        const [key, ...rest] = line.split(":");
+        if (!key || rest.length === 0) return;
+        urlMap[key.trim().toLowerCase()] = rest.join(":").trim();
+      });
+
+      const hasVideo = resources.some(r => r.name === 'Video');
+      const hasSlides = resources.some(r => r.name === 'Slides');
+      const hasRecording = resources.some(r => r.name === 'Recording');
+      const hasArticle = resources.some(r => r.name === 'Article');
+
+      // Extract URLs by key (case-insensitive)
+      const videoUrl = urlMap['video'] || '';
+      const slidesUrl = urlMap['slides'] || '';
+      const recordingUrl = urlMap['recording'] || '';
+      const articleUrl = urlMap['article'] || '';
 
       // Create markdown content
       const markdown = `---
