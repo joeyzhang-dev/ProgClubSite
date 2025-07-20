@@ -1,11 +1,21 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import FormattedDate from "@/components/Date.astro";
 import Layout from "@/layouts/Layout.astro";
+import ResourceButtons from "@/components/ResourceButtons.astro";
 
-type Props = CollectionEntry<"events">["data"];
+interface Props {
+  title: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  resources?: Array<{
+    type: string;
+    label?: string;
+    url?: string;
+  }>;
+}
 
-const { title, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, pubDate, updatedDate, heroImage, resources } = Astro.props;
 ---
 
 <Layout>
@@ -32,6 +42,12 @@ const { title, pubDate, updatedDate, heroImage } = Astro.props;
           }
         </div>
         <h1>{title}</h1>
+        {resources && resources.length > 0 && (
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-3">Resources</h3>
+            <ResourceButtons resources={resources} />
+          </div>
+        )}
         <hr />
       </div>
       <slot />

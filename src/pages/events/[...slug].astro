@@ -1,21 +1,28 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getEvents, getEvent, renderPortableText } from "@/lib/sanity.js";
 import BlogPost from "@/layouts/BlogPost.astro";
-import { render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("events");
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: post,
+  const events = await getEvents();
+  return events.map((event) => ({
+    params: { slug: event.slug.current },
+    props: { event },
   }));
 }
-type Props = CollectionEntry<"events">;
 
-const post = Astro.props;
-const { Content } = await render(post);
+const { event } = Astro.props;
+const descriptionHtml = renderPortableText(event.description);
 ---
 
-<BlogPost {...post.data}>
-  <Content />
+<BlogPost 
+  title={event.title}
+  description={typeof event.description === 'string' ? event.description : 'Event description'}
+  pubDate={new Date(event.date)}
+  resources={event.resources}
+>
+  <div class="prose prose-lg mx-auto">
+    <h1>{event.title}</h1>
+    <p class="text-gray-600 mb-6">{new Date(event.date).toLocaleDateString()}</p>
+    <div set:html={descriptionHtml} />
+  </div>
 </BlogPost>

@@ -1,24 +1,41 @@
 ---
-import { getCollection } from "astro:content";
+import { getEvents, renderPortableText } from "@/lib/sanity.js";
 import BlogPostCard from "@/components/BlogPostCard.astro";
 import Section from "@/components/Section.astro";
 import Layout from "@/layouts/Layout.astro";
 
-const posts = (await getCollection("events")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const events = await getEvents();
+
+// Helper function to extract plain text from description
+function getPlainTextExcerpt(description) {
+  if (typeof description === 'string') return description;
+  if (!description || !Array.isArray(description)) return '';
+  
+  // Extract text from block content
+  return description
+    .filter(block => block._type === 'block')
+    .map(block => 
+      block.children
+        ?.filter(child => child._type === 'span')
+        ?.map(span => span.text)
+        ?.join('') || ''
+    )
+    .join(' ')
+    .substring(0, 150) + '...';
+}
 ---
 
 <Layout title="Events">
   <Section title="Events">
     <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
       {
-        posts.map((post) => (
+        events.map((event) => (
           <BlogPostCard
-            slug={post.id}
-            title={post.data.title}
-            excerpt={post.data.description}
-            date={post.data.pubDate}
+            slug={event.slug.current}
+            title={event.title}
+            excerpt={getPlainTextExcerpt(event.description)}
+            date={new Date(event.date)}
+            resources={event.resources}
           />
         ))
       }

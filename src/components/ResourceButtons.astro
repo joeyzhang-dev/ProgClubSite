@@ -1,0 +1,41 @@
+---
+interface Resource {
+  type: string;
+  label?: string;
+  url?: string;
+}
+
+interface Props {
+  resources: Resource[];
+}
+
+const { resources } = Astro.props;
+
+const getButtonColor = (type: string) => {
+  switch (type.toLowerCase()) {
+    case 'video': return 'bg-blue-600 hover:bg-blue-700';
+    case 'slides': return 'bg-green-600 hover:bg-green-700';
+    case 'recording': return 'bg-purple-600 hover:bg-purple-700';
+    case 'article': return 'bg-orange-600 hover:bg-orange-700';
+    default: return 'bg-gray-600 hover:bg-gray-700';
+  }
+};
+---
+
+<div class="flex flex-wrap gap-3">
+  {resources && resources.map((resource) => (
+    resource.url ? (
+      <a 
+        href={resource.url} 
+        target="_blank" 
+        class={`${getButtonColor(resource.type)} text-white px-4 py-2 rounded transition-colors`}
+      >
+        {resource.label || resource.type}
+      </a>
+    ) : (
+      <span class="bg-gray-600 text-white px-4 py-2 rounded opacity-50">
+        {resource.label || resource.type} (Coming Soon)
+      </span>
+    )
+  ))}
+</div> 
