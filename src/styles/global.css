@@ -227,56 +227,5 @@ img,
   }
 }
 
-/* Terminal quote effect */
-.terminal-quote {
-  font-family: "VCR", monospace;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-}
 
-.static-text {
-  color: #00ff00;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-  white-space: nowrap;
-}
-
-.typed-text {
-  color: #00ff00;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-  white-space: nowrap;
-  font-family: "VCR", monospace;
-}
-
-.cursor {
-  display: inline-block;
-  background-color: #00ff00;
-  margin-left: 0.1rem;
-  width: 3px;
-  height: 1.2em;
-  animation: blink 1s infinite;
-  box-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
-}
-
-.cursor.typing {
-  animation: none;
-}
-
-@keyframes blink {
-  0%  { background-color: #00ff00; }
-  49% { background-color: #00ff00; }
-  50% { background-color: transparent; }
-  99% { background-color: transparent; }
-  100%  { background-color: #00ff00; }
-}
-
-/* Matrix-style glow effect for terminal text */
-.terminal-quote:hover .static-text,
-.terminal-quote:hover .typed-text {
-  text-shadow: 
-    0 0 5px rgba(0, 255, 0, 0.5),
-    0 0 10px rgba(0, 255, 0, 0.3),
-    0 0 15px rgba(0, 255, 0, 0.2);
-}
 

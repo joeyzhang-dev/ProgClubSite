@@ -12,10 +12,8 @@ import { QUOTE, SITE_TITLE } from "@/consts";
   <div class="grid place-items-center">
     <div class="text-center -mt-10">
       <h1 class="font-bold text-7xl glitch-title" data-text="{`<${SITE_TITLE} />`}">{`<${SITE_TITLE} />`}</h1>
-      <h2 class="text-2xl opacity-95 terminal-quote">
-        <span class="static-text">everyone is&nbsp;</span>
-        <span class="typed-text"></span>
-        <span class="cursor">&nbsp;</span>
+      <h2 class="text-2xl opacity-95 text-white">
+        everyone is welcome
       </h2>
     </div>
   </div>
@@ -33,79 +31,6 @@ import { QUOTE, SITE_TITLE } from "@/consts";
   let heroAnimationInitialized = false;
   let heroInterval = null;
   let glitchIntervals = new Map(); // Track glitch intervals for each character
-  let typingEffectInitialized = false;
-
-  // Typing effect variables
-  const textArray = ["welcome", "a programmer", "a dreamer"];
-  const typingDelay = 150;
-  const erasingDelay = 100;
-  const newTextDelay = 2000; // Delay between current and next text
-  let textArrayIndex = 0;
-  let charIndex = 0;
-  let typingComplete = false;
-
-  // Initialize typing effect
-  function initTypingEffect() {
-    if (typingEffectInitialized) return;
-    
-    // Reset completion flag and indices
-    typingComplete = false;
-    textArrayIndex = 0;
-    charIndex = 0;
-    
-    const typedTextSpan = document.querySelector(".typed-text");
-    const cursorSpan = document.querySelector(".cursor");
-    
-    if (!typedTextSpan || !cursorSpan) {
-      setTimeout(initTypingEffect, 100);
-      return;
-    }
-
-    function type() {
-      if (charIndex < textArray[textArrayIndex].length) {
-        if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
-        typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(type, typingDelay);
-      } 
-      else {
-        cursorSpan.classList.remove("typing");
-        // If we've completed the cycle and this is "welcome", don't erase
-        if (typingComplete && textArrayIndex === 0) {
-          // Stop here - keep "welcome" displayed
-          return;
-        }
-        setTimeout(erase, newTextDelay);
-      }
-    }
-
-    function erase() {
-      if (charIndex > 0) {
-        if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
-        typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
-        charIndex--;
-        setTimeout(erase, erasingDelay);
-      } 
-      else {
-        cursorSpan.classList.remove("typing");
-        textArrayIndex++;
-        if(textArrayIndex >= textArray.length) {
-          // We've gone through all words, now type "welcome" and stop
-          textArrayIndex = 0; // Go back to "welcome"
-          typingComplete = true;
-          setTimeout(() => {
-            type();
-          }, typingDelay + 1100);
-        } else {
-          setTimeout(type, typingDelay + 1100);
-        }
-      }
-    }
-
-    // Start the typing effect
-    if(textArray.length) setTimeout(type, newTextDelay + 250);
-    typingEffectInitialized = true;
-  }
 
 
 
@@ -222,12 +147,6 @@ import { QUOTE, SITE_TITLE } from "@/consts";
   // Function to reset hero animation for navigation
   function resetHeroAnimation() {
     heroAnimationInitialized = false;
-    typingEffectInitialized = false;
-    
-    // Reset typing effect variables
-    textArrayIndex = 0;
-    charIndex = 0;
-    typingComplete = false;
     
     // Clear existing intervals
     if (heroInterval) {
@@ -243,7 +162,6 @@ import { QUOTE, SITE_TITLE } from "@/consts";
     setTimeout(() => {
       initHeroAnimation();
       initGlitchEffect();
-      initTypingEffect(); // Re-initialize typing effect
     }, 50);
   }
 
@@ -252,12 +170,10 @@ import { QUOTE, SITE_TITLE } from "@/consts";
     document.addEventListener('DOMContentLoaded', () => {
       initHeroAnimation();
       initGlitchEffect();
-      initTypingEffect(); // Initialize typing effect on load
     });
   } else {
     initHeroAnimation();
     initGlitchEffect();
-    initTypingEffect(); // Initialize typing effect on load
   }
 
   // Listen for Astro navigation events
