@@ -12,20 +12,77 @@ export default {
     {
       name: 'date',
       title: 'Date',
-      type: 'date',
-      validation: (Rule: any) => Rule.required()
+      type: 'object',
+      fields: [
+        {
+          name: 'isTBD',
+          title: 'Date TBD',
+          type: 'boolean',
+          initialValue: false
+        },
+        {
+          name: 'value',
+          title: 'Date Value',
+          type: 'date',
+          hidden: ({ parent }: any) => parent?.isTBD
+        }
+      ],
+      validation: (Rule: any) => Rule.custom((dateObj: any) => {
+        if (!dateObj) return 'Date is required';
+        if (dateObj.isTBD) return true;
+        if (!dateObj.value) return 'Date value is required when not TBD';
+        return true;
+      })
     },
     {
       name: 'time',
       title: 'Time',
-      type: 'string',
-      validation: (Rule: any) => Rule.required()
+      type: 'object',
+      fields: [
+        {
+          name: 'isTBD',
+          title: 'Time TBD',
+          type: 'boolean',
+          initialValue: false
+        },
+        {
+          name: 'value',
+          title: 'Time Value',
+          type: 'string',
+          hidden: ({ parent }: any) => parent?.isTBD
+        }
+      ],
+      validation: (Rule: any) => Rule.custom((timeObj: any) => {
+        if (!timeObj) return 'Time is required';
+        if (timeObj.isTBD) return true;
+        if (!timeObj.value) return 'Time value is required when not TBD';
+        return true;
+      })
     },
     {
       name: 'location',
       title: 'Location',
-      type: 'string',
-      validation: (Rule: any) => Rule.required()
+      type: 'object',
+      fields: [
+        {
+          name: 'isTBD',
+          title: 'Location TBD',
+          type: 'boolean',
+          initialValue: false
+        },
+        {
+          name: 'value',
+          title: 'Location Value',
+          type: 'string',
+          hidden: ({ parent }: any) => parent?.isTBD
+        }
+      ],
+      validation: (Rule: any) => Rule.custom((locationObj: any) => {
+        if (!locationObj) return 'Location is required';
+        if (locationObj.isTBD) return true;
+        if (!locationObj.value) return 'Location value is required when not TBD';
+        return true;
+      })
     },
     { 
       name: 'description', 

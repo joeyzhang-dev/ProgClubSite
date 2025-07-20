@@ -41,7 +41,7 @@ function getPlainTextExcerpt(description) {
             slug={event.slug.current}
             title={event.title}
             excerpt={getPlainTextExcerpt(event.description)}
-            date={new Date(event.date)}
+            date={event.date?.isTBD ? null : (event.date?.value ? new Date(event.date.value) : null)}
             resources={event.resources}
           />
         ))

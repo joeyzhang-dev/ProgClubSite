@@ -25,15 +25,15 @@ const postHtml = renderPortableText(event.post);
     <div class="flex flex-wrap items-center justify-center gap-3">
       <div class="flex items-center gap-1 text-sm text-purple-100 font-semibold px-3 py-1 rounded-full bg-purple-800/60 border border-purple-400/20">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-        {event.date ? new Date(event.date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : 'TBA'}
+        {event.date?.isTBD ? 'TBD' : (event.date?.value ? new Date(event.date.value).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : 'TBA')}
       </div>
       <div class="flex items-center gap-1 text-sm text-purple-100 font-semibold px-3 py-1 rounded-full bg-purple-800/60 border border-purple-400/20">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        {event.time || 'TBA'}
+        {event.time?.isTBD ? 'TBD' : (event.time?.value || 'TBA')}
       </div>
       <div class="flex items-center gap-1 text-sm text-purple-100 font-semibold px-3 py-1 rounded-full bg-purple-800/60 border border-purple-400/20">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 12.414a4 4 0 10-1.414 1.414l4.243 4.243a1 1 0 001.414-1.414z" /></svg>
-        {event.location || 'TBA'}
+        {event.location?.isTBD ? 'TBD' : (event.location?.value || 'TBA')}
       </div>
     </div>
   </div>

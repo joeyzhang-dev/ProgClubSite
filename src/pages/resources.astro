@@ -9,7 +9,8 @@ const events = await getEvents();
 
 // Group events by semester (you can customize this logic)
 const currentEvents = events.filter(event => {
-  const eventDate = new Date(event.date);
+  if (event.date?.isTBD || !event.date?.value) return false;
+  const eventDate = new Date(event.date.value);
   const now = new Date();
   // Consider events from the last 6 months as "current"
   return eventDate > new Date(now.getTime() - 6 * 30 * 24 * 60 * 60 * 1000);

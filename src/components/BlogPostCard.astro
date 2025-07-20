@@ -3,7 +3,7 @@ type Props = {
   title: string;
   slug: string;
   excerpt: string;
-  date: Date;
+  date: Date | null;
   resources?: any[];
 };
 
@@ -28,13 +28,11 @@ const { title, slug, excerpt, date, resources } = Astro.props;
         {title}
       </h2>
       <p class="text-white font-medium tracking-widest text-sm mb-4">
-        [{
-          date.toLocaleDateString("en-us", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })
-        }]
+        [{date ? date.toLocaleDateString("en-us", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        }) : 'TBD'}]
       </p>
       <p class="text-white/80 text-sm font-thin mb-4 line-clamp-3">{excerpt}</p>
       <p
