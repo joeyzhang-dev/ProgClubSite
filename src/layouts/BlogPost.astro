@@ -31,17 +31,6 @@ const { title, pubDate, updatedDate, heroImage, resources } = Astro.props;
       class="prose !max-w-[90vw] overflow-x-hidden !break-words brightness-110 prose-img:scale-90 prose-img:rounded-2xl prose-invert prose-hr:border-white prose-hr:bg-white px-4 md:px-0 md:max-w-4xl"
     >
       <div>
-        <div>
-          {pubDate && <FormattedDate date={pubDate} />}
-          {
-            updatedDate && (
-              <div class="last-updated-on">
-                Last updated on <FormattedDate date={updatedDate} />
-              </div>
-            )
-          }
-        </div>
-        <h1>{title}</h1>
         {resources && resources.length > 0 && (
           <div class="mb-4">
             <h3 class="text-base font-semibold mb-2">Resources</h3>
