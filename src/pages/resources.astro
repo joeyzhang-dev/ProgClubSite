@@ -19,21 +19,21 @@ const upcomingEvents = [
   {
     title: "Technical Interview Prep Workshop",
     description: "Comprehensive guide to technical interviews, common questions, and problem-solving strategies.",
-    date: "January 22nd",
+    date: "FALL 2025",
     slug: "technical-interview-prep",
     resources: []
   },
   {
     title: "Project Portfolio Building Session", 
     description: "Learn how to showcase your projects effectively and build a compelling portfolio.",
-    date: "January 29th",
+    date: "FALL 2025",
     slug: "portfolio-building",
     resources: []
   },
   {
     title: "Networking & Professional Branding",
     description: "Master LinkedIn optimization, networking strategies, and building your professional brand.",
-    date: "February 5th",
+    date: "FALL 2025",
     slug: "networking-branding",
     resources: []
   }
@@ -49,11 +49,11 @@ const upcomingEvents = [
         <div class="space-y-6">
           <h2 class="text-3xl font-bold text-center mb-8">Fall 2025</h2>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {currentEvents.map((event) => (
               <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
                 <h3 class="text-xl font-semibold mb-3">{event.title}</h3>
-                <div class="prose prose-invert prose-sm mb-4" set:html={renderPortableText(event.description)} />
+                <div class="prose prose-invert prose-sm mb-4 line-clamp-2" set:html={renderPortableText(event.description)} />
                 <ResourceButtons resources={event.resources || []} />
               </div>
             ))}
@@ -64,11 +64,11 @@ const upcomingEvents = [
         <div class="space-y-6">
           <h2 class="text-3xl font-bold text-center mb-8">Upcoming Resources</h2>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {upcomingEvents.map((event) => (
               <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
                 <h3 class="text-xl font-semibold mb-3">{event.title}</h3>
-                <p class="text-white/80 mb-4">{event.description}</p>
+                <p class="text-white/80 mb-4 line-clamp-2">{event.description}</p>
                 <div class="flex flex-wrap gap-3">
                   <span class="bg-yellow-600 text-white px-4 py-2 rounded">
                     {event.date}
@@ -217,36 +217,19 @@ const upcomingEvents = [
             <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
               <h3 class="text-lg font-semibold mb-3">External Resources</h3>
               <div class="space-y-3">
-                <a href="https://leetcode.com" target="_blank" class="block text-white/80 hover:text-white transition-colors">
-                  → LeetCode (Practice Problems)
-                </a>
-                <a href="https://github.com" target="_blank" class="block text-white/80 hover:text-white transition-colors">
-                  → GitHub (Code Hosting)
-                </a>
-                <a href="https://linkedin.com" target="_blank" class="block text-white/80 hover:text-white transition-colors">
-                  → LinkedIn (Professional Networking)
-                </a>
-                <a href="https://hackerrank.com" target="_blank" class="block text-white/80 hover:text-white transition-colors">
-                  → HackerRank (Coding Challenges)
-                </a>
+                <a href="https://leetcode.com" target="_blank" class="block text-white/80 hover:text-white transition-colors">→ LeetCode (Practice Problems)</a>
+                <a href="https://github.com/ProgClubGSU" target="_blank" class="block text-white/80 hover:text-white transition-colors">→ GitHub</a>
+                <span class="block text-gray-500 cursor-not-allowed select-none">→ LinkedIn (Coming Soon)</span>
+                <span class="block text-gray-500 cursor-not-allowed select-none">→ HackerRank (Coming Soon)</span>
               </div>
             </div>
-
             <div class="bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/20 rounded-lg p-6">
               <h3 class="text-lg font-semibold mb-3">Club Resources</h3>
               <div class="space-y-3">
-                <a href="/events" class="block text-white/80 hover:text-white transition-colors">
-                  → All Events
-                </a>
-                <a href="#" class="block text-white/80 hover:text-white transition-colors">
-                  → Discord Server
-                </a>
-                <a href="#" class="block text-white/80 hover:text-white transition-colors">
-                  → Meeting Schedule
-                </a>
-                <a href="#" class="block text-white/80 hover:text-white transition-colors">
-                  → Contact Information
-                </a>
+                <a href="/events" class="block text-white/80 hover:text-white transition-colors">→ All Events</a>
+                <a href="https://discord.gg/KTsEzTuWs7" target="_blank" class="block text-white/80 hover:text-white transition-colors">→ Discord Server</a>
+                <span class="block text-gray-500 cursor-not-allowed select-none">→ Meeting Schedule (Coming Soon)</span>
+                <span class="block text-gray-500 cursor-not-allowed select-none">→ Contact Information (Coming Soon)</span>
               </div>
             </div>
           </div>
