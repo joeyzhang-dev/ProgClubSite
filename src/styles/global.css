@@ -49,8 +49,8 @@ img,
   user-select: none;
   /* Ensure animation starts immediately */
   animation: fadeIn 0.5s ease-in-out;
-  color: rgba(147, 51, 234, 0.6);
-  text-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
+  color: rgba(255, 255, 255, 0.4);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 @keyframes fadeIn {
@@ -96,15 +96,36 @@ img,
   color: rgba(147, 51, 234, 0.4);
   font-family: "VCR", monospace;
   font-size: 16px;
-  animation: fadeOut 2s forwards;
+  animation: fadeOut 1.5s ease-out forwards;
   /* Ensure smooth animations */
   will-change: transform, opacity;
 }
 
 @keyframes fadeOut {
-  0% { opacity: 0.6; transform: scale(1) translateY(0px); }
-  50% { opacity: 0.4; transform: scale(1.1) translateY(20px); }
-  100% { opacity: 0; transform: scale(0.9) translateY(40px); }
+  0% { 
+    opacity: 0.6; 
+    transform: scale(1) translateY(0px); 
+  }
+  20% { 
+    opacity: 0.5; 
+    transform: scale(1.05) translateY(8px); 
+  }
+  40% { 
+    opacity: 0.4; 
+    transform: scale(1.1) translateY(16px); 
+  }
+  60% { 
+    opacity: 0.3; 
+    transform: scale(1.05) translateY(24px); 
+  }
+  80% { 
+    opacity: 0.15; 
+    transform: scale(0.95) translateY(32px); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: scale(0.9) translateY(40px); 
+  }
 }
 
 .glow-pulse-title {
@@ -168,4 +189,40 @@ img,
 .event-content-card h5,
 .event-content-card h6 {
   font-family: "VCR", monospace !important;
+}
+
+/* Glitch title effect */
+.glitch-title {
+  position: relative;
+  cursor: default;
+}
+
+.glitch-char {
+  display: inline-block;
+  transition: all 0.1s ease;
+  position: relative;
+}
+
+.glitch-char:hover {
+  color: #9333ea;
+  text-shadow: 
+    0 0 5px rgba(147, 51, 234, 0.5),
+    0 0 10px rgba(147, 51, 234, 0.3);
+  transform: scale(1.05);
+}
+
+/* Subtle glow effect for glitching characters */
+.glitch-char.glitching {
+  animation: glitchPulse 0.1s ease-in-out;
+}
+
+@keyframes glitchPulse {
+  0%, 100% { 
+    color: #9333ea;
+    text-shadow: 0 0 5px rgba(147, 51, 234, 0.5);
+  }
+  50% { 
+    color: #fff;
+    text-shadow: 0 0 10px rgba(147, 51, 234, 0.8);
+  }
 }

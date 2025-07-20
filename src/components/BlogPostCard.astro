@@ -4,9 +4,10 @@ type Props = {
   slug: string;
   excerpt: string;
   date: Date;
+  resources?: any[];
 };
 
-const { title, slug, excerpt, date } = Astro.props;
+const { title, slug, excerpt, date, resources } = Astro.props;
 ---
 
 <div

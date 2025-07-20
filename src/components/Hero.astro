@@ -11,7 +11,7 @@ import { QUOTE, SITE_TITLE } from "@/consts";
 >
   <div class="grid place-items-center">
     <div class="text-center -mt-10">
-      <h1 class="font-bold text-7xl">{`<${SITE_TITLE} />`}</h1>
+      <h1 class="font-bold text-7xl glitch-title" data-text="{`<${SITE_TITLE} />`}">{`<${SITE_TITLE} />`}</h1>
       <h2 class="text-2xl opacity-95">
         {QUOTE}
       </h2>
@@ -30,6 +30,7 @@ import { QUOTE, SITE_TITLE } from "@/consts";
   // Global variables to track initialization
   let heroAnimationInitialized = false;
   let heroInterval = null;
+  let glitchIntervals = new Map(); // Track glitch intervals for each character
 
   // Ensure DOM is loaded before initializing animations
   function initHeroAnimation() {
@@ -62,10 +63,83 @@ import { QUOTE, SITE_TITLE } from "@/consts";
         binaryText += Math.floor(Math.random() * 2).toString();
       }
       hero_bg.textContent = binaryText;
-    }, 200);
+    }, 250);
 
     // Mark as initialized
     heroAnimationInitialized = true;
+  }
+
+  // Initialize glitch effect on title
+  function initGlitchEffect() {
+    const title = document.querySelector('.glitch-title');
+    if (!title) {
+      setTimeout(initGlitchEffect, 100);
+      return;
+    }
+
+    // Split title into individual characters
+    const originalText = title.textContent;
+    const characters = originalText.split('');
+    
+    // Create spans for each character
+    title.innerHTML = '';
+    characters.forEach((char, index) => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.className = 'glitch-char';
+      span.dataset.original = char;
+      span.dataset.index = index;
+      title.appendChild(span);
+    });
+
+    // Add hover effects to each character
+    const charSpans = title.querySelectorAll('.glitch-char');
+    charSpans.forEach((span, index) => {
+      span.addEventListener('mouseenter', () => {
+        startGlitchEffect(span);
+      });
+      
+      span.addEventListener('mouseleave', () => {
+        stopGlitchEffect(span);
+      });
+    });
+  }
+
+  // Start glitch effect for a character
+  function startGlitchEffect(span) {
+    const originalChar = span.dataset.original;
+    const symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '=', '+', '[', ']', '{', '}', '|', '\\', ':', ';', '"', "'", '<', '>', ',', '.', '?', '/', '~', '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    
+    // Clear any existing interval for this character
+    if (glitchIntervals.has(span)) {
+      clearInterval(glitchIntervals.get(span));
+    }
+    
+    // Add glitching class for visual effect
+    span.classList.add('glitching');
+    
+    // Start new glitch interval
+    const interval = setInterval(() => {
+      if (Math.random() > 0.3) { // 70% chance to show random symbol
+        span.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      } else { // 30% chance to show original character
+        span.textContent = originalChar;
+      }
+    }, 50); // Update every 50ms for fast glitch effect
+    
+    glitchIntervals.set(span, interval);
+  }
+
+  // Stop glitch effect for a character
+  function stopGlitchEffect(span) {
+    if (glitchIntervals.has(span)) {
+      clearInterval(glitchIntervals.get(span));
+      glitchIntervals.delete(span);
+    }
+    // Remove glitching class
+    span.classList.remove('glitching');
+    // Restore original character
+    span.textContent = span.dataset.original;
   }
 
   // Function to reset hero animation for navigation
@@ -78,15 +152,26 @@ import { QUOTE, SITE_TITLE } from "@/consts";
       heroInterval = null;
     }
     
+    // Clear all glitch intervals
+    glitchIntervals.forEach(interval => clearInterval(interval));
+    glitchIntervals.clear();
+    
     // Reinitialize after a short delay
-    setTimeout(initHeroAnimation, 50);
+    setTimeout(() => {
+      initHeroAnimation();
+      initGlitchEffect();
+    }, 50);
   }
 
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeroAnimation);
+    document.addEventListener('DOMContentLoaded', () => {
+      initHeroAnimation();
+      initGlitchEffect();
+    });
   } else {
     initHeroAnimation();
+    initGlitchEffect();
   }
 
   // Listen for Astro navigation events
