@@ -1,5 +1,5 @@
 export const SITE_TITLE = "PROGgsu";
-export const SITE_DESCRIPTION = "Official website for Georgia State University's Programming Club. Join us for coding, events, and community!";
+export const SITE_DESCRIPTION = "Georgia State University's Programming Club - Join us for coding, events, and community!";
 
 export const KNOWN_TECH =
   `Astro,Tailwindcss,Svelte,Nextjs,Javascript,Typescript,Python,SCSS,CSS,HTML,HTMX,Astro,Tailwindcss,Svelte,Nextjs,Javascript,Typescript,Python,SCSS,CSS,HTML,HTMX`.split(
