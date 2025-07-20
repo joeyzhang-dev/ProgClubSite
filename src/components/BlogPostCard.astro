@@ -11,7 +11,7 @@ const { title, slug, excerpt, date, resources } = Astro.props;
 ---
 
 <div
-  class="w-full mx-auto bg-gradient-to-br relative pb-5 from-white/[0.001] to-white/[0.01] border-2 border-white rounded-lg overflow-hidden transition-all duration-300 ease-in-out hover:border-blue-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-blue-400/30 cursor-pointer group"
+  class="w-full mx-auto bg-gradient-to-br relative pb-5 from-white/[0.001] to-white/[0.01] border-2 border-white rounded-lg overflow-hidden transition-all duration-300 ease-in-out hover:border-blue-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-blue-400/30 cursor-pointer group h-64"
 >
   <div class="flex items-center justify-start px-4 py-2 bg-white/95">
     <div class="flex space-x-2">
@@ -36,7 +36,7 @@ const { title, slug, excerpt, date, resources } = Astro.props;
           })
         }]
       </p>
-      <p class="text-white/80 text-sm font-thin mb-4 line-clamp-1">{excerpt}</p>
+      <p class="text-white/80 text-sm font-thin mb-4 line-clamp-3">{excerpt}</p>
       <p
         class="text-white absolute bottom-4 font-medium inline-flex items-center group-hover:underline-offset-4 underline-offset-8 underline transition-all ease-in-out"
       >
