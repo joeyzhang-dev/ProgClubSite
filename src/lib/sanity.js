@@ -15,9 +15,30 @@ export function renderPortableText(blocks) {
   return toHTML(blocks);
 }
 
+// Helper function to normalize event data (handle both old and new schema formats)
+function normalizeEventData(event) {
+  return {
+    ...event,
+    // Handle date field - could be string (old) or object (new)
+    date: typeof event.date === 'string' 
+      ? { isTBD: false, value: event.date }
+      : event.date || { isTBD: true, value: null },
+    
+    // Handle time field - could be string (old) or object (new)
+    time: typeof event.time === 'string'
+      ? { isTBD: false, value: event.time }
+      : event.time || { isTBD: true, value: null },
+    
+    // Handle location field - could be string (old) or object (new)
+    location: typeof event.location === 'string'
+      ? { isTBD: false, value: event.location }
+      : event.location || { isTBD: true, value: null }
+  };
+}
+
 // Helper function to fetch all events
 export async function getEvents() {
-  return await sanityClient.fetch(`
+  const events = await sanityClient.fetch(`
     *[_type == "event"] | order(date desc) {
       _id,
       title,
@@ -41,11 +62,13 @@ export async function getEvents() {
       }
     }
   `)
+  
+  return events.map(normalizeEventData);
 }
 
 // Helper function to fetch a single event by slug
 export async function getEvent(slug) {
-  return await sanityClient.fetch(`
+  const event = await sanityClient.fetch(`
     *[_type == "event" && slug.current == $slug][0] {
       _id,
       title,
@@ -69,4 +92,6 @@ export async function getEvent(slug) {
       }
     }
   `, { slug })
+  
+  return event ? normalizeEventData(event) : null;
 } 
