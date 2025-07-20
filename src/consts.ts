@@ -20,3 +20,6 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
     href: "//discord.gg/your-discord-link",
   },
 ];
+
+// Force deployment update - July 20, 2025
+export const DEPLOYMENT_VERSION = "1.0.1";
