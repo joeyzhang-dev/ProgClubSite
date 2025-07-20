@@ -30,7 +30,7 @@ export async function GET(context) {
     items: events.map((event) => ({
       title: event.title,
       description: getPlainTextExcerpt(event.description),
-      pubDate: new Date(event.date),
+      pubDate: event.date && event.date.value ? new Date(event.date.value) : undefined,
       link: `/events/${event.slug.current}/`,
     })),
   });

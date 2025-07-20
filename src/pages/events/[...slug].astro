@@ -18,7 +18,7 @@ const postHtml = renderPortableText(event.post);
 <BlogPost 
   title={event.title}
   description={typeof event.description === 'string' ? event.description : 'Event description'}
-  pubDate={event.date ? new Date(event.date) : undefined}
+  pubDate={event.date && event.date.value ? new Date(event.date.value) : undefined}
   resources={event.resources}
 >
   <div class="event-info-card flex flex-col items-center justify-center gap-2 p-3 md:p-4 mb-8 bg-gradient-to-br from-purple-900/80 to-purple-700/60 border border-purple-400/30 rounded-xl shadow max-w-xl mx-auto">
