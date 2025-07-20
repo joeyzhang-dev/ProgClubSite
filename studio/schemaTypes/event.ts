@@ -10,6 +10,28 @@ export default {
       validation: (Rule: any) => Rule.required()
     },
     {
+      name: 'pinned',
+      title: 'Pinned Event',
+      type: 'boolean',
+      description: 'Pin this event to the top of the events list',
+      initialValue: false
+    },
+    {
+      name: 'specialTags',
+      title: 'Special Tags',
+      type: 'array',
+      description: 'Add special tags to highlight this event. Tags can be managed in the "Tags" section.',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'tag' }]
+        }
+      ],
+      options: {
+        layout: 'tags'
+      }
+    },
+    {
       name: 'date',
       title: 'Date',
       type: 'object',

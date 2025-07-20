@@ -4,14 +4,71 @@ type Props = {
   slug: string;
   excerpt: string;
   date: Date | null;
+  time?: string | null;
+  location?: string | null;
+  status?: 'upcoming' | 'active' | 'past';
+  pinned?: boolean;
+  specialTags?: Array<{
+    _id: string;
+    name: string;
+    slug: { current: string };
+    color: string;
+    isActive: boolean;
+  }>;
   resources?: any[];
 };
 
-const { title, slug, excerpt, date, resources } = Astro.props;
+const { title, slug, excerpt, date, time, location, status = 'upcoming', pinned = false, specialTags = [], resources } = Astro.props;
+
+// Helper function to determine status based on date
+function getEventStatus(date: Date | null): 'upcoming' | 'active' | 'past' {
+  if (!date) return 'upcoming';
+  
+  const now = new Date();
+  const eventDate = new Date(date);
+  
+  // Set event date to start of day for comparison
+  eventDate.setHours(0, 0, 0, 0);
+  const today = new Date(now);
+  today.setHours(0, 0, 0, 0);
+  
+  if (eventDate < today) return 'past';
+  if (eventDate.getTime() === today.getTime()) return 'active';
+  return 'upcoming';
+}
+
+// Use provided status or calculate from date
+const eventStatus = status || getEventStatus(date);
+
+// Status configuration
+const statusConfig = {
+  upcoming: {
+    text: 'UPCOMING',
+    color: 'text-green-400',
+    bgColor: 'bg-green-400/20',
+    borderColor: 'border-green-400/30'
+  },
+  active: {
+    text: 'TODAY',
+    color: 'text-yellow-400',
+    bgColor: 'bg-yellow-400/20',
+    borderColor: 'border-yellow-400/30'
+  },
+  past: {
+    text: 'PAST',
+    color: 'text-gray-400',
+    bgColor: 'bg-gray-400/20',
+    borderColor: 'border-gray-400/30'
+  }
+};
+
+const currentStatus = statusConfig[eventStatus];
 ---
 
 <div
-  class="w-full mx-auto relative pb-5 overflow-hidden transition-all duration-500 ease-out cursor-pointer group h-64 rounded-xl backdrop-blur-md border border-white/20 bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] shadow-lg hover:shadow-2xl hover:scale-[1.02] hover:border-white/40"
+  class={`w-full mx-auto relative pb-5 overflow-hidden transition-all duration-500 ease-out cursor-pointer group h-64 rounded-xl backdrop-blur-md border border-white/20 bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] shadow-lg hover:shadow-2xl hover:scale-[1.02] hover:border-white/40 ${
+    pinned ? 'pinned-event' : ''
+  }`}
 >
   <!-- Glass effect overlay -->
   <div class="absolute inset-0 bg-gradient-to-br from-white/[0.1] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -30,17 +87,64 @@ const { title, slug, excerpt, date, resources } = Astro.props;
   <!-- Content area with enhanced glass effect -->
   <div class="relative p-6 tracking-wider z-10">
     <a href={`/events/${slug}`} class="block group">
-      <h2 class="text-xl font-medium text-white mb-2 group-hover:text-blue-300 transition-colors duration-300 drop-shadow-sm">
-        <span class="text-white/70 mr-2 group-hover:text-blue-400 transition-colors duration-300">❯</span>
-        {title}
-      </h2>
-      <p class="text-white font-medium tracking-widest text-sm mb-4 bg-gradient-to-r from-purple-400/20 to-blue-400/20 px-2 py-1 rounded-md inline-block">
-        [{date ? date.toLocaleDateString("en-us", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        }) : 'TBD'}]
-      </p>
+      <!-- Title and Status Row -->
+      <div class="flex items-start justify-between mb-3">
+        <h2 class="text-xl font-medium text-white group-hover:text-blue-300 transition-colors duration-300 drop-shadow-sm flex-1">
+          <span class="text-white/70 mr-2 group-hover:text-blue-400 transition-colors duration-300">❯</span>
+          {title}
+        </h2>
+        <!-- Status Badge -->
+        <div class={`ml-3 px-2 py-1 rounded-md text-xs font-bold uppercase tracking-wide ${currentStatus.bgColor} ${currentStatus.borderColor} border ${currentStatus.color} backdrop-blur-sm`}>
+          {currentStatus.text}
+        </div>
+      </div>
+      
+      <!-- Special Tags Row -->
+      {specialTags && specialTags.length > 0 && (
+        <div class="flex flex-wrap gap-1 mb-3">
+          {specialTags.filter(tag => tag.isActive).map((tag) => {
+            const colorClasses = {
+              purple: 'bg-purple-400/20 border-purple-400/30 text-purple-300',
+              blue: 'bg-blue-400/20 border-blue-400/30 text-blue-300',
+              green: 'bg-green-400/20 border-green-400/30 text-green-300',
+              yellow: 'bg-yellow-400/20 border-yellow-400/30 text-yellow-300',
+              red: 'bg-red-400/20 border-red-400/30 text-red-300',
+              orange: 'bg-orange-400/20 border-orange-400/30 text-orange-300',
+              pink: 'bg-pink-400/20 border-pink-400/30 text-pink-300',
+              teal: 'bg-teal-400/20 border-teal-400/30 text-teal-300'
+            };
+            const tagColor = colorClasses[tag.color] || colorClasses.purple;
+            
+            return (
+              <span class={`px-2 py-1 rounded-md text-xs font-medium ${tagColor} backdrop-blur-sm`}>
+                {tag.name}
+              </span>
+            );
+          })}
+        </div>
+      )}
+      
+      <!-- Event Info Cards - Date, Time, Location -->
+      <div class="flex gap-2 mb-4">
+        <!-- Date Card -->
+        <div class="flex items-center gap-1 px-2 py-1 rounded-md bg-white/[0.1] border border-white/20 backdrop-blur-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          <span class="text-xs font-medium text-white drop-shadow-sm">{date ? date.toLocaleDateString("en-us", { month: "short", day: "numeric" }) : 'TBD'}</span>
+        </div>
+        
+        <!-- Time Card -->
+        <div class="flex items-center gap-1 px-2 py-1 rounded-md bg-white/[0.1] border border-white/20 backdrop-blur-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span class="text-xs font-medium text-white drop-shadow-sm">{time || 'TBD'}</span>
+        </div>
+        
+        <!-- Location Card -->
+        <div class="flex items-center gap-1 px-2 py-1 rounded-md bg-white/[0.1] border border-white/20 backdrop-blur-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 12.414a4 4 0 10-1.414 1.414l4.243 4.243a1 1 0 001.414-1.414z" /></svg>
+          <span class="text-xs font-medium text-white drop-shadow-sm line-clamp-1">{location || 'TBD'}</span>
+        </div>
+      </div>
+      
       <p class="text-white/80 text-sm font-thin mb-4 line-clamp-3 leading-relaxed">{excerpt}</p>
     </a>
   </div>

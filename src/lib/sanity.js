@@ -41,6 +41,10 @@ function sortEvents(events) {
   const now = new Date();
   
   return events.sort((a, b) => {
+    // Pinned events always come first
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    
     // Both have confirmed dates
     if (a.date?.value && b.date?.value) {
       const dateA = new Date(a.date.value);
@@ -70,6 +74,14 @@ export async function getEvents() {
     *[_type == "event"] | order(date desc) {
       _id,
       title,
+      pinned,
+      specialTags[]-> {
+        _id,
+        name,
+        slug,
+        color,
+        isActive
+      },
       date,
       time,
       location,
@@ -101,6 +113,14 @@ export async function getEvent(slug) {
     *[_type == "event" && slug.current == $slug][0] {
       _id,
       title,
+      pinned,
+      specialTags[]-> {
+        _id,
+        name,
+        slug,
+        color,
+        isActive
+      },
       date,
       time,
       location,

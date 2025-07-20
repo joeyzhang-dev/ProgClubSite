@@ -23,21 +23,46 @@ function getPlainTextExcerpt(description) {
     .join(' ')
     .substring(0, 150) + '...';
 }
+
+// Helper function to determine event status
+function getEventStatus(date) {
+  if (!date) return 'upcoming';
+  
+  const now = new Date();
+  const eventDate = new Date(date);
+  
+  // Set event date to start of day for comparison
+  eventDate.setHours(0, 0, 0, 0);
+  const today = new Date(now);
+  today.setHours(0, 0, 0, 0);
+  
+  if (eventDate < today) return 'past';
+  if (eventDate.getTime() === today.getTime()) return 'active';
+  return 'upcoming';
+}
 ---
 
 <Layout title="Events">
   <Section title="Events">
     <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {
-        events.map((event) => (
-          <BlogPostCard
-            slug={event.slug.current}
-            title={event.title}
-            excerpt={getPlainTextExcerpt(event.description)}
-            date={event.date?.isTBD ? null : (event.date?.value ? new Date(event.date.value) : null)}
-            resources={event.resources}
-          />
-        ))
+        events.map((event) => {
+          const eventDate = event.date?.isTBD ? null : (event.date?.value ? new Date(event.date.value) : null);
+          return (
+            <BlogPostCard
+              slug={event.slug.current}
+              title={event.title}
+              excerpt={getPlainTextExcerpt(event.description)}
+              date={eventDate}
+              time={event.time?.isTBD ? null : event.time?.value}
+              location={event.location?.isTBD ? null : event.location?.value}
+              status={getEventStatus(eventDate)}
+              pinned={event.pinned || false}
+              specialTags={event.specialTags || []}
+              resources={event.resources}
+            />
+          );
+        })
       }
     </div>
   </Section>
