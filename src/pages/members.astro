@@ -50,50 +50,106 @@ const membersByYear = {
     {
       name: "Jenny Liu",
       role: "Founding President", 
-      description: "Our fearless founder! Started PROGgsu from an idea in 2020 and built it into the thriving community it is today. True visionary and leader.",
+      description: "Our fearless founder! Started PROGgsu from an idea in March 2020 during the COVID-19 pandemic and built it into the thriving community it is today. True visionary and leader.",
       github: "jennyliu",
       linkedin: "jenny-liu",
       specialties: ["Club Founding", "Visionary Leadership", "Community Building"]
     },
     {
+      name: "Andrew Huang",
+      role: "Founding Academic Advisor",
+      description: "Facebook Engineer In Residence (EIR) and founding academic advisor who provided crucial guidance and industry expertise during PROGgsu's creation in 2020.",
+      github: "andrewhuang",
+      linkedin: "andrew-huang",
+      specialties: ["Industry Mentorship", "Academic Guidance", "Software Engineering"]
+    },
+    {
       name: "Shardul",
       role: "Founding VP",
-      description: "Vice President during Fall 2021 who worked closely with Jenny and the founding team. Key contributor to early club planning and logistics.",
+      description: "Founding member and Vice President who worked closely with Jenny to establish PROGgsu from its very beginning in March 2020.",
       github: "shardul",
       linkedin: "shardul",
       specialties: ["Event Planning", "Logistics", "Team Coordination"]
     },
     {
       name: "Ikenna",
-      role: "Secretary",
-      description: "Secretary/Librarian during Fall 2021. Helped establish club documentation and organizational systems in the early days.",
+      role: "Secretary/Librarian",
+      description: "Founding member and Secretary/Librarian who helped establish club documentation and organizational systems from day one.",
       github: "ikenna",
       linkedin: "ikenna",
       specialties: ["Documentation", "Organization", "Communication"]
     },
     {
       name: "Adithya",
-      role: "Event Lead",
-      description: "Event Lead during Fall 2021. Co-organized early club events and helped establish PROGgsu's event programming traditions.",
+      role: "Director of Events",
+      description: "Founding member and Director of Events who co-organized the very first PROGgsu events and helped establish event programming traditions.",
       github: "adithya",
       linkedin: "adithya",
       specialties: ["Event Planning", "Workshop Organization", "Community Engagement"]
     },
     {
       name: "Beethoven",
-      role: "Event Lead", 
-      description: "Event Lead during Fall 2021 who later became the second president. Started as 'Bee' and helped create engaging programming events before taking on leadership.",
+      role: "Director of Events", 
+      description: "Founding member and Director of Events (originally 'Bee') who partnered with Adithya to create engaging programming events from the club's inception.",
       github: "beethoven",
       linkedin: "beethoven",
       specialties: ["Event Coordination", "Workshop Development", "Leadership Development"]
     },
     {
       name: "Gyan",
-      role: "Tech Chair",
-      description: "Tech Chair during Fall 2021. Managed technical infrastructure and helped establish the club's technology foundations.",
+      role: "Director of Technology",
+      description: "Founding member and Director of Technology (formerly called Tech Chair) who managed technical infrastructure from PROGgsu's founding.",
       github: "gyan",
       linkedin: "gyan", 
       specialties: ["Technical Infrastructure", "Web Development", "System Administration"]
+    },
+    {
+      name: "Anish Ganga",
+      role: "Director of Technology",
+      description: "Founding member and Director of Technology who partnered with Gyan to establish the club's technology foundations from the beginning.",
+      github: "anishganga",
+      linkedin: "anish-ganga",
+      specialties: ["Technical Infrastructure", "Software Development", "System Design"]
+    },
+    {
+      name: "Shain Dholakiya",
+      role: "Former Exec",
+      description: "Former executive member who served from the founding period through 2023, contributing to PROGgsu's growth and development.",
+      github: "shaindholakiya",
+      linkedin: "shain-dholakiya",
+      specialties: ["Executive Leadership", "Strategic Planning", "Community Growth"]
+    },
+    {
+      name: "Japnit",
+      role: "Former Exec",
+      description: "Former executive member who served from the founding era through 2023, helping to build PROGgsu's foundations.",
+      github: "japnit",
+      linkedin: "japnit",
+      specialties: ["Executive Leadership", "Community Building", "Program Development"]
+    },
+    {
+      name: "Rebecca",
+      role: "Former Exec"
+    },
+    {
+      name: "Tawfiq",
+      role: "Former Exec"
+    },
+    {
+      name: "Elisha",
+      role: "Former Exec"
+    },
+    {
+      name: "Austin",
+      role: "Former Exec"
+    },
+    {
+      name: "Dagm",
+      role: "Server Owner",
+      description: "Server owner who managed PROGgsu's Discord and online infrastructure, keeping the community connected.",
+      github: "dagm",
+      linkedin: "dagm",
+      specialties: ["Server Administration", "Community Management", "Discord Moderation"]
     }
   ]
 };
@@ -113,18 +169,24 @@ function getRolePriority(role: string): number {
   const priorities = {
     "President": 1,
     "Founding President": 1,
-    "Vice President": 2,
-    "Former President": 2,
-    "VP": 2,
-    "Former VP": 2,
-    "Founding VP": 2,
-    "Secretary": 3,
-    "Former Secretary": 3,
-    "Treasurer": 4,
-    "Event Lead": 5,
-    "Events Coordinator": 5,
-    "Workshop Lead": 6,
-    "Tech Chair": 7
+    "Founding Academic Advisor": 2,
+    "Vice President": 3,
+    "Former President": 3,
+    "VP": 3,
+    "Former VP": 3,
+    "Founding VP": 3,
+    "Secretary": 4,
+    "Secretary/Librarian": 4,
+    "Former Secretary": 4,
+    "Treasurer": 5,
+    "Director of Events": 6,
+    "Event Lead": 6,
+    "Events Coordinator": 6,
+    "Director of Technology": 7,
+    "Tech Chair": 7,
+    "Workshop Lead": 8,
+    "Former Exec": 9,
+    "Server Owner": 10
   };
   return priorities[role] || 99;
 }
@@ -323,44 +385,81 @@ Object.keys(membersByYear).forEach(year => {
                     }`}>
                       {member.name}
                     </h3>
-                    <p class={`text-sm leading-relaxed ${
-                      isFoundingPresident(member.role) 
-                        ? 'text-violet-100/90' 
-                        : isPresidentRole(member.role) 
-                          ? 'text-amber-100/90' 
-                          : 'text-white/80'
-                    }`}>
-                      {member.description}
-                    </p>
+                    {member.description && (
+                      <p class={`text-sm leading-relaxed ${
+                        isFoundingPresident(member.role) 
+                          ? 'text-violet-100/90' 
+                          : isPresidentRole(member.role) 
+                            ? 'text-amber-100/90' 
+                            : 'text-white/80'
+                      }`}>
+                        {member.description}
+                      </p>
+                    )}
+                    {!member.description && (
+                      <p class={`text-sm leading-relaxed italic ${
+                        isFoundingPresident(member.role) 
+                          ? 'text-violet-100/60' 
+                          : isPresidentRole(member.role) 
+                            ? 'text-amber-100/60' 
+                            : 'text-white/50'
+                      }`}>
+                        {year === "2020-2021" ? "Founding member of PROGgsu." : "Former member of PROGgsu."} More information coming soon...
+                      </p>
+                    )}
                   </div>
 
                   <!-- Specialties Tags -->
-                  <div class="mb-6">
-                    <p class={`text-xs uppercase tracking-wide mb-3 font-medium ${
-                      isFoundingPresident(member.role) 
-                        ? 'text-violet-300' 
-                        : isPresidentRole(member.role) 
-                          ? 'text-amber-300' 
-                          : 'text-cyan-300'
-                    }`}>Specialties</p>
-                    <div class="flex flex-wrap gap-2">
-                      {member.specialties.map((specialty) => (
-                        <span class={`px-3 py-1.5 text-xs rounded-full border border-white/20 text-white/90 backdrop-blur-sm transition-all duration-300 shadow-lg ${
-                          isFoundingPresident(member.role)
-                            ? 'bg-gradient-to-r from-violet-400/20 to-pink-400/20 hover:from-violet-400/30 hover:to-pink-400/30'
-                            : isPresidentRole(member.role)
-                              ? 'bg-gradient-to-r from-amber-400/20 to-yellow-400/20 hover:from-amber-400/30 hover:to-yellow-400/30'
-                              : 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30'
-                        }`}>
-                          {specialty}
-                        </span>
-                      ))}
+                  {member.specialties && member.specialties.length > 0 ? (
+                    <div class="mb-6">
+                      <p class={`text-xs uppercase tracking-wide mb-3 font-medium ${
+                        isFoundingPresident(member.role) 
+                          ? 'text-violet-300' 
+                          : isPresidentRole(member.role) 
+                            ? 'text-amber-300' 
+                            : 'text-cyan-300'
+                      }`}>Specialties</p>
+                      <div class="flex flex-wrap gap-2">
+                        {member.specialties.map((specialty) => (
+                          <span class={`px-3 py-1.5 text-xs rounded-full border border-white/20 text-white/90 backdrop-blur-sm transition-all duration-300 shadow-lg ${
+                            isFoundingPresident(member.role)
+                              ? 'bg-gradient-to-r from-violet-400/20 to-pink-400/20 hover:from-violet-400/30 hover:to-pink-400/30'
+                              : isPresidentRole(member.role)
+                                ? 'bg-gradient-to-r from-amber-400/20 to-yellow-400/20 hover:from-amber-400/30 hover:to-yellow-400/30'
+                                : 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30'
+                          }`}>
+                            {specialty}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div class="mb-6">
+                      <p class={`text-xs uppercase tracking-wide mb-3 font-medium ${
+                        isFoundingPresident(member.role) 
+                          ? 'text-violet-300/60' 
+                          : isPresidentRole(member.role) 
+                            ? 'text-amber-300/60' 
+                            : 'text-cyan-300/60'
+                      }`}>Specialties</p>
+                      <div class="flex flex-wrap gap-2">
+                        <span class={`px-3 py-1.5 text-xs rounded-full border border-white/10 text-white/40 backdrop-blur-sm transition-all duration-300 shadow-lg italic ${
+                          isFoundingPresident(member.role)
+                            ? 'bg-gradient-to-r from-violet-400/10 to-pink-400/10'
+                            : isPresidentRole(member.role)
+                              ? 'bg-gradient-to-r from-amber-400/10 to-yellow-400/10'
+                              : 'bg-gradient-to-r from-purple-500/10 to-blue-500/10'
+                        }`}>
+                          Information coming soon
+                        </span>
+                      </div>
+                    </div>
+                  )}
 
                   <!-- Social Links -->
                   <div class="flex gap-3 mt-auto">
-                    {member.github && (
+                    <!-- GitHub Button -->
+                    {member.github ? (
                       <a 
                         href={`https://github.com/${member.github}`}
                         target="_blank"
@@ -372,8 +471,17 @@ Object.keys(membersByYear).forEach(year => {
                         </svg>
                         GitHub
                       </a>
+                    ) : (
+                      <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-gray-800/20 to-gray-900/20 border border-white/10 text-white/40 transition-all duration-300 text-xs backdrop-blur-sm shadow-lg cursor-not-allowed opacity-60">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        GitHub
+                      </div>
                     )}
-                    {member.linkedin && (
+
+                    <!-- LinkedIn Button -->
+                    {member.linkedin ? (
                       <a 
                         href={`https://linkedin.com/in/${member.linkedin}`}
                         target="_blank"
@@ -385,6 +493,13 @@ Object.keys(membersByYear).forEach(year => {
                         </svg>
                         LinkedIn
                       </a>
+                    ) : (
+                      <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-800/20 to-blue-900/20 border border-white/10 text-white/40 transition-all duration-300 text-xs backdrop-blur-sm shadow-lg cursor-not-allowed opacity-60">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
+                        </svg>
+                        LinkedIn
+                      </div>
                     )}
                   </div>
                 </div>
