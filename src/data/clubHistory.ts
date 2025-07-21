@@ -85,7 +85,7 @@ export const clubTimeline: ClubHistory = {
     {
       date: "Fall 2021",
       title: "Second Executive Board Transition",
-      description: "Successful leadership transition with expanded executive team including new roles for Events Directors and Tech Chairs.",
+      description: "Successful leadership transition with expanded executive team including new academic advisors and specialized roles.",
       type: "milestone"
     },
     {
@@ -95,30 +95,36 @@ export const clubTimeline: ClubHistory = {
       type: "program"
     },
     {
-      date: "Fall 2022",
-      title: "Structured Event Schedule",
-      description: "Established consistent weekly programming with alternating technical workshops, mock interviews, and competitive programming.",
+      date: "2022",
+      title: "Prahbir Virk Leadership Era Begins",
+      description: "Prahbir Virk takes over as 3rd President, beginning a 3-year leadership tenure focused on membership expansion and activity strengthening.",
       type: "milestone"
     },
     {
-      date: "2022",
-      title: "Partnership with PantherHackers",
-      description: "Collaborated on joint events including Python workshops and hackathons, expanding our community reach.",
+      date: "2022-2023",
+      title: "Partnership & Growth Expansion", 
+      description: "Continued collaboration with PantherHackers, established consistent weekly programming, and maintained strong competitive programming participation.",
       type: "achievement"
     }
   ],
 
   currentEra: [
     {
-      date: "2023-Present",
-      title: "Sustainable Growth & Innovation",
-      description: "Maintaining consistent programming while adapting to post-pandemic hybrid learning and new technologies.",
+      date: "2022-2025",
+      title: "Prahbir Virk Presidential Era",
+      description: "Three-year leadership period under Prahbir Virk, maintaining club stability and growth while building on Beethoven's foundational work.",
       type: "milestone"
     },
     {
-      date: "2024-Present",
-      title: "Leadership Continuity",
-      description: "Successful multi-year leadership transitions ensuring institutional knowledge preservation and program continuity.",
+      date: "2025-Present",
+      title: "Joey Zhang Leadership & Innovation",
+      description: "Current president Joey Zhang takes over in 2025, leading PROGgsu into the future with continued innovation and community building.",
+      type: "milestone"
+    },
+    {
+      date: "2020-Present",
+      title: "Sustainable Community Legacy",
+      description: "5+ years of continuous operation demonstrating resilience through leadership transitions, with proven programs helping hundreds of students.",
       type: "achievement"
     }
   ]

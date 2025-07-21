@@ -36,28 +36,25 @@ export const membersByYear: MembersByYear = {
     // Add current officers here as they join
   ],
   
-  "2024-2025": [
+  "2022-2025": [
     {
-      name: "Prahbir",
+      name: "Prahbir Virk",
       role: "Former President",
-      description: "Former president who led PROGgsu through 2024-2025. Great leader who helped expand our membership and activities.",
-      specialties: ["Leadership", "Project Management", "Software Development"]
-    }
-  ],
-  
-  "2023-2024": [
+      description: "3rd President who led PROGgsu from 2022-2025, taking over after Beethoven's foundational work. Expanded membership, strengthened club activities, and maintained the strong community culture through multiple academic years.",
+      specialties: ["Leadership", "Project Management", "Software Development", "Community Growth"]
+    },
     {
       name: "Ethan Munji",
-      role: "Former President", 
-      description: "3rd President who led PROGgsu through 2023-2024 with innovation and dedication. Took over after Beethoven's successful tenure and continued building the club's momentum.",
-      specialties: ["Leadership", "Software Engineering", "Team Building"]
+      role: "Former VP",
+      description: "Former Vice President who served during Prahbir's presidency (2022-2025), providing crucial support and helping maintain club operations and member engagement.",
+      specialties: ["Leadership Support", "Software Engineering", "Team Building"]
     }
   ],
   
   "2021-2023": [
     {
       name: "Beethoven",
-      role: "Former President",
+      role: "2nd President",
       description: "2nd President (2021-2023) who transformed PROGgsu from HackJams and DSA reviews to hackathons and mock interviews. Expanded to 400+ Discord members, achieved official RSO status, and secured SAFC funding. Originally a founding member and Director of Events.",
       github: "beesmalley",
       specialties: ["Leadership", "Community Growth", "Event Innovation", "Strategic Partnerships"]
