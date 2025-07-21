@@ -1,0 +1,302 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Section from "@/components/Section.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+
+// Sample member data - replace with actual data source (Sanity CMS, etc.)
+const membersByYear = {
+  "2024-2025": [
+    {
+      name: "Alex Johnson",
+      role: "President",
+      major: "Computer Science",
+      year: "Senior",
+      github: "alexj",
+      linkedin: "alexjohnson",
+      specialties: ["React", "Python", "AI/ML"],
+      joinedSemester: "Fall 2022"
+    },
+    {
+      name: "Sarah Chen",
+      role: "Vice President",
+      major: "Software Engineering",
+      year: "Junior",
+      github: "sarahc",
+      linkedin: "sarah-chen",
+      specialties: ["Vue.js", "Node.js", "DevOps"],
+      joinedSemester: "Spring 2023"
+    },
+    {
+      name: "Marcus Williams",
+      role: "Secretary",
+      major: "Information Systems",
+      year: "Junior",
+      github: "marcusw",
+      linkedin: "marcus-williams",
+      specialties: ["Java", "Spring", "Databases"],
+      joinedSemester: "Fall 2023"
+    },
+    {
+      name: "Priya Patel",
+      role: "Treasurer",
+      major: "Computer Science",
+      year: "Sophomore",
+      github: "priyap",
+      linkedin: "priya-patel",
+      specialties: ["JavaScript", "React", "UI/UX"],
+      joinedSemester: "Spring 2024"
+    },
+    {
+      name: "David Kim",
+      role: "Events Coordinator",
+      major: "Cybersecurity",
+      year: "Senior",
+      github: "davidk",
+      linkedin: "david-kim",
+      specialties: ["Security", "Penetration Testing", "Linux"],
+      joinedSemester: "Fall 2022"
+    },
+    {
+      name: "Emily Rodriguez",
+      role: "Workshop Lead",
+      major: "Data Science",
+      year: "Junior",
+      github: "emilyr",
+      linkedin: "emily-rodriguez",
+      specialties: ["Python", "Machine Learning", "Data Analysis"],
+      joinedSemester: "Fall 2023"
+    }
+  ],
+  "2023-2024": [
+    {
+      name: "Jordan Lee",
+      role: "Former President",
+      major: "Computer Science",
+      year: "Alumni (2024)",
+      github: "jordanl",
+      linkedin: "jordan-lee",
+      specialties: ["Full Stack", "Leadership", "Mentoring"],
+      joinedSemester: "Fall 2021"
+    },
+    {
+      name: "Taylor Brown",
+      role: "Former VP",
+      major: "Software Engineering",
+      year: "Alumni (2024)",
+      github: "taylorb",
+      linkedin: "taylor-brown",
+      specialties: ["Angular", "C#", ".NET"],
+      joinedSemester: "Spring 2022"
+    },
+    {
+      name: "Alex Martinez",
+      role: "Former Secretary",
+      major: "Information Technology",
+      year: "Alumni (2024)",
+      github: "alexm",
+      linkedin: "alex-martinez",
+      specialties: ["Cloud Computing", "AWS", "Docker"],
+      joinedSemester: "Fall 2022"
+    }
+  ],
+  "2022-2023": [
+    {
+      name: "Jessica Wang",
+      role: "Founding President",
+      major: "Computer Science",
+      year: "Alumni (2023)",
+      github: "jessicaw",
+      linkedin: "jessica-wang",
+      specialties: ["Club Founding", "Community Building", "React"],
+      joinedSemester: "Fall 2021"
+    },
+    {
+      name: "Michael Thompson",
+      role: "Founding VP",
+      major: "Software Development",
+      year: "Alumni (2023)",
+      github: "mikethompson",
+      linkedin: "michael-thompson",
+      specialties: ["Backend Development", "APIs", "Database Design"],
+      joinedSemester: "Fall 2021"
+    }
+  ]
+};
+
+// Get role priority for sorting
+function getRolePriority(role: string): number {
+  const priorities = {
+    "President": 1,
+    "Founding President": 1,
+    "Vice President": 2,
+    "Former President": 2,
+    "VP": 2,
+    "Former VP": 2,
+    "Secretary": 3,
+    "Former Secretary": 3,
+    "Treasurer": 4,
+    "Events Coordinator": 5,
+    "Workshop Lead": 6,
+    "Founding VP": 7
+  };
+  return priorities[role] || 99;
+}
+
+// Sort members by role priority
+Object.keys(membersByYear).forEach(year => {
+  membersByYear[year].sort((a, b) => getRolePriority(a.role) - getRolePriority(b.role));
+});
+---
+
+<Layout
+  title="Members - PROGgsu"
+  description="Meet the amazing members of PROGgsu across the years. From founding members to current leadership, discover the people building GSU's programming community."
+>
+  <Section title="Our Amazing Members" className="pt-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <Breadcrumb title="Members" />
+        <p class="text-white/80 text-lg mt-6 max-w-3xl mx-auto leading-relaxed">
+          Meet the incredible people who make PROGgsu possible! From our founding members who started this journey
+          to our current leadership team, each person contributes to building GSU's vibrant programming community.
+        </p>
+      </div>
+
+      <!-- Members by Year -->
+      {Object.entries(membersByYear).map(([year, members]) => (
+        <div class="mb-16">
+          <!-- Year Header -->
+          <div class="flex items-center justify-center mb-8">
+            <div class="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-400/30 rounded-full px-8 py-3 backdrop-blur-sm">
+              <h2 class="text-2xl md:text-3xl font-bold text-white glow-pulse-title">
+                Academic Year {year}
+              </h2>
+            </div>
+          </div>
+
+          <!-- Member Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {members.map((member) => (
+              <div class="group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-white/40">
+                <!-- Glass effect overlay -->
+                <div class="absolute inset-0 bg-gradient-to-br from-white/[0.1] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <!-- Header with role -->
+                <div class="relative px-6 py-4 bg-gradient-to-r from-white/[0.15] to-white/[0.08] backdrop-blur-sm border-b border-white/20">
+                  <div class="flex items-center justify-between">
+                    <div class="flex space-x-2">
+                      <div class="w-3 h-3 rounded-full bg-green-400 shadow-sm"></div>
+                      <div class="w-3 h-3 rounded-full bg-yellow-400 shadow-sm"></div>
+                      <div class="w-3 h-3 rounded-full bg-red-400 shadow-sm"></div>
+                    </div>
+                    <span class="text-xs font-medium text-purple-300 uppercase tracking-wide">
+                      {member.role}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Member Info -->
+                <div class="relative p-6 z-10">
+                  <!-- Name and Academic Info -->
+                  <div class="mb-4">
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300">
+                      {member.name}
+                    </h3>
+                    <div class="space-y-1">
+                      <p class="text-sm text-white/80">
+                        <span class="text-purple-300">Major:</span> {member.major}
+                      </p>
+                      <p class="text-sm text-white/80">
+                        <span class="text-purple-300">Year:</span> {member.year}
+                      </p>
+                      <p class="text-sm text-white/80">
+                        <span class="text-purple-300">Joined:</span> {member.joinedSemester}
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Specialties Tags -->
+                  <div class="mb-4">
+                    <p class="text-xs text-purple-300 uppercase tracking-wide mb-2">Specialties</p>
+                    <div class="flex flex-wrap gap-1">
+                      {member.specialties.map((specialty) => (
+                        <span class="px-2 py-1 text-xs rounded-full bg-purple-400/20 border border-purple-400/30 text-purple-300 backdrop-blur-sm">
+                          {specialty}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <!-- Social Links -->
+                  <div class="flex gap-3 mt-auto">
+                    {member.github && (
+                      <a 
+                        href={`https://github.com/${member.github}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gray-600/20 border border-gray-400/30 text-gray-300 hover:bg-gray-600/40 hover:text-white transition-all duration-300 text-xs"
+                      >
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        GitHub
+                      </a>
+                    )}
+                    {member.linkedin && (
+                      <a 
+                        href={`https://linkedin.com/in/${member.linkedin}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-600/20 border border-blue-400/30 text-blue-300 hover:bg-blue-600/40 hover:text-white transition-all duration-300 text-xs"
+                      >
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"></path>
+                        </svg>
+                        LinkedIn
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                <!-- Subtle glow effect -->
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- Call to Action -->
+      <div class="text-center mt-16 py-12 px-8 rounded-2xl border border-white/20 bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] backdrop-blur-md">
+        <h3 class="text-3xl font-bold text-white mb-4 glow-pulse-title">
+          Want to Join Our Team?
+        </h3>
+        <p class="text-white/80 text-lg mb-6 max-w-2xl mx-auto">
+          We're always looking for passionate programmers to join our community! Whether you're a beginner 
+          or experienced developer, there's a place for you in PROGgsu.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/events" 
+            class="px-8 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          >
+            Check Out Our Events
+          </a>
+          <a 
+            href="//discord.gg/your-discord-link" 
+            target="_blank"
+            class="px-8 py-3 rounded-lg border border-white/30 text-white hover:bg-white/10 font-medium transition-all duration-300 hover:scale-105"
+          >
+            <span>❤️ Join Our Discord</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </Section>
+</Layout>
+
+<style>
+  .glow-pulse-title {
+    animation: titlePulse 2.5s infinite;
+  }
+</style> 
