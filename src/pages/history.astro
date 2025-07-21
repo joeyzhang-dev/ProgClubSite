@@ -229,20 +229,20 @@ const timelineEvents = [
           
           <!-- Timeline Events -->
           {timelineEvents.map((event, index) => {
-            // Create staggered positioning pattern
+            // Create dramatic staggered positioning with overlapping
             const staggerPatterns = [
-              'items-start', // Card above dot
-              'items-center', // Card aligned with dot  
-              'items-end',   // Card below dot
-              'items-center transform translate-y-4', // Card slightly below center
-              'items-center transform -translate-y-4', // Card slightly above center
-              'items-start transform translate-y-2', // Card above dot, slight offset
-              'items-end transform -translate-y-2'   // Card below dot, slight offset
+              'items-center mb-12', // Standard spacing
+              'items-center -mt-12 mb-8', // Significant overlap
+              'items-center mt-16 mb-6', // Large gap down
+              'items-center -mt-8 mb-10', // Medium overlap
+              'items-center mt-20 mb-4', // Very large gap
+              'items-center -mt-16 mb-8', // Large overlap
+              'items-center mt-6 mb-14'   // Small gap, larger bottom
             ];
             const staggerClass = staggerPatterns[index % staggerPatterns.length];
             
             return (
-            <div class={`relative flex ${staggerClass} mb-8 md:mb-12 timeline-entrance md:${index % 2 === 0 ? 'justify-start' : 'justify-end'} justify-start`}>
+            <div class={`relative flex ${staggerClass} timeline-entrance md:${index % 2 === 0 ? 'justify-start' : 'justify-end'} justify-start`}>
               <!-- Timeline Dot - responsive positioning -->
               <div class={`absolute left-8 md:left-1/2 transform md:-translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-black ${event.milestone ? 'bg-white shadow-lg shadow-white/30' : 'bg-white/60 shadow-lg shadow-white/20'} transition-all duration-300 hover:scale-125`}></div>
               
