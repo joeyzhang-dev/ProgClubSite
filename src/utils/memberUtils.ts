@@ -32,6 +32,10 @@ export function getRolePriority(role: string): number {
   const priorities: Record<string, number> = {
     "President": 1,
     "Founding President": 1,
+    "2nd President": 1,
+    "3rd President": 1,
+    "4th President": 1,
+    "5th President": 1,
     "Founding Academic Advisor": 2,
     "Vice President": 3,
     "Former President": 3,
