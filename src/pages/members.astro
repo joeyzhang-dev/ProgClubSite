@@ -39,11 +39,7 @@ const membersByYear = {
   "2021-2023": [
     {
       name: "Beethoven",
-      role: "Former President",
-      description: "Second president who led PROGgsu from Fall 2021 to 2023. Built upon Jenny's foundation and expanded the club significantly.",
-      github: "beethoven",
-      linkedin: "beethoven",
-      specialties: ["Leadership", "Community Growth", "Programming"]
+      role: "Former President"
     }
   ],
   "2020-2021": [
@@ -57,43 +53,23 @@ const membersByYear = {
     },
     {
       name: "Shardul",
-      role: "Founding VP",
-      description: "Vice President during Fall 2021 who worked closely with Jenny and the founding team. Key contributor to early club planning and logistics.",
-      github: "shardul",
-      linkedin: "shardul",
-      specialties: ["Event Planning", "Logistics", "Team Coordination"]
+      role: "Founding VP"
     },
     {
       name: "Ikenna",
-      role: "Secretary",
-      description: "Secretary/Librarian during Fall 2021. Helped establish club documentation and organizational systems in the early days.",
-      github: "ikenna",
-      linkedin: "ikenna",
-      specialties: ["Documentation", "Organization", "Communication"]
+      role: "Secretary"
     },
     {
       name: "Adithya",
-      role: "Event Lead",
-      description: "Event Lead during Fall 2021. Co-organized early club events and helped establish PROGgsu's event programming traditions.",
-      github: "adithya",
-      linkedin: "adithya",
-      specialties: ["Event Planning", "Workshop Organization", "Community Engagement"]
+      role: "Event Lead"
     },
     {
       name: "Beethoven",
-      role: "Event Lead", 
-      description: "Event Lead during Fall 2021 who later became the second president. Started as 'Bee' and helped create engaging programming events before taking on leadership.",
-      github: "beethoven",
-      linkedin: "beethoven",
-      specialties: ["Event Coordination", "Workshop Development", "Leadership Development"]
+      role: "Event Lead"
     },
     {
       name: "Gyan",
-      role: "Tech Chair",
-      description: "Tech Chair during Fall 2021. Managed technical infrastructure and helped establish the club's technology foundations.",
-      github: "gyan",
-      linkedin: "gyan", 
-      specialties: ["Technical Infrastructure", "Web Development", "System Administration"]
+      role: "Tech Chair"
     }
   ]
 };
@@ -323,40 +299,44 @@ Object.keys(membersByYear).forEach(year => {
                     }`}>
                       {member.name}
                     </h3>
-                    <p class={`text-sm leading-relaxed ${
-                      isFoundingPresident(member.role) 
-                        ? 'text-violet-100/90' 
-                        : isPresidentRole(member.role) 
-                          ? 'text-amber-100/90' 
-                          : 'text-white/80'
-                    }`}>
-                      {member.description}
-                    </p>
+                    {member.description && (
+                      <p class={`text-sm leading-relaxed ${
+                        isFoundingPresident(member.role) 
+                          ? 'text-violet-100/90' 
+                          : isPresidentRole(member.role) 
+                            ? 'text-amber-100/90' 
+                            : 'text-white/80'
+                      }`}>
+                        {member.description}
+                      </p>
+                    )}
                   </div>
 
                   <!-- Specialties Tags -->
-                  <div class="mb-6">
-                    <p class={`text-xs uppercase tracking-wide mb-3 font-medium ${
-                      isFoundingPresident(member.role) 
-                        ? 'text-violet-300' 
-                        : isPresidentRole(member.role) 
-                          ? 'text-amber-300' 
-                          : 'text-cyan-300'
-                    }`}>Specialties</p>
-                    <div class="flex flex-wrap gap-2">
-                      {member.specialties.map((specialty) => (
-                        <span class={`px-3 py-1.5 text-xs rounded-full border border-white/20 text-white/90 backdrop-blur-sm transition-all duration-300 shadow-lg ${
-                          isFoundingPresident(member.role)
-                            ? 'bg-gradient-to-r from-violet-400/20 to-pink-400/20 hover:from-violet-400/30 hover:to-pink-400/30'
-                            : isPresidentRole(member.role)
-                              ? 'bg-gradient-to-r from-amber-400/20 to-yellow-400/20 hover:from-amber-400/30 hover:to-yellow-400/30'
-                              : 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30'
-                        }`}>
-                          {specialty}
-                        </span>
-                      ))}
+                  {member.specialties && member.specialties.length > 0 && (
+                    <div class="mb-6">
+                      <p class={`text-xs uppercase tracking-wide mb-3 font-medium ${
+                        isFoundingPresident(member.role) 
+                          ? 'text-violet-300' 
+                          : isPresidentRole(member.role) 
+                            ? 'text-amber-300' 
+                            : 'text-cyan-300'
+                      }`}>Specialties</p>
+                      <div class="flex flex-wrap gap-2">
+                        {member.specialties.map((specialty) => (
+                          <span class={`px-3 py-1.5 text-xs rounded-full border border-white/20 text-white/90 backdrop-blur-sm transition-all duration-300 shadow-lg ${
+                            isFoundingPresident(member.role)
+                              ? 'bg-gradient-to-r from-violet-400/20 to-pink-400/20 hover:from-violet-400/30 hover:to-pink-400/30'
+                              : isPresidentRole(member.role)
+                                ? 'bg-gradient-to-r from-amber-400/20 to-yellow-400/20 hover:from-amber-400/30 hover:to-yellow-400/30'
+                                : 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30'
+                          }`}>
+                            {specialty}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <!-- Social Links -->
                   <div class="flex gap-3 mt-auto">
