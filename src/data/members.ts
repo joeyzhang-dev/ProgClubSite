@@ -67,53 +67,53 @@ export const membersByYear: MembersByYear = {
     },
     {
       name: "John Martin",
-      role: "Former Academic Advisor",
+      role: "Academic Advisor",
       description: "Facebook Engineer In Residence (EIR) who served as Academic Advisor from 2021-2022. Worked closely with Beethoven and the second executive board to expand club programming and industry partnerships.",
       specialties: ["Industry Mentorship", "Academic Guidance", "Facebook/Meta Partnerships"]
     },
     {
       name: "Batya Zamansky",
-      role: "Former Academic Advisor",
+      role: "Academic Advisor",
       description: "Facebook Engineer In Residence (EIR) who served as Academic Advisor from 2022-2023. Continued the tradition of industry guidance before pursuing her career as Senior Software Engineer at Meta.",
       specialties: ["Industry Mentorship", "Software Engineering", "Career Guidance"]
     },
     {
       name: "Cierra",
-      role: "Former VP",
-      description: "2nd Vice President who collaborated closely with Beethoven to run hackathons and expand club programming. Key partner in achieving RSO status and building industry partnerships with Meta, Google, and Microsoft.",
-      specialties: ["Event Planning", "Partnership Development", "Hackathon Organization"]
+      role: "Vice President",
+      description: "Vice President during the second executive board era, helping to expand PROGgsu's reach and member engagement.",
+      specialties: ["Leadership", "Member Engagement", "Strategic Planning"]
     },
     {
       name: "Sara Edwards",
       role: "Director of Events",
-      description: "Director of Events during the second executive board era. Part of the 2nd Exec Committee that helped expand PROGgsu's programming and achieve official RSO status.",
-      specialties: ["Event Planning", "Workshop Organization", "Community Engagement"]
+      description: "Director of Events who organized innovative programming events and workshops during the club's growth period.",
+      specialties: ["Event Planning", "Workshop Development", "Community Outreach"]
     },
     {
       name: "Humi",
-      role: "Former Exec"
+      role: "Exec"
     },
     {
       name: "Owen",
-      role: "Former Exec"
+      role: "Exec"
     },
     {
       name: "Adrian",
-      role: "Former Exec"
+      role: "Exec"
     },
     {
       name: "JenniferA",
-      role: "Former Exec"
+      role: "Exec"
     },
     {
       name: "Nyima",
       role: "Director of Events",
-      description: "Director of Events during the second executive board period. Contributed to the expansion of club programming and helped achieve the 400+ member milestone.",
-      specialties: ["Event Coordination", "Community Building", "Program Development"]
+      description: "Director of Events who contributed to PROGgsu's programming and community building efforts.",
+      specialties: ["Event Coordination", "Program Development", "Team Leadership"]
     },
     {
       name: "Srikumar",
-      role: "Former Exec"
+      role: "Exec"
     }
   ],
   
@@ -175,31 +175,31 @@ export const membersByYear: MembersByYear = {
     },
     {
       name: "Shain Dholakiya",
-      role: "Former Exec",
-      description: "Former executive member who served from the founding period through 2023, contributing to PROGgsu's growth and development.",
+      role: "Founding Member",
+      description: "Founding member who served from the founding period through 2023, contributing to PROGgsu's growth and development.",
       specialties: ["Executive Leadership", "Strategic Planning", "Community Growth"]
     },
     {
       name: "Japnit",
-      role: "Former Exec",
-      description: "Former executive member who served from the founding era through 2023, helping to build PROGgsu's foundations.",
+      role: "Founding Member",
+      description: "Founding member who served from the founding era through 2023, helping to build PROGgsu's foundations.",
       specialties: ["Executive Leadership", "Community Building", "Program Development"]
     },
     {
       name: "Rebecca",
-      role: "Former Exec"
+      role: "Founding Member"
     },
     {
       name: "Tawfiq",
-      role: "Former Exec"
+      role: "Founding Member"
     },
     {
       name: "Elisha",
-      role: "Former Exec"
+      role: "Founding Member"
     },
     {
       name: "Austin",
-      role: "Former Exec"
+      role: "Founding Member"
     },
     {
       name: "Dagm",

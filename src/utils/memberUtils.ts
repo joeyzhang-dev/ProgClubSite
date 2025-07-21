@@ -6,9 +6,11 @@ import type { Member, MembersByYear } from '@/data/members';
 /**
  * Check if a member's role is president-level
  * Used for special styling and sparkle effects
+ * Excludes Vice President - only actual Presidents get special effects
  */
 export function isPresidentRole(role: string): boolean {
-  return role.toLowerCase().includes('president');
+  const roleLC = role.toLowerCase();
+  return roleLC.includes('president') && !roleLC.includes('vice president');
 }
 
 /**
@@ -37,23 +39,20 @@ export function getRolePriority(role: string): number {
     "4th President": 1,
     "5th President": 1,
     "Founding Academic Advisor": 2,
-    "Vice President": 3,
-    "Former President": 3,
-    "VP": 3,
-    "Former VP": 3,
-    "Founding VP": 3,
-    "Secretary": 4,
-    "Secretary/Librarian": 4,
-    "Former Secretary": 4,
-    "Treasurer": 5,
-    "Director of Events": 6,
-    "Event Lead": 6,
-    "Events Coordinator": 6,
-    "Director of Technology": 7,
-    "Tech Chair": 7,
-    "Workshop Lead": 8,
-    "Former Exec": 9,
-    "Server Owner": 10
+    "Academic Advisor": 3,
+    "Vice President": 4,
+    "Founding Member": 5,
+    "Secretary": 6,
+    "Secretary/Librarian": 6,
+    "Librarian": 6,
+    "Treasurer": 7,
+    "Director of Events": 8,
+    "Director of Technology": 8,
+    "Tech Chair": 8,
+    "Event Lead": 8,
+    "Exec": 9,
+    "Server Owner": 10,
+    "Member": 11
   };
   
   return priorities[role] || 99; // Default to lowest priority for unknown roles
@@ -74,12 +73,21 @@ export function sortMembersByRole(membersByYear: MembersByYear): MembersByYear {
 }
 
 /**
- * Get placeholder text for members without descriptions
- * Provides contextual placeholder based on the academic year
+ * Generate placeholder descriptions for members without detailed info
+ * Used when member.description is undefined or empty
  */
-export function getPlaceholderDescription(year: string): string {
-  if (year === "2020-2021") {
-    return "Founding member of PROGgsu. More information coming soon...";
+export function getPlaceholderDescription(role: string): string {
+  if (isFoundingPresident(role)) {
+    return "Founding President of PROGgsu. More details about their incredible journey coming soon...";
+  } else if (isPresidentRole(role)) {
+    return "President of PROGgsu leading the club to new heights. More information coming soon...";
+  } else if (role.toLowerCase().includes('founding')) {
+    return "Founding member of PROGgsu who helped establish our amazing community. More details coming soon...";
+  } else if (role.toLowerCase().includes('advisor')) {
+    return "Academic advisor who provided invaluable guidance to PROGgsu. More information coming soon...";
+  } else if (role.toLowerCase().includes('exec')) {
+    return "Executive member who contributed to PROGgsu's leadership and growth. More information coming soon...";
+  } else {
+    return "Valued member of PROGgsu. More information coming soon...";
   }
-  return "Former member of PROGgsu. More information coming soon...";
 } 
