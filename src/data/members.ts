@@ -27,8 +27,8 @@ export const membersByYear: MembersByYear = {
   "2025-2027": [
     {
       name: "Joey Zhang",
-      role: "President",
-      description: "Current president leading PROGgsu into the future! Passionate about building community and helping fellow programmers grow. Math + CS @ GSU, building InfiniteMonke.",
+      role: "5th President",
+      description: "Current 5th President leading PROGgsu into the future! Passionate about building community and helping fellow programmers grow. Math + CS @ GSU, building InfiniteMonke.",
       github: "joeyzhang-dev",
       linkedin: "joeyzhangdev",
       specialties: ["Leadership", "Community Building", "Full Stack", "TypeScript", "React"]
@@ -39,15 +39,18 @@ export const membersByYear: MembersByYear = {
   "2022-2025": [
     {
       name: "Prahbir Virk",
-      role: "Former President",
-      description: "3rd President who led PROGgsu from 2022-2025, taking over after Beethoven's foundational work. Expanded membership, strengthened club activities, and maintained the strong community culture through multiple academic years.",
+      role: "3rd President",
+      description: "3rd President who led PROGgsu from 2022-2025. During 2023-2024, served as co-president alongside Ethan Munji, demonstrating collaborative leadership and ensuring smooth club operations.",
       specialties: ["Leadership", "Project Management", "Software Development", "Community Growth"]
-    },
+    }
+  ],
+  
+  "2023-2024": [
     {
       name: "Ethan Munji",
-      role: "Former VP",
-      description: "Former Vice President who served during Prahbir's presidency (2022-2025), providing crucial support and helping maintain club operations and member engagement.",
-      specialties: ["Leadership Support", "Software Engineering", "Team Building"]
+      role: "4th President",
+      description: "4th President who served as co-president with Prahbir Virk during 2023-2024. This collaborative leadership model ensured continued club growth and member engagement during a transitional period.",
+      specialties: ["Leadership", "Software Engineering", "Team Building", "Collaborative Management"]
     }
   ],
   

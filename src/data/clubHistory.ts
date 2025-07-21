@@ -111,20 +111,26 @@ export const clubTimeline: ClubHistory = {
   currentEra: [
     {
       date: "2022-2025",
-      title: "Prahbir Virk Presidential Era",
-      description: "Three-year leadership period under Prahbir Virk, maintaining club stability and growth while building on Beethoven's foundational work.",
+      title: "Prahbir Virk Presidential Era (3rd President)",
+      description: "Prahbir Virk serves as 3rd President from 2022-2025, including a unique co-presidency period with Ethan Munji during 2023-2024.",
+      type: "milestone"
+    },
+    {
+      date: "2023-2024",
+      title: "Co-Presidency Innovation",
+      description: "Unique collaborative leadership period with Prahbir Virk (3rd President) and Ethan Munji (4th President) serving as co-presidents, ensuring continuity and shared governance.",
       type: "milestone"
     },
     {
       date: "2025-Present",
-      title: "Joey Zhang Leadership & Innovation",
-      description: "Current president Joey Zhang takes over in 2025, leading PROGgsu into the future with continued innovation and community building.",
+      title: "Joey Zhang Leadership Era (5th President)",
+      description: "Joey Zhang becomes the 5th President in 2025, leading PROGgsu into the future with continued innovation and community building.",
       type: "milestone"
     },
     {
       date: "2020-Present",
-      title: "Sustainable Community Legacy",
-      description: "5+ years of continuous operation demonstrating resilience through leadership transitions, with proven programs helping hundreds of students.",
+      title: "Five-President Legacy",
+      description: "5+ years demonstrating resilient leadership transitions: Jenny (Founding) → Beethoven (2nd) → Prahbir (3rd) → Ethan (4th) → Joey (5th).",
       type: "achievement"
     }
   ]
