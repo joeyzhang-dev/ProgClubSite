@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
 import DeferredStyles from "@/components/DeferredStyles.astro";
 import SpeedInsights from '@vercel/speed-insights/astro';
+import Analytics from '@vercel/analytics/astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 
 const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
@@ -30,6 +31,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     
     <!-- Vercel Speed Insights -->
     <SpeedInsights />
+    
+    <!-- Vercel Analytics -->
+    <Analytics />
   </body>
 </html>
 
