@@ -2,114 +2,116 @@
 import Layout from "@/layouts/Layout.astro";
 import Section from "@/components/Section.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
+import { clubTimeline, clubStats } from "@/data/clubHistory";
 
-// Club history timeline data
+// Transform our timeline data to match the existing template structure
 const timelineEvents = [
+  // Founding Era
   {
-    date: "Fall 2021",
-    title: "The Beginning",
-    description: "Jessica Wang and Michael Thompson founded PROGgsu with a vision to create an inclusive programming community at Georgia State University.",
+    date: "March 2020",
+    title: "Club Founded During COVID-19",
+    description: "Jenny Liu founded PROGgsu during the global pandemic, creating GSU's premier programming community from the ground up with the help of Facebook EIR Andrew Huang.",
     type: "founding",
     details: [
-      "First organizational meeting with 8 students",
-      "Established club constitution and goals",
-      "Registered as official GSU student organization"
+      "Founded by Jenny Liu during COVID-19 pandemic",
+      "Andrew Huang (Facebook EIR) became founding academic advisor",
+      "Established founding team with Shardul, Ikenna, Adithya, Beethoven, and Gyan",
+      "Built community from a vision during unprecedented times"
     ],
     milestone: true
   },
   {
-    date: "Spring 2022",
-    title: "First Workshop Series",
-    description: "Launched our inaugural 'Code from Zero' workshop series, teaching programming fundamentals to beginners.",
-    type: "workshop",
-    details: [
-      "6-week workshop series on Python basics",
-      "25+ students participated",
-      "Partnership with GSU Computer Science Department"
-    ],
-    milestone: false
-  },
-  {
-    date: "Fall 2022",
-    title: "Hackathon Debut",
-    description: "Organized our first mini-hackathon 'GSU Code Challenge' with 40+ participants and local tech sponsors.",
+    date: "Fall 2020",
+    title: "First Structured Events Launch",
+    description: "Launched inaugural programming events including CS Jeopardy, technical interview prep, and resume workshops with 25+ regular attendees.",
     type: "event",
     details: [
-      "24-hour coding challenge",
-      "3 winning teams with cash prizes",
-      "Partnerships with Atlanta tech companies",
-      "Featured in GSU Signal newspaper"
+      "CS Jeopardy with breakout rooms and team collaboration",
+      "Technical interview preparation sessions",
+      "Resume workshops with industry guidance",
+      "Consistent 25+ attendance despite virtual format"
+    ],
+    milestone: false
+  },
+  {
+    date: "Spring 2021",
+    title: "Official University Recognition",
+    description: "Achieved official GSU recognition as a registered student organization with approved charter and PIN registration.",
+    type: "milestone",
+    details: [
+      "Completed charter with defined officer roles",
+      "Successfully registered through PIN system",
+      "Established constitutional framework still used today",
+      "First official officer elections held in April 2021"
     ],
     milestone: true
   },
   {
-    date: "Spring 2023",
-    title: "Community Growth",
-    description: "Reached 100+ active members and launched mentorship program pairing upperclassmen with newcomers.",
+    date: "January 2021",
+    title: "Signature Programs Established",
+    description: "Launched the core programs that define PROGgsu: DSA Interview Prep, Mock Interviews, and Competitive Programming.",
+    type: "program",
+    details: [
+      "Saturday DSA Interview Prep series (2-4pm weekly)",
+      "Bi-weekly mock technical interviews with industry professionals",
+      "Competitive programming competitions and training",
+      "Programs helping dozens of students land internships"
+    ],
+    milestone: true
+  },
+  {
+    date: "Fall 2021",
+    title: "HackJam Workshop Series",
+    description: "Introduced hands-on coding workshops covering web development, React.js, and practical programming skills with interactive learning.",
+    type: "workshop",
+    details: [
+      "Beginner web development (HTML/CSS)",
+      "React.js workshops with live coding",
+      "Interactive breakout rooms and pair programming",
+      "Focus on practical, applicable skills"
+    ],
+    milestone: false
+  },
+  {
+    date: "Fall 2021",
+    title: "Second Executive Board Transition",
+    description: "Successful leadership transition with expanded executive team including new academic advisors and specialized roles.",
     type: "growth",
     details: [
-      "100+ active Discord members",
-      "20+ mentor-mentee pairs",
-      "Weekly study groups established",
-      "First alumni network formation"
+      "John Martin and Batya Zamansky as academic advisors",
+      "Expanded leadership with Directors of Events and Technology",
+      "Structured executive training and shadowing program",
+      "Established sustainable leadership development pipeline"
     ],
     milestone: false
   },
   {
-    date: "Fall 2023",
-    title: "Tech Talk Series",
-    description: "Started monthly tech talks featuring GSU alumni and industry professionals sharing real-world experiences.",
-    type: "education",
-    details: [
-      "Monthly speaker series launch",
-      "Featured speakers from Google, Microsoft, Mailchimp",
-      "Career guidance and internship tips",
-      "Networking opportunities for members"
-    ],
-    milestone: false
-  },
-  {
-    date: "Spring 2024",
-    title: "Open Source Initiative",
-    description: "Launched PROGgsu's first collaborative open-source project - this very website you're viewing!",
-    type: "project",
-    details: [
-      "Club website development project",
-      "Members contributing to real codebase",
-      "Learning Git/GitHub workflows",
-      "Modern web development practices"
-    ],
-    milestone: true
-  },
-  {
-    date: "Fall 2024",
-    title: "Partnership Expansion",
-    description: "Formed official partnerships with tech companies for internship opportunities and career development.",
+    date: "2022",
+    title: "Partnership & Growth Era",
+    description: "Formalized partnerships with PantherHackers, established mentorship programs, and created consistent weekly programming.",
     type: "partnership",
     details: [
-      "Partnership with Atlanta tech companies",
-      "Exclusive internship opportunities",
-      "Resume review sessions",
-      "Mock interview workshops"
+      "Collaboration with PantherHackers on Python workshops",
+      "Formal peer mentoring with upperclassmen support",
+      "Consistent weekly event schedule established",
+      "Regular competitive programming participation"
     ],
     milestone: false
   },
   {
     date: "Present",
-    title: "Continuing Innovation",
-    description: "Today, we're stronger than ever with 150+ members, multiple ongoing projects, and endless opportunities ahead!",
+    title: "Thriving Community Legacy",
+    description: "Today, PROGgsu stands as a testament to pandemic resilience with 5+ years of continuous programming and sustainable leadership.",
     type: "current",
     details: [
-      "150+ active members across all skill levels",
-      "Multiple student-led project teams",
-      "Regular workshop and event programming",
-      "Building the future of GSU's tech community"
+      "5+ years of continuous operation since March 2020",
+      "Proven programs helping students land internships",
+      "Multi-generational leadership continuity",
+      "Foundational programs still running strong today"
     ],
     milestone: true
   }
 ];
-
-// No need for icons or colors anymore - keeping it clean and minimal
 ---
 
 <Layout
@@ -121,8 +123,8 @@ const timelineEvents = [
       <div class="text-center mb-16">
         <Breadcrumb title="Club History" />
         <p class="text-white/80 text-lg mt-6 max-w-3xl mx-auto leading-relaxed">
-          From humble beginnings to a thriving community of 150+ members, discover how PROGgsu has evolved 
-          to become Georgia State University's premier programming organization.
+          From a visionary idea during the COVID-19 pandemic to a thriving community with proven programs, 
+          discover how PROGgsu has evolved since March 2020 to become Georgia State University's premier programming organization.
         </p>
       </div>
 
@@ -197,20 +199,20 @@ const timelineEvents = [
       <!-- Stats Section -->
       <div class="mt-20 grid grid-cols-1 md:grid-cols-4 gap-6">
         <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
-          <div class="text-3xl font-bold text-white mb-2">3+</div>
+          <div class="text-3xl font-bold text-white mb-2">{clubStats.yearsActive}</div>
           <div class="text-sm text-white/60">Years Strong</div>
         </div>
         <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
-          <div class="text-3xl font-bold text-white mb-2">150+</div>
-          <div class="text-sm text-white/60">Active Members</div>
+          <div class="text-3xl font-bold text-white mb-2">100+</div>
+          <div class="text-sm text-white/60">Students Helped</div>
         </div>
         <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
-          <div class="text-3xl font-bold text-white mb-2">50+</div>
-          <div class="text-sm text-white/60">Events Hosted</div>
+          <div class="text-3xl font-bold text-white mb-2">{clubStats.programsLaunched.length}</div>
+          <div class="text-sm text-white/60">Core Programs</div>
         </div>
         <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
-          <div class="text-3xl font-bold text-white mb-2">10+</div>
-          <div class="text-sm text-white/60">Industry Partners</div>
+          <div class="text-3xl font-bold text-white mb-2">{clubStats.keyAchievements.length}</div>
+          <div class="text-sm text-white/60">Major Milestones</div>
         </div>
       </div>
 
