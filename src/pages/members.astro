@@ -5,120 +5,55 @@ import Breadcrumb from "@/components/Breadcrumb.astro";
 
 // Sample member data - replace with actual data source (Sanity CMS, etc.)
 const membersByYear = {
+  "2025-2027": [
+    {
+      name: "Joey Zhang",
+      role: "President",
+      description: "Current president leading PROGgsu into the future! Passionate about building community and helping fellow programmers grow.",
+      github: "joeyzhang",
+      linkedin: "joey-zhang",
+      specialties: ["Leadership", "Community Building", "Full Stack"]
+    },
+    // Add current officers here as they join
+  ],
   "2024-2025": [
     {
-      name: "Alex Johnson",
-      role: "President",
-      major: "Computer Science",
-      year: "Senior",
-      github: "alexj",
-      linkedin: "alexjohnson",
-      specialties: ["React", "Python", "AI/ML"],
-      joinedSemester: "Fall 2022"
-    },
-    {
-      name: "Sarah Chen",
-      role: "Vice President",
-      major: "Software Engineering",
-      year: "Junior",
-      github: "sarahc",
-      linkedin: "sarah-chen",
-      specialties: ["Vue.js", "Node.js", "DevOps"],
-      joinedSemester: "Spring 2023"
-    },
-    {
-      name: "Marcus Williams",
-      role: "Secretary",
-      major: "Information Systems",
-      year: "Junior",
-      github: "marcusw",
-      linkedin: "marcus-williams",
-      specialties: ["Java", "Spring", "Databases"],
-      joinedSemester: "Fall 2023"
-    },
-    {
-      name: "Priya Patel",
-      role: "Treasurer",
-      major: "Computer Science",
-      year: "Sophomore",
-      github: "priyap",
-      linkedin: "priya-patel",
-      specialties: ["JavaScript", "React", "UI/UX"],
-      joinedSemester: "Spring 2024"
-    },
-    {
-      name: "David Kim",
-      role: "Events Coordinator",
-      major: "Cybersecurity",
-      year: "Senior",
-      github: "davidk",
-      linkedin: "david-kim",
-      specialties: ["Security", "Penetration Testing", "Linux"],
-      joinedSemester: "Fall 2022"
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Workshop Lead",
-      major: "Data Science",
-      year: "Junior",
-      github: "emilyr",
-      linkedin: "emily-rodriguez",
-      specialties: ["Python", "Machine Learning", "Data Analysis"],
-      joinedSemester: "Fall 2023"
+      name: "Prahbir Lastname", 
+      role: "Former President",
+      description: "Former president who led PROGgsu through 2024-2025. Great leader who helped expand our membership and activities.",
+      github: "prahbir",
+      linkedin: "prahbir-lastname",
+      specialties: ["Leadership", "Project Management", "Software Development"]
     }
   ],
   "2023-2024": [
     {
-      name: "Jordan Lee",
-      role: "Former President",
-      major: "Computer Science",
-      year: "Alumni (2024)",
-      github: "jordanl",
-      linkedin: "jordan-lee",
-      specialties: ["Full Stack", "Leadership", "Mentoring"],
-      joinedSemester: "Fall 2021"
-    },
-    {
-      name: "Taylor Brown",
-      role: "Former VP",
-      major: "Software Engineering",
-      year: "Alumni (2024)",
-      github: "taylorb",
-      linkedin: "taylor-brown",
-      specialties: ["Angular", "C#", ".NET"],
-      joinedSemester: "Spring 2022"
-    },
-    {
-      name: "Alex Martinez",
-      role: "Former Secretary",
-      major: "Information Technology",
-      year: "Alumni (2024)",
-      github: "alexm",
-      linkedin: "alex-martinez",
-      specialties: ["Cloud Computing", "AWS", "Docker"],
-      joinedSemester: "Fall 2022"
+      name: "Ethan Munji",
+      role: "Former President", 
+      description: "Led PROGgsu through 2023-2024 with innovation and dedication. Passionate about technology and fostering collaborative learning.",
+      github: "ethanmunji",
+      linkedin: "ethan-munji",
+      specialties: ["Leadership", "Software Engineering", "Team Building"]
     }
   ],
-  "2022-2023": [
+  "2021-2023": [
     {
-      name: "Jessica Wang",
-      role: "Founding President",
-      major: "Computer Science",
-      year: "Alumni (2023)",
-      github: "jessicaw",
-      linkedin: "jessica-wang",
-      specialties: ["Club Founding", "Community Building", "React"],
-      joinedSemester: "Fall 2021"
-    },
+      name: "Beethoven",
+      role: "Former President",
+      description: "Second president who led PROGgsu from Fall 2021 to 2023. Built upon Jenny's foundation and expanded the club significantly.",
+      github: "beethoven",
+      linkedin: "beethoven",
+      specialties: ["Leadership", "Community Growth", "Programming"]
+    }
+  ],
+  "2020-2021": [
     {
-      name: "Michael Thompson",
-      role: "Founding VP",
-      major: "Software Development",
-      year: "Alumni (2023)",
-      github: "mikethompson",
-      linkedin: "michael-thompson",
-      specialties: ["Backend Development", "APIs", "Database Design"],
-      joinedSemester: "Fall 2021"
+      name: "Jenny Liu",
+      role: "Founding President", 
+      description: "Our fearless founder! Started PROGgsu from an idea in 2020 and built it into the thriving community it is today. True visionary and leader.",
+      github: "jennyliu",
+      linkedin: "jenny-liu",
+      specialties: ["Club Founding", "Visionary Leadership", "Community Building"]
     }
   ]
 };
@@ -277,44 +212,11 @@ Object.keys(membersByYear).forEach(year => {
                     }`}>
                       {member.name}
                     </h3>
-                    <div class="space-y-2">
-                      <div class="flex items-center gap-2">
-                        <div class={`w-1.5 h-1.5 rounded-full shadow-sm ${
-                          isPresidentRole(member.role)
-                            ? 'bg-gradient-to-r from-amber-400 to-yellow-400'
-                            : 'bg-gradient-to-r from-purple-400 to-blue-400'
-                        }`}></div>
-                        <p class="text-sm text-white/90">
-                          <span class={`font-medium ${
-                            isPresidentRole(member.role) ? 'text-amber-300' : 'text-cyan-300'
-                          }`}>Major:</span> {member.major}
-                        </p>
-                      </div>
-                      <div class="flex items-center gap-2">
-                        <div class={`w-1.5 h-1.5 rounded-full shadow-sm ${
-                          isPresidentRole(member.role)
-                            ? 'bg-gradient-to-r from-yellow-400 to-amber-400'
-                            : 'bg-gradient-to-r from-blue-400 to-purple-400'
-                        }`}></div>
-                        <p class="text-sm text-white/90">
-                          <span class={`font-medium ${
-                            isPresidentRole(member.role) ? 'text-amber-300' : 'text-cyan-300'
-                          }`}>Year:</span> {member.year}
-                        </p>
-                      </div>
-                      <div class="flex items-center gap-2">
-                        <div class={`w-1.5 h-1.5 rounded-full shadow-sm ${
-                          isPresidentRole(member.role)
-                            ? 'bg-gradient-to-r from-amber-400 to-yellow-300'
-                            : 'bg-gradient-to-r from-purple-400 to-cyan-400'
-                        }`}></div>
-                        <p class="text-sm text-white/90">
-                          <span class={`font-medium ${
-                            isPresidentRole(member.role) ? 'text-amber-300' : 'text-cyan-300'
-                          }`}>Joined:</span> {member.joinedSemester}
-                        </p>
-                      </div>
-                    </div>
+                    <p class={`text-sm leading-relaxed ${
+                      isPresidentRole(member.role) ? 'text-amber-100/90' : 'text-white/80'
+                    }`}>
+                      {member.description}
+                    </p>
                   </div>
 
                   <!-- Specialties Tags -->
