@@ -222,19 +222,19 @@ const timelineEvents = [
         <h2 class="text-2xl font-bold text-white text-center mb-8 glow-pulse-title">Our Timeline</h2>
         
         <!-- Vertical Timeline Container -->
-        <div class="relative">
-          <!-- Central Timeline Line -->
-          <div class="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-white/30 via-white/20 to-white/30 rounded-full" 
+        <div class="relative px-4 md:px-0">
+          <!-- Central Timeline Line - responsive positioning -->
+          <div class="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-0.5 bg-gradient-to-b from-white/30 via-white/20 to-white/30 rounded-full" 
                style="height: calc(100% - 2rem); top: 1rem;"></div>
           
           <!-- Timeline Events -->
           {timelineEvents.map((event, index) => (
-            <div class={`relative flex items-center ${index % 2 === 0 ? 'justify-start' : 'justify-end'} mb-12 timeline-entrance`}>
-              <!-- Timeline Dot -->
-              <div class={`absolute left-1/2 transform -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-black ${event.milestone ? 'bg-white shadow-lg shadow-white/30' : 'bg-white/60 shadow-lg shadow-white/20'} transition-all duration-300 hover:scale-125`}></div>
+            <div class={`relative flex items-center mb-8 md:mb-12 timeline-entrance md:${index % 2 === 0 ? 'justify-start' : 'justify-end'} justify-start`}>
+              <!-- Timeline Dot - responsive positioning -->
+              <div class={`absolute left-8 md:left-1/2 transform md:-translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-black ${event.milestone ? 'bg-white shadow-lg shadow-white/30' : 'bg-white/60 shadow-lg shadow-white/20'} transition-all duration-300 hover:scale-125`}></div>
               
-              <!-- Event Card -->
-              <div class={`${index % 2 === 0 ? 'mr-auto pr-12' : 'ml-auto pl-12'} w-5/12 group`}>
+              <!-- Event Card - responsive width and positioning -->
+              <div class={`pl-16 md:pl-0 w-full md:w-5/12 group ${index % 2 === 0 ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'}`}>
                 <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-white/20 timeline-card glass-card">
                   <!-- Glass effect overlay -->
                   <div class="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -251,7 +251,7 @@ const timelineEvents = [
 
                   <!-- Card Content -->
                   <div class="relative p-4 z-10">
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors duration-300">
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors duration-300">
                       {event.title}
                       {event.milestone && (
                         <span class="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 border border-white/20 text-white/80">
@@ -278,8 +278,8 @@ const timelineEvents = [
                     </div>
                   </div>
 
-                  <!-- Connection Line to Timeline -->
-                  <div class={`absolute top-6 ${index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'} w-12 h-px bg-gradient-to-r ${index % 2 === 0 ? 'from-white/20 to-transparent' : 'from-transparent to-white/20'}`}></div>
+                  <!-- Connection Line to Timeline - responsive -->
+                  <div class={`absolute top-6 left-0 -translate-x-full w-8 h-px bg-gradient-to-l from-white/20 to-transparent md:${index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'} md:w-12 md:bg-gradient-to-r md:${index % 2 === 0 ? 'from-white/20 to-transparent' : 'from-transparent to-white/20'}`}></div>
                   
                   <!-- Subtle tint effect -->
                   <div class="absolute inset-0 bg-gradient-to-br from-blue-500/[0.02] via-transparent to-purple-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
