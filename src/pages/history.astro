@@ -351,14 +351,12 @@ const timelineEvents = [
 
   /* Floating navigation styles */
   #timelineTOC {
-    opacity: 0;
-    pointer-events: none;
+    opacity: 1;
     transition: all 0.5s ease-in-out;
   }
 
   #floatingNav {
-    opacity: 0;
-    pointer-events: none;
+    opacity: 1;
     transition: all 0.5s ease-in-out;
   }
 
@@ -395,27 +393,35 @@ const timelineEvents = [
     timelineElements = Array.from(document.querySelectorAll('[id^="timeline-"]'));
     totalTimelineItems = timelineElements.length;
     
-    if (totalTimelineItems === 0) return;
+    console.log('Timeline elements found:', totalTimelineItems); // Debug
+    
+    if (totalTimelineItems === 0) {
+      console.log('No timeline elements found!'); // Debug
+      return;
+    }
 
     // Set up intersection observer to track which timeline item is visible
     observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const index = parseInt(entry.target.id.split('-')[1]);
+          console.log('Timeline item visible:', index); // Debug
           updateActiveTimelineItem(index);
         }
       });
     }, {
-      rootMargin: '-50% 0px -50% 0px', // Trigger when item is in center of viewport
-      threshold: 0
+      rootMargin: '-30% 0px -30% 0px', // Trigger when item is in center of viewport
+      threshold: 0.1
     });
 
     // Observe all timeline items
-    timelineElements.forEach(element => {
+    timelineElements.forEach((element, index) => {
+      console.log('Observing element:', element.id); // Debug
       observer.observe(element);
     });
 
     updateNavigationState();
+    updateTOCDots(); // Initial TOC update
   }
 
   function scrollToTimelineSmooth(index) {
@@ -472,47 +478,18 @@ const timelineEvents = [
     });
   }
 
-  // Show/hide floating navigation based on scroll position
+  // Optional: Hide navigation when not in timeline section
   function handleScroll() {
-    const floatingNav = document.getElementById('floatingNav');
-    const timelineTOC = document.getElementById('timelineTOC');
-    const timeline = document.querySelector('.timeline-entrance');
-    
-    if (timeline && floatingNav && timelineTOC) {
-      const timelineRect = timeline.getBoundingClientRect();
-      const isTimelineVisible = timelineRect.top < window.innerHeight && timelineRect.bottom > 0;
-      
-      if (isTimelineVisible) {
-        floatingNav.classList.remove('opacity-0', 'pointer-events-none');
-        floatingNav.classList.add('opacity-100');
-        timelineTOC.classList.remove('opacity-0', 'pointer-events-none');
-        timelineTOC.classList.add('opacity-100');
-      } else {
-        floatingNav.classList.add('opacity-0', 'pointer-events-none');
-        floatingNav.classList.remove('opacity-100');
-        timelineTOC.classList.add('opacity-0', 'pointer-events-none');
-        timelineTOC.classList.remove('opacity-100');
-      }
-    }
+    // Simplified - just keep navigation visible for now
+    // Can add hide/show logic later if needed
   }
 
   // Initialize everything when DOM is loaded
   document.addEventListener('DOMContentLoaded', () => {
-    // Add initial classes for smooth transitions
-    const floatingNav = document.getElementById('floatingNav');
-    const timelineTOC = document.getElementById('timelineTOC');
-    
-    if (floatingNav) {
-      floatingNav.classList.add('transition-all', 'duration-500');
-    }
-    if (timelineTOC) {
-      timelineTOC.classList.add('transition-all', 'duration-500');
-    }
-
     // Initialize timeline functionality
     setTimeout(initializeTimeline, 100); // Small delay to ensure DOM is ready
     
-    // Add scroll listener
+    // Add scroll listener for future enhancements
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
   });
