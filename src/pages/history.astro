@@ -21,86 +21,62 @@ const timelineEvents = [
     milestone: true
   },
   {
-    date: "Fall 2020",
-    title: "Level 1 Complete: From Zero to Hero Events",
-    description: "Launched inaugural programming events including CS Jeopardy, technical interview prep, and resume workshops with 25+ regular attendees.",
-    type: "event",
+    date: "Spring 2020-2021",
+    title: "Dream Team Assembly Complete",
+    description: "The founding team came together with diverse skills and shared passion for programming education, laying the groundwork for what would become GSU's most impactful programming organization.",
+    type: "founding",
     details: [
-      "CS Jeopardy with breakout rooms and team collaboration",
-      "Technical interview preparation sessions",
-      "Resume workshops with industry guidance",
-      "Consistent 25+ attendance despite virtual format"
-    ],
-    milestone: false
-  },
-  {
-    date: "Spring 2021",
-    title: "Achievement Unlocked: We're Legit Now!",
-    description: "Achieved official GSU recognition as a registered student organization with approved charter and PIN registration.",
-    type: "milestone",
-    details: [
-      "Completed charter with defined officer roles",
-      "Successfully registered through PIN system",
-      "Established constitutional framework still used today",
-      "First official officer elections held in April 2021"
+      "Jenny Liu established as Founding President",
+      "Shardul joined as Founding VP and key community builder",
+      "Ikenna took on Secretary/Librarian role with organizational expertise",
+      "Adithya and Beethoven formed dynamic events leadership duo",
+      "Gyan and Anish Ganga brought technical infrastructure knowledge"
     ],
     milestone: true
   },
   {
-    date: "January 2021",
-    title: "The Holy Trinity: DSA, Mocks & Competitive Chaos",
-    description: "Launched the core programs that define PROGgsu: DSA Interview Prep, Mock Interviews, and Competitive Programming.",
-    type: "program",
-    details: [
-      "Saturday DSA Interview Prep series (2-4pm weekly)",
-      "Bi-weekly mock technical interviews with industry professionals",
-      "Competitive programming competitions and training",
-      "Programs helping dozens of students land internships"
-    ],
-    milestone: true
-  },
-  {
-    date: "Fall 2021",
-    title: "HackJam Sessions: Where Code Gets Sticky",
-    description: "Introduced hands-on coding workshops covering web development, React.js, and practical programming skills with interactive learning.",
-    type: "workshop",
-    details: [
-      "Beginner web development (HTML/CSS)",
-      "React.js workshops with live coding",
-      "Interactive breakout rooms and pair programming",
-      "Focus on practical, applicable skills"
-    ],
-    milestone: false
-  },
-  {
-    date: "Fall 2021",
-    title: "Executive Shuffle: New Captains, Same Ship",
-    description: "Successful leadership transition with expanded executive team including new academic advisors and specialized roles.",
+    date: "2021",
+    title: "The Great Recognition Quest",
+    description: "PROGgsu achieved official RSO status and SAFC funding recognition, transforming from a passionate startup to a legitimate campus organization with real resources and backing.",
     type: "growth",
     details: [
-      "John Martin and Batya Zamansky as academic advisors",
-      "Expanded leadership with Directors of Events and Technology",
-      "Structured executive training and shadowing program",
-      "Established sustainable leadership development pipeline"
+      "Achieved official RSO (Registered Student Organization) status",
+      "Secured SAFC (Student Activity Fee Committee) funding",
+      "Established formal organizational structure and governance",
+      "Gained university recognition and support systems"
     ],
-    milestone: false
+    milestone: true
   },
   {
-    date: "2022-2025",
-    title: "The Prahbir Dynasty: Three Years of Glory",
-    description: "Prahbir Virk serves as 3rd President from 2022-2025, including an innovative co-presidency period with Ethan Munji during 2023-2024.",
-    type: "leadership",
+    date: "2021-2023",
+    title: "Beethoven's Revolution Era",
+    description: "Beethoven becomes 2nd President, transforming PROGgsu from HackJams and DSA reviews to hackathons and mock interviews, expanding to 400+ Discord members.",
+    type: "growth",
     details: [
-      "Three-year presidential tenure (3rd President)",
-      "Collaborative co-presidency model with Ethan Munji (2023-2024)",
-      "Sustained membership growth and engagement",
-      "Maintained core programs and community culture"
+      "Beethoven elected as 2nd President",
+      "Pivoted from basic programming help to structured interview prep",
+      "Launched comprehensive mock interview program",
+      "Grew Discord community to 400+ active members",
+      "Established hackathon participation and competitive programming focus"
+    ],
+    milestone: true
+  },
+  {
+    date: "2022",
+    title: "Prahbir Dynasty Begins",
+    description: "Prahbir Virk takes over as 3rd President, beginning a 3-year leadership tenure focused on membership expansion and activity strengthening.",
+    type: "milestone",
+    details: [
+      "Prahbir Virk becomes 3rd President",
+      "Three-year presidential tenure begins",
+      "Focus on sustainable growth and member retention",
+      "Strengthened core programming activities"
     ],
     milestone: true
   },
   {
     date: "2023-2024",
-    title: "Dynamic Duo: Two Presidents, One Brain Cell", 
+    title: "Dynamic Duo: Two Presidents, One Brain Cell",
     description: "Unique collaborative leadership period with Prahbir Virk (3rd President) and Ethan Munji (4th President) serving together as co-presidents.",
     type: "milestone",
     details: [
@@ -132,8 +108,8 @@ const timelineEvents = [
   description="Discover the journey of PROGgsu from its founding to today. Explore our milestones, achievements, and the growth of GSU's programming community."
 >
   <Section title="Our Journey" className="pt-16">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
         <Breadcrumb title="Club History" />
         <p class="text-white/80 text-lg mt-6 max-w-3xl mx-auto leading-relaxed">
           From a visionary idea during the COVID-19 pandemic to a thriving community with proven programs, 
@@ -141,171 +117,35 @@ const timelineEvents = [
         </p>
       </div>
 
-      <!-- Timeline Container with Fade -->
-      <div class="relative">
-        <!-- Main Content Layout -->
-        <div class="flex flex-col xl:flex-row gap-8">
-          <!-- Timeline Scroll Container (Left Side) -->
-          <div class="flex-1">
-            <div id="timelineContainer" class="relative h-[80vh] overflow-y-auto scroll-smooth border border-white/20 rounded-3xl bg-gradient-to-b from-white/[0.02] via-white/[0.01] to-transparent backdrop-blur-xl shadow-2xl">
-              <!-- Fade overlay at bottom -->
-              <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none z-30 rounded-b-3xl"></div>
-              
-              <!-- Vertical Timeline Container -->
-              <div class="relative px-8 py-12">
-                <!-- Central Timeline Line -->
-                <div class="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-white/30 via-white/20 to-white/30 rounded-full" 
-                     style="height: calc(100% - 4rem); top: 2rem;"></div>
-                
-                <!-- Timeline Events -->
-                {timelineEvents.map((event, index) => (
-                  <div id={`timeline-${index}`} class={`relative flex items-center ${index % 2 === 0 ? 'justify-start' : 'justify-end'} mb-12 timeline-entrance`}>
-                    <!-- Timeline Dot -->
-                    <div class={`absolute left-1/2 transform -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-black ${event.milestone ? 'bg-white shadow-lg shadow-white/30' : 'bg-white/60 shadow-lg shadow-white/20'} transition-all duration-300 hover:scale-125`}></div>
-                    
-                    <!-- Event Card -->
-                    <div class={`${index % 2 === 0 ? 'mr-auto pr-8' : 'ml-auto pl-8'} w-5/12 group`}>
-                      <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-white/20 timeline-card glass-card">
-                        <!-- Glass effect overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <!-- Card Header -->
-                        <div class="relative px-4 py-3 bg-gradient-to-r from-white/[0.08] to-white/[0.04] backdrop-blur-sm border-b border-white/10">
-                          <div class="flex items-center justify-between">
-                            <span class="text-sm font-bold text-white/90 uppercase tracking-wide">
-                              {event.date}
-                            </span>
-                            <div class="w-2 h-2 rounded-full bg-white/40"></div>
-                          </div>
-                        </div>
-
-                        <!-- Card Content -->
-                        <div class="relative p-4 z-10">
-                          <h3 class="text-xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors duration-300">
-                            {event.title}
-                            {event.milestone && (
-                              <span class="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 border border-white/20 text-white/80">
-                                Milestone
-                              </span>
-                            )}
-                          </h3>
-                          
-                          <p class="text-white/70 text-sm mb-4 leading-relaxed">
-                            {event.description}
-                          </p>
-
-                          <!-- Event Details -->
-                          <div class="space-y-2">
-                            <h4 class="text-xs text-white/60 uppercase tracking-wide font-medium">Highlights</h4>
-                            <ul class="space-y-1">
-                              {event.details.map((detail) => (
-                                <li class="flex items-start gap-2 text-xs text-white/60">
-                                  <span class="text-white/40 mt-0.5">•</span>
-                                  <span>{detail}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-
-                        <!-- Connection Line to Timeline -->
-                        <div class={`absolute top-6 ${index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'} w-8 h-px bg-gradient-to-r ${index % 2 === 0 ? 'from-white/20 to-transparent' : 'from-transparent to-white/20'}`}></div>
-                        
-                        <!-- Subtle tint effect -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/[0.02] via-transparent to-purple-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Sidebar Content (Stacked, not scrollable) -->
-          <div class="w-full xl:w-80 space-y-6">
-            <!-- Key Achievements -->
-            <div class="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-6 glass-card shadow-2xl">
-              <h3 class="text-xl font-bold text-white mb-4">Key Achievements</h3>
-              <div class="space-y-4">
-                <div class="flex items-start gap-3">
-                  <div class="w-2 h-2 rounded-full bg-purple-400 mt-2"></div>
-                  <div>
-                    <h4 class="text-white/90 font-medium">5+ Years Strong</h4>
-                    <p class="text-white/60 text-sm">Continuous operation since March 2020</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-2 h-2 rounded-full bg-blue-400 mt-2"></div>
-                  <div>
-                    <h4 class="text-white/90 font-medium">100+ Students Helped</h4>
-                    <p class="text-white/60 text-sm">Through interview prep and programming guidance</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-2 h-2 rounded-full bg-green-400 mt-2"></div>
-                  <div>
-                    <h4 class="text-white/90 font-medium">6 Core Programs</h4>
-                    <p class="text-white/60 text-sm">DSA prep, mock interviews, competitive programming</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-2 h-2 rounded-full bg-amber-400 mt-2"></div>
-                  <div>
-                    <h4 class="text-white/90 font-medium">5 Presidents</h4>
-                    <p class="text-white/60 text-sm">Successful leadership transitions</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Did You Know? -->
-            <div class="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-6 glass-card shadow-2xl">
-              <h3 class="text-xl font-bold text-white mb-4">Did You Know?</h3>
-              <div class="space-y-4">
-                <div class="p-4 rounded-lg bg-white/[0.05] border border-white/10">
-                  <p class="text-white/80 text-sm">PROGgsu was founded during the COVID-19 pandemic, proving that great communities can emerge from challenging times!</p>
-                </div>
-                <div class="p-4 rounded-lg bg-white/[0.05] border border-white/10">
-                  <p class="text-white/80 text-sm">We had a unique co-presidency period where Prahbir and Ethan shared leadership duties - a first in club history!</p>
-                </div>
-                <div class="p-4 rounded-lg bg-white/[0.05] border border-white/10">
-                  <p class="text-white/80 text-sm">Our "Holy Trinity" programs (DSA, Mocks, Competitive Programming) have helped dozens of students land internships at top tech companies.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Quick Timeline Summary -->
-            <div class="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-6 glass-card shadow-2xl">
-              <h3 class="text-xl font-bold text-white mb-4">Timeline Overview</h3>
-              <div class="space-y-3">
-                <div class="flex justify-between items-center py-2 border-b border-white/10">
-                  <span class="text-white/80 text-sm">2020</span>
-                  <span class="text-white/60 text-sm">Founded</span>
-                </div>
-                <div class="flex justify-between items-center py-2 border-b border-white/10">
-                  <span class="text-white/80 text-sm">2021</span>
-                  <span class="text-white/60 text-sm">Official Recognition</span>
-                </div>
-                <div class="flex justify-between items-center py-2 border-b border-white/10">
-                  <span class="text-white/80 text-sm">2022-2025</span>
-                  <span class="text-white/60 text-sm">Prahbir Dynasty</span>
-                </div>
-                <div class="flex justify-between items-center py-2">
-                  <span class="text-white/80 text-sm">2025</span>
-                  <span class="text-white/60 text-sm">Joey's Era</span>
-                </div>
-              </div>
-            </div>
-          </div>
+      <!-- Stats Cards Section -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+        <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
+          <div class="text-3xl font-bold text-white mb-2">{clubStats.yearsActive}</div>
+          <div class="text-sm text-white/60">Years Strong</div>
         </div>
+        <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
+          <div class="text-3xl font-bold text-white mb-2">100+</div>
+          <div class="text-sm text-white/60">Students Helped</div>
+        </div>
+        <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
+          <div class="text-3xl font-bold text-white mb-2">{clubStats.programsLaunched.length}</div>
+          <div class="text-sm text-white/60">Core Programs</div>
+        </div>
+        <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
+          <div class="text-3xl font-bold text-white mb-2">{clubStats.keyAchievements.length}</div>
+          <div class="text-sm text-white/60">Major Milestones</div>
+        </div>
+      </div>
 
+      <!-- Separator -->
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16"></div>
 
-      <!-- Mobile Sidebar Content (visible on smaller screens) -->
-      <div class="xl:hidden mt-8 space-y-6">
+      <!-- Key Achievements | Did You Know Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
         <!-- Key Achievements -->
-        <div class="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-6 glass-card shadow-2xl">
-          <h3 class="text-xl font-bold text-white mb-4">Key Achievements</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl p-6 glass-card">
+          <h3 class="text-2xl font-bold text-white mb-6">Key Achievements</h3>
+          <div class="space-y-4">
             <div class="flex items-start gap-3">
               <div class="w-2 h-2 rounded-full bg-purple-400 mt-2"></div>
               <div>
@@ -334,13 +174,27 @@ const timelineEvents = [
                 <p class="text-white/60 text-sm">Successful leadership transitions</p>
               </div>
             </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 rounded-full bg-red-400 mt-2"></div>
+              <div>
+                <h4 class="text-white/90 font-medium">Official Recognition</h4>
+                <p class="text-white/60 text-sm">RSO status and SAFC funding secured</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 rounded-full bg-cyan-400 mt-2"></div>
+              <div>
+                <h4 class="text-white/90 font-medium">400+ Discord Members</h4>
+                <p class="text-white/60 text-sm">Active programming community built</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Did You Know? -->
-        <div class="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-6 glass-card shadow-2xl">
-          <h3 class="text-xl font-bold text-white mb-4">Did You Know?</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl p-6 glass-card">
+          <h3 class="text-2xl font-bold text-white mb-6">Did You Know?</h3>
+          <div class="space-y-4">
             <div class="p-4 rounded-lg bg-white/[0.05] border border-white/10">
               <p class="text-white/80 text-sm">PROGgsu was founded during the COVID-19 pandemic, proving that great communities can emerge from challenging times!</p>
             </div>
@@ -350,82 +204,97 @@ const timelineEvents = [
             <div class="p-4 rounded-lg bg-white/[0.05] border border-white/10">
               <p class="text-white/80 text-sm">Our "Holy Trinity" programs (DSA, Mocks, Competitive Programming) have helped dozens of students land internships at top tech companies.</p>
             </div>
+            <div class="p-4 rounded-lg bg-white/[0.05] border border-white/10">
+              <p class="text-white/80 text-sm">Andrew Huang, a Facebook Engineer in Residence, was our founding academic advisor who helped establish our foundation.</p>
+            </div>
+            <div class="p-4 rounded-lg bg-white/[0.05] border border-white/10">
+              <p class="text-white/80 text-sm">We transformed from basic HackJams to comprehensive interview prep, revolutionizing how GSU students approach technical interviews.</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Floating Table of Contents -->
-      <div id="timelineTOC" class="fixed top-1/2 left-8 xl:left-12 transform -translate-y-1/2 z-50 hidden lg:block">
-        <div class="bg-black/20 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-2xl">
-          <h4 class="text-white/90 text-sm font-bold mb-3 text-center">Timeline</h4>
-          <div class="space-y-2">
-            {timelineEvents.map((event, index) => (
-              <button 
-                onclick={`scrollToTimelineSmooth(${index})`}
-                class="timeline-nav-dot w-3 h-3 rounded-full border-2 border-white/40 bg-white/20 hover:bg-white/60 hover:border-white/80 transition-all duration-300 block mx-auto relative group"
-                data-index={index}
-                title={event.title}
-              >
-                <div class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                  {event.date}
+      <!-- Separator -->
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16"></div>
+
+      <!-- Timeline Section -->
+      <div class="mb-16">
+        <h2 class="text-3xl font-bold text-white text-center mb-12 glow-pulse-title">Our Timeline</h2>
+        
+        <!-- Vertical Timeline Container -->
+        <div class="relative">
+          <!-- Central Timeline Line -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-white/30 via-white/20 to-white/30 rounded-full" 
+               style="height: calc(100% - 2rem); top: 1rem;"></div>
+          
+          <!-- Timeline Events -->
+          {timelineEvents.map((event, index) => (
+            <div class={`relative flex items-center ${index % 2 === 0 ? 'justify-start' : 'justify-end'} mb-12 timeline-entrance`}>
+              <!-- Timeline Dot -->
+              <div class={`absolute left-1/2 transform -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 border-black ${event.milestone ? 'bg-white shadow-lg shadow-white/30' : 'bg-white/60 shadow-lg shadow-white/20'} transition-all duration-300 hover:scale-125`}></div>
+              
+              <!-- Event Card -->
+              <div class={`${index % 2 === 0 ? 'mr-auto pr-12' : 'ml-auto pl-12'} w-5/12 group`}>
+                <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-white/20 timeline-card glass-card">
+                  <!-- Glass effect overlay -->
+                  <div class="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <!-- Card Header -->
+                  <div class="relative px-4 py-3 bg-gradient-to-r from-white/[0.08] to-white/[0.04] backdrop-blur-sm border-b border-white/10">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-bold text-white/90 uppercase tracking-wide">
+                        {event.date}
+                      </span>
+                      <div class="w-2 h-2 rounded-full bg-white/40"></div>
+                    </div>
+                  </div>
+
+                  <!-- Card Content -->
+                  <div class="relative p-4 z-10">
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors duration-300">
+                      {event.title}
+                      {event.milestone && (
+                        <span class="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 border border-white/20 text-white/80">
+                          Milestone
+                        </span>
+                      )}
+                    </h3>
+                    
+                    <p class="text-white/70 text-sm mb-4 leading-relaxed">
+                      {event.description}
+                    </p>
+
+                    <!-- Event Details -->
+                    <div class="space-y-2">
+                      <h4 class="text-xs text-white/60 uppercase tracking-wide font-medium">Highlights</h4>
+                      <ul class="space-y-1">
+                        {event.details.map((detail) => (
+                          <li class="flex items-start gap-2 text-xs text-white/60">
+                            <span class="text-white/40 mt-0.5">•</span>
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Connection Line to Timeline -->
+                  <div class={`absolute top-6 ${index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'} w-12 h-px bg-gradient-to-r ${index % 2 === 0 ? 'from-white/20 to-transparent' : 'from-transparent to-white/20'}`}></div>
+                  
+                  <!-- Subtle tint effect -->
+                  <div class="absolute inset-0 bg-gradient-to-br from-blue-500/[0.02] via-transparent to-purple-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
                 </div>
-              </button>
-            ))}
-          </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <!-- Floating Navigation Arrows -->
-      <div id="floatingNav" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
-        <div class="flex items-center gap-4 bg-black/20 backdrop-blur-xl border border-white/20 rounded-full px-6 py-3 shadow-2xl">
-          <button 
-            id="prevBtnFloat" 
-            onclick="navigateTimelineSmooth(-1)" 
-            class="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-          </button>
-          
-          <div class="text-center min-w-[80px]">
-            <span id="timelinePositionFloat" class="text-white/90 text-sm font-medium">1 of {timelineEvents.length}</span>
-          </div>
-          
-          <button 
-            id="nextBtnFloat" 
-            onclick="navigateTimelineSmooth(1)" 
-            class="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
+      <!-- Separator -->
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16"></div>
 
-      <!-- Stats Section (Below Timeline) -->
-      <div class="mt-20 grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
-          <div class="text-3xl font-bold text-white mb-2">{clubStats.yearsActive}</div>
-          <div class="text-sm text-white/60">Years Strong</div>
-        </div>
-        <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
-          <div class="text-3xl font-bold text-white mb-2">100+</div>
-          <div class="text-sm text-white/60">Students Helped</div>
-        </div>
-        <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
-          <div class="text-3xl font-bold text-white mb-2">{clubStats.programsLaunched.length}</div>
-          <div class="text-sm text-white/60">Core Programs</div>
-        </div>
-        <div class="text-center p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
-          <div class="text-3xl font-bold text-white mb-2">{clubStats.keyAchievements.length}</div>
-          <div class="text-sm text-white/60">Major Milestones</div>
-        </div>
-      </div>
-
-      <!-- Future Vision (Below Stats) -->
-      <div class="mt-16 text-center py-12 px-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
+      <!-- Future Vision -->
+      <div class="text-center py-12 px-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl glass-card">
         <h3 class="text-3xl font-bold text-white mb-4 glow-pulse-title">
           The Future is Bright
         </h3>
@@ -471,6 +340,23 @@ const timelineEvents = [
     }
   }
   
+  @keyframes titlePulse {
+    0%, 100% {
+      text-shadow:
+        0 0 6px rgba(59, 130, 246, 0.18),
+        0 0 12px rgba(255, 255, 255, 0.10),
+        0 0 24px rgba(59, 130, 246, 0.08);
+      color: #fff;
+    }
+    50% {
+      text-shadow:
+        0 0 12px rgba(59, 130, 246, 0.22),
+        0 0 24px rgba(255, 255, 255, 0.13),
+        0 0 36px rgba(59, 130, 246, 0.10);
+      color: #f4faff;
+    }
+  }
+  
   /* Stagger the animation for each timeline item */
   .timeline-entrance:nth-child(1) { animation-delay: 0.1s; }
   .timeline-entrance:nth-child(2) { animation-delay: 0.2s; }
@@ -479,7 +365,6 @@ const timelineEvents = [
   .timeline-entrance:nth-child(5) { animation-delay: 0.5s; }
   .timeline-entrance:nth-child(6) { animation-delay: 0.6s; }
   .timeline-entrance:nth-child(7) { animation-delay: 0.7s; }
-  .timeline-entrance:nth-child(8) { animation-delay: 0.8s; }
   
   /* Subtle glass effect enhancement */
   .glass-card {
@@ -493,211 +378,4 @@ const timelineEvents = [
                 0 0 0 1px rgba(255, 255, 255, 0.1),
                 0 0 20px rgba(255, 255, 255, 0.05);
   }
-
-  /* Floating navigation styles */
-  #timelineTOC {
-    opacity: 1;
-    transition: all 0.5s ease-in-out;
-  }
-
-  #floatingNav {
-    opacity: 1;
-    transition: all 0.5s ease-in-out;
-  }
-
-  /* Timeline container scrollbar styling */
-  #timelineContainer {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-  }
-
-  #timelineContainer::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  #timelineContainer::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-  }
-
-  #timelineContainer::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-  }
-
-  #timelineContainer::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
-  }
-
-  .timeline-nav-dot {
-    transition: all 0.3s ease;
-  }
-
-  .timeline-nav-dot:hover {
-    transform: scale(1.2);
-  }
-
-  /* Mobile adjustments */
-  @media (max-width: 1024px) {
-    #timelineTOC {
-      display: none !important;
-    }
-    
-    #floatingNav {
-      bottom: 4rem;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  }
-
-  @media (max-width: 768px) {
-    #timelineContainer {
-      height: 60vh !important;
-      margin-bottom: 2rem;
-    }
-  }
-</style>
-
-<script>
-  // Enhanced floating timeline navigation
-  let currentTimelineIndex = 0;
-  let totalTimelineItems = 0;
-  let timelineElements = [];
-  let observer = null;
-
-  function initializeTimeline() {
-    timelineElements = Array.from(document.querySelectorAll('[id^="timeline-"]'));
-    totalTimelineItems = timelineElements.length;
-    
-    console.log('Timeline elements found:', totalTimelineItems); // Debug
-    
-    if (totalTimelineItems === 0) {
-      console.log('No timeline elements found!'); // Debug
-      return;
-    }
-
-    // Set up intersection observer to track which timeline item is visible
-    observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const index = parseInt(entry.target.id.split('-')[1]);
-          console.log('Timeline item visible:', index); // Debug
-          updateActiveTimelineItem(index);
-        }
-      });
-    }, {
-      root: document.getElementById('timelineContainer'), // Use timeline container as root
-      rootMargin: '-30% 0px -30% 0px', // Trigger when item is in center of container
-      threshold: 0.1
-    });
-
-    // Observe all timeline items
-    timelineElements.forEach((element, index) => {
-      console.log('Observing element:', element.id); // Debug
-      observer.observe(element);
-    });
-
-    updateNavigationState();
-    updateTOCDots(); // Initial TOC update
-  }
-
-  function scrollToTimelineSmooth(index) {
-    if (index < 0 || index >= totalTimelineItems) return;
-    
-    const element = document.getElementById(`timeline-${index}`);
-    const container = document.getElementById('timelineContainer');
-    
-    if (element && container) {
-      // Calculate position within the scrollable container
-      const containerRect = container.getBoundingClientRect();
-      const elementRect = element.getBoundingClientRect();
-      const scrollTop = container.scrollTop;
-      
-      // Calculate target scroll position
-      const targetScroll = scrollTop + elementRect.top - containerRect.top - (containerRect.height / 2) + (elementRect.height / 2);
-      
-      // Smooth scroll within the container
-      container.scrollTo({
-        top: targetScroll,
-        behavior: 'smooth'
-      });
-      
-      currentTimelineIndex = index;
-      updateNavigationState();
-    }
-  }
-
-  function navigateTimelineSmooth(direction) {
-    const newIndex = currentTimelineIndex + direction;
-    if (newIndex >= 0 && newIndex < totalTimelineItems) {
-      scrollToTimelineSmooth(newIndex);
-    }
-  }
-
-  function updateActiveTimelineItem(index) {
-    currentTimelineIndex = index;
-    updateNavigationState();
-    updateTOCDots();
-  }
-
-  function updateNavigationState() {
-    // Update floating navigation buttons
-    const prevBtn = document.getElementById('prevBtnFloat');
-    const nextBtn = document.getElementById('nextBtnFloat');
-    const positionSpan = document.getElementById('timelinePositionFloat');
-
-    if (prevBtn && nextBtn && positionSpan) {
-      prevBtn.disabled = currentTimelineIndex === 0;
-      nextBtn.disabled = currentTimelineIndex === totalTimelineItems - 1;
-      positionSpan.textContent = `${currentTimelineIndex + 1} of ${totalTimelineItems}`;
-    }
-  }
-
-  function updateTOCDots() {
-    // Update table of contents dots
-    const dots = document.querySelectorAll('.timeline-nav-dot');
-    dots.forEach((dot, index) => {
-      if (index === currentTimelineIndex) {
-        dot.classList.add('bg-white', 'border-white');
-        dot.classList.remove('bg-white/20', 'border-white/40');
-      } else {
-        dot.classList.add('bg-white/20', 'border-white/40');
-        dot.classList.remove('bg-white', 'border-white');
-      }
-    });
-  }
-
-  // Optional: Hide navigation when not in timeline section
-  function handleScroll() {
-    // Simplified - just keep navigation visible for now
-    // Can add hide/show logic later if needed
-  }
-
-  // Initialize everything when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    // Initialize timeline functionality
-    setTimeout(initializeTimeline, 100); // Small delay to ensure DOM is ready
-    
-    // Add scroll listener for future enhancements
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
-  });
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      navigateTimelineSmooth(-1);
-    } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      navigateTimelineSmooth(1);
-    }
-  });
-
-  // Clean up observer when page unloads
-  window.addEventListener('beforeunload', () => {
-    if (observer) {
-      observer.disconnect();
-    }
-  });
-</script> 
+</style> 
