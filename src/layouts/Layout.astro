@@ -2,6 +2,7 @@
 import BaseHead from "@/components/BaseHead.astro";
 import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
+import DeferredStyles from "@/components/DeferredStyles.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 
 const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
@@ -22,6 +23,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     
     <!-- Background glow effect -->
     <div id="bg-glow" class="fixed inset-0 pointer-events-none z-0 opacity-0 transition-opacity duration-300"></div>
+    
+    <!-- Load non-critical styles after page render -->
+    <DeferredStyles />
   </body>
 </html>
 

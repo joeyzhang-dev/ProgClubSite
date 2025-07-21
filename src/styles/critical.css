@@ -1,0 +1,58 @@
+/* Critical CSS - Inlined for fast initial render */
+
+@font-face {
+  font-family: "VCR";
+  src: url("/fonts/VCRosdNEUE.ttf") format("truetype");
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Essential base styles */
+body {
+  font-family: "VCR", monospace !important;
+  background: #000;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Basic layout styles for header and main content */
+header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 9999;
+}
+
+main {
+  padding-top: 7rem;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding-top: 5rem;
+  }
+}
+
+/* Essential scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Basic selection styles */
+::selection {
+  background: #fff;
+  color: #000;
+}
+
+::-moz-selection {
+  background: #fff;
+  color: #000;
+}
+
+/* Prevent layout shift for images */
+img {
+  max-width: 100%;
+  height: auto;
+} 

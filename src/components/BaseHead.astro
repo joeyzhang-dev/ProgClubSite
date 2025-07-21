@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+// Only import critical styles now
 import "@/styles/global.css";
 
 interface Props {
@@ -17,6 +18,9 @@ const {
 } = Astro.props;
 import HeroImage from "@/hero.png";
 import { ABOUT_ME, SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+
+// Read critical CSS for inlining
+import criticalCSS from "@/styles/critical.css?inline";
 ---
 
 <!-- Global Metadata -->
@@ -26,14 +30,25 @@ import { ABOUT_ME, SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
-<!-- Font preloads -->
+<!-- DNS prefetch for external domains -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+
+<!-- Resource hints for better performance -->
+<link rel="preconnect" href="https://proggsu.vercel.app" />
+
+<!-- Font preloads with higher priority -->
 <link
   rel="preload"
   href="/fonts/VCRosdNEUE.ttf"
   as="font"
   type="font/ttf"
-  crossorigin
+  crossorigin="anonymous"
 />
+
+<!-- Critical CSS inlined for immediate render -->
+<style set:html={criticalCSS}></style>
+
+<!-- Non-critical styles are loaded via DeferredStyles component -->
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -65,3 +80,11 @@ import { ABOUT_ME, SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 
 <!-- View Transitions  -->
 <ClientRouter />
+
+<!-- Performance hints -->
+<meta name="theme-color" content="#000000" />
+<meta name="color-scheme" content="dark" />
+
+<!-- Prefetch important pages -->
+<link rel="prefetch" href="/events" />
+<link rel="prefetch" href="/resources" />
