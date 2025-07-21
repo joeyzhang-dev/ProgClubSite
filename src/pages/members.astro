@@ -44,10 +44,20 @@ const membersByYear = {
       github: "beethoven",
       linkedin: "beethoven",
       specialties: ["Leadership", "Community Growth", "Programming"]
+    }
+  ],
+  "2020-2021": [
+    {
+      name: "Jenny Liu",
+      role: "Founding President", 
+      description: "Our fearless founder! Started PROGgsu from an idea in 2020 and built it into the thriving community it is today. True visionary and leader.",
+      github: "jennyliu",
+      linkedin: "jenny-liu",
+      specialties: ["Club Founding", "Visionary Leadership", "Community Building"]
     },
     {
       name: "Shardul",
-      role: "Former VP",
+      role: "Founding VP",
       description: "Vice President during Fall 2021 who worked closely with Jenny and the founding team. Key contributor to early club planning and logistics.",
       github: "shardul",
       linkedin: "shardul",
@@ -55,7 +65,7 @@ const membersByYear = {
     },
     {
       name: "Ikenna",
-      role: "Former Secretary",
+      role: "Secretary",
       description: "Secretary/Librarian during Fall 2021. Helped establish club documentation and organizational systems in the early days.",
       github: "ikenna",
       linkedin: "ikenna",
@@ -70,12 +80,12 @@ const membersByYear = {
       specialties: ["Event Planning", "Workshop Organization", "Community Engagement"]
     },
     {
-      name: "Bee",
+      name: "Beethoven",
       role: "Event Lead", 
-      description: "Event Lead during Fall 2021. Partnered with Adithya to create engaging programming events and workshops for the growing community.",
-      github: "bee",
-      linkedin: "bee",
-      specialties: ["Event Coordination", "Workshop Development", "Student Outreach"]
+      description: "Event Lead during Fall 2021 who later became the second president. Started as 'Bee' and helped create engaging programming events before taking on leadership.",
+      github: "beethoven",
+      linkedin: "beethoven",
+      specialties: ["Event Coordination", "Workshop Development", "Leadership Development"]
     },
     {
       name: "Gyan",
@@ -84,16 +94,6 @@ const membersByYear = {
       github: "gyan",
       linkedin: "gyan", 
       specialties: ["Technical Infrastructure", "Web Development", "System Administration"]
-    }
-  ],
-  "2020-2021": [
-    {
-      name: "Jenny Liu",
-      role: "Founding President", 
-      description: "Our fearless founder! Started PROGgsu from an idea in 2020 and built it into the thriving community it is today. True visionary and leader.",
-      github: "jennyliu",
-      linkedin: "jenny-liu",
-      specialties: ["Club Founding", "Visionary Leadership", "Community Building"]
     }
   ]
 };
@@ -117,14 +117,14 @@ function getRolePriority(role: string): number {
     "Former President": 2,
     "VP": 2,
     "Former VP": 2,
+    "Founding VP": 2,
     "Secretary": 3,
     "Former Secretary": 3,
     "Treasurer": 4,
     "Event Lead": 5,
     "Events Coordinator": 5,
     "Workshop Lead": 6,
-    "Tech Chair": 7,
-    "Founding VP": 8
+    "Tech Chair": 7
   };
   return priorities[role] || 99;
 }
