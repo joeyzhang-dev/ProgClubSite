@@ -4,102 +4,130 @@ import Section from "@/components/Section.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import { clubTimeline, clubStats } from "@/data/clubHistory";
 
-// Transform our timeline data to match the existing template structure
+// Transform clubTimeline data into timeline events for the template
 const timelineEvents = [
-  // Founding Era
-  {
-    date: "March 2020",
-    title: "Plot Twist: Pandemic Sparks Programming Paradise",
-    description: "Jenny Liu founded PROGgsu during the global pandemic, creating GSU's premier programming community from the ground up with the help of Facebook EIR Andrew Huang.",
-    type: "founding",
+  // Founding Era Events
+  ...clubTimeline.founding.map(event => ({
+    ...event,
     details: [
-      "Founded by Jenny Liu during COVID-19 pandemic",
-      "Andrew Huang (Facebook EIR) became founding academic advisor",
-      "Established founding team with Shardul, Ikenna, Adithya, Beethoven, and Gyan",
-      "Built community from a vision during unprecedented times"
+      // Add some contextual details based on the event
+      ...(event.title.includes("Founded") ? [
+        "Founded by Jenny Liu during COVID-19 pandemic",
+        "Andrew Huang (Facebook EIR) became founding academic advisor", 
+        "Established founding team with key members",
+        "Built community from a vision during unprecedented times"
+      ] : event.title.includes("Structured Events") ? [
+        "CS Jeopardy became a flagship event",
+        "Technical interview prep launched", 
+        "Resume workshops drew 25+ attendees",
+        "Consistent weekly programming established"
+      ] : event.title.includes("Registration") ? [
+        "Began official university recognition process",
+        "Charter development initiated",
+        "PIN registration completed", 
+        "Foundation for official status laid"
+      ] : [
+        "Significant milestone in club development",
+        "Community impact and growth achieved", 
+        "Foundation building activities completed"
+      ])
     ],
-    milestone: true
-  },
-  {
-    date: "Spring 2020-2021",
-    title: "Dream Team Assembly Complete",
-    description: "The founding team came together with diverse skills and shared passion for programming education, laying the groundwork for what would become GSU's most impactful programming organization.",
-    type: "founding",
+    milestone: event.type === 'founding' || event.type === 'milestone'
+  })),
+
+  // Early Development Events  
+  ...clubTimeline.earlyDevelopment.map(event => ({
+    ...event,
     details: [
-      "Jenny Liu established as Founding President",
-      "Shardul joined as Founding VP and key community builder",
-      "Ikenna took on Secretary/Librarian role with organizational expertise",
-      "Adithya and Beethoven formed dynamic events leadership duo",
-      "Gyan and Anish Ganga brought technical infrastructure knowledge"
+      ...(event.title.includes("Charter") ? [
+        "Achieved official RSO (Registered Student Organization) status",
+        "Secured university recognition and support", 
+        "Established formal organizational structure",
+        "Gained access to campus resources and funding"
+      ] : event.title.includes("Programming") ? [
+        "Weekly programming challenges implemented",
+        "Study groups for data structures and algorithms",
+        "Peer learning and collaboration emphasized", 
+        "Technical skill development prioritized"
+      ] : event.title.includes("Community") ? [
+        "Discord server established as central hub",
+        "Regular member engagement activities",
+        "Mentorship programs launched",
+        "Inclusive community culture developed"
+      ] : [
+        "Important development milestone achieved",
+        "Community growth and engagement increased",
+        "Programming focus strengthened"
+      ])
     ],
-    milestone: true
-  },
-  {
-    date: "2021",
-    title: "The Great Recognition Quest",
-    description: "PROGgsu achieved official RSO status and SAFC funding recognition, transforming from a passionate startup to a legitimate campus organization with real resources and backing.",
-    type: "growth",
+    milestone: event.type === 'milestone'
+  })),
+
+  // Growth Era Events
+  ...clubTimeline.growth.map(event => ({
+    ...event, 
     details: [
-      "Achieved official RSO (Registered Student Organization) status",
-      "Secured SAFC (Student Activity Fee Committee) funding",
-      "Established formal organizational structure and governance",
-      "Gained university recognition and support systems"
+      ...(event.title.includes("Holy Trinity") ? [
+        "Data Structures & Algorithms prep launched",
+        "Mock technical interviews introduced",
+        "Competitive programming events established",
+        "Comprehensive technical skill development"
+      ] : event.title.includes("Recognition") ? [
+        "SAFC (Student Activity Fee Committee) funding secured",
+        "Official university partnership established",
+        "Campus programming organization leadership",
+        "Resources and support systems gained"
+      ] : event.title.includes("400+") ? [
+        "Discord community grew to 400+ active members",
+        "Regular weekly programming activities",
+        "Strong peer learning network established", 
+        "Campus programming community leadership"
+      ] : [
+        "Significant growth milestone achieved",
+        "Programming community impact expanded",
+        "Technical programs strengthened"
+      ])
     ],
-    milestone: true
-  },
-  {
-    date: "2021-2023",
-    title: "Beethoven's Revolution Era",
-    description: "Beethoven becomes 2nd President, transforming PROGgsu from HackJams and DSA reviews to hackathons and mock interviews, expanding to 400+ Discord members.",
-    type: "growth",
+    milestone: event.type === 'milestone' || event.type === 'achievement'
+  })),
+
+  // Current Era Events
+  ...clubTimeline.currentEra.map(event => ({
+    ...event,
     details: [
-      "Beethoven elected as 2nd President",
-      "Pivoted from basic programming help to structured interview prep",
-      "Launched comprehensive mock interview program",
-      "Grew Discord community to 400+ active members",
-      "Established hackathon participation and competitive programming focus"
+      ...(event.title.includes("Beethoven") ? [
+        "2nd President leadership transition",
+        "Transformed club from HackJams to interview prep",
+        "Expanded Discord to 400+ members",
+        "Established competitive programming focus"
+      ] : event.title.includes("Ethan") ? [
+        "3rd President during Fall 2023",
+        "Proved that skateboarding is indeed a presidential specialty",
+        "Demonstrated that even club leaders aren't immune to plot twists",
+        "Left a memorable (if brief) mark on PROGgsu history"
+      ] : event.title.includes("Prahbir") ? [
+        "4th President who stepped in during Fall 2023",
+        "Demonstrated leadership during challenging transition",
+        "Ensured club continuity and stability",
+        "Led club through to 2025 with dedication"
+      ] : event.title.includes("Joey") ? [
+        "5th President leading club into the future",
+        "Building on legacy of 4 previous presidents",
+        "Continued innovation and community building",
+        "Leading PROGgsu into its next chapter"
+      ] : event.title.includes("Five-President") || event.title.includes("Legacy") ? [
+        "5+ years of continuous operation",
+        "Successful leadership transitions through challenges: Jenny → Beethoven → Ethan → Prahbir → Joey",
+        "Proven resilience and adaptability",
+        "Strong foundation for future growth"
+      ] : [
+        "Current era milestone achieved",
+        "Leadership and community growth",
+        "Continued programming excellence"
+      ])
     ],
-    milestone: true
-  },
-  {
-    date: "2022",
-    title: "Prahbir Dynasty Begins",
-    description: "Prahbir Virk takes over as 3rd President, beginning a 3-year leadership tenure focused on membership expansion and activity strengthening.",
-    type: "milestone",
-    details: [
-      "Prahbir Virk becomes 3rd President",
-      "Three-year presidential tenure begins",
-      "Focus on sustainable growth and member retention",
-      "Strengthened core programming activities"
-    ],
-    milestone: true
-  },
-  {
-    date: "2023-2024",
-    title: "Dynamic Duo: Two Presidents, One Brain Cell",
-    description: "Unique collaborative leadership period with Prahbir Virk (3rd President) and Ethan Munji (4th President) serving together as co-presidents.",
-    type: "milestone",
-    details: [
-      "First co-presidency in club history",
-      "Prahbir Virk continued as 3rd President",
-      "Ethan Munji served as 4th President simultaneously",
-      "Demonstrated innovative shared governance model"
-    ],
-    milestone: true
-  },
-  {
-    date: "Present",
-    title: "Joey's Reign: The Fifth Element of Leadership",
-    description: "Joey Zhang becomes the 5th President in 2025, leading PROGgsu into the future with continued innovation and community building.",
-    type: "current",
-    details: [
-      "5th President in club's 5+ year history",
-      "Building on legacy of 4 previous presidents",
-      "Continued innovation and community building",
-      "Leading PROGgsu into its next chapter"
-    ],
-    milestone: true
-  }
+    milestone: event.type === 'milestone' || event.type === 'achievement'
+  }))
 ];
 ---
 

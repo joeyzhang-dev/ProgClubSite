@@ -1,6 +1,9 @@
 // PROGgsu Club Historical Timeline
 // Key milestones and achievements in club history
 //
+// ⚠️  IMPORTANT: This data is used by src/pages/history.astro for the timeline
+// ✏️  TO UPDATE TIMELINE: Edit the events below, they will automatically appear on /history
+//
 // HOW TO ADD NEW TIMELINE EVENTS:
 // 1. Add new TimelineEvent object to the appropriate section
 // 2. Include: date, title, description, type (founding/event/milestone/program)
@@ -24,19 +27,19 @@ export const clubTimeline: ClubHistory = {
   founding: [
     {
       date: "March 2020",
-      title: "Club Founded During COVID-19",
+      title: "Plot Twist: Pandemic Sparks Programming Paradise",
       description: "Jenny Liu founded PROGgsu during the global pandemic, creating GSU's premier programming community from the ground up.",
       type: "founding"
     },
     {
       date: "Fall 2020",
-      title: "First Structured Events",
+      title: "The Great Launch: CS Jeopardy and Friends",
       description: "Launched inaugural programming events including CS Jeopardy, technical interview prep, and resume workshops with 25+ regular attendees.",
       type: "event"
     },
     {
       date: "October 2020",
-      title: "Club Registration Initiated",
+      title: "Paperwork Adventures Begin",
       description: "Began official university recognition process with charter development and PIN registration.",
       type: "milestone"
     }
@@ -45,92 +48,74 @@ export const clubTimeline: ClubHistory = {
   earlyDevelopment: [
     {
       date: "Spring 2021",
-      title: "Charter Completed & PIN Registration",
+      title: "Victory Lap: Official Recognition Achieved",
       description: "Achieved official university recognition as a registered student organization with approved charter and officer structure.",
       type: "milestone"
     },
     {
-      date: "April 2021",
-      title: "First Official Officer Elections",
-      description: "Conducted inaugural democratic elections establishing the executive committee structure still used today.",
-      type: "milestone"
-    },
-    {
-      date: "January 2021",
-      title: "DSA Interview Prep Series Launched",
-      description: "Introduced weekly Saturday sessions covering data structures and algorithms, becoming one of our most popular programs.",
-      type: "program"
-    },
-    {
-      date: "January 2021",
-      title: "Mock Interview Program Established",
-      description: "Started bi-weekly technical mock interviews with industry professionals, helping dozens of students land internships.",
-      type: "program"
-    },
-    {
-      date: "Spring 2021",
-      title: "Competitive Programming Introduced",
-      description: "Launched competitive programming competitions and training, including inter-collegiate contests with NJIT and other schools.",
-      type: "program"
-    },
-    {
       date: "Fall 2021",
-      title: "HackJam Workshop Series",
-      description: "Introduced hands-on coding workshops covering web development, React.js, and practical programming skills.",
+      title: "The Weekly Grind: Programming Challenges Era",
+      description: "Established consistent weekly programming activities including data structures practice and algorithm challenges.",
       type: "program"
+    },
+    {
+      date: "Spring 2022",
+      title: "Community Building: The Discord Dynasty",
+      description: "Expanded community engagement through Discord server and regular programming discussions, building strong member connections.",
+      type: "event"
     }
   ],
 
   growth: [
     {
-      date: "Fall 2021",
-      title: "Second Executive Board Transition",
-      description: "Successful leadership transition with expanded executive team including new academic advisors and specialized roles.",
-      type: "milestone"
-    },
-    {
-      date: "Spring 2022",
-      title: "Mentorship Program Expansion",
-      description: "Formalized peer mentoring with upperclassmen supporting underclassmen in coursework and career development.",
+      date: "Fall 2022",
+      title: "The Holy Trinity: DSA, Mocks & Competitive Chaos",
+      description: "Launched the three core programs that would define PROGgsu: Data Structures & Algorithms prep, mock interviews, and competitive programming.",
       type: "program"
     },
     {
-      date: "2022",
-      title: "Prahbir Virk Leadership Era Begins",
-      description: "Prahbir Virk takes over as 3rd President, beginning a 3-year leadership tenure focused on membership expansion and activity strengthening.",
-      type: "milestone"
+      date: "Spring 2023",
+      title: "Level Up: SAFC Recognition & Funding",
+      description: "Secured Student Activity Fee Committee funding and full university partnership status, gaining access to resources and official support.",
+      type: "achievement"
     },
     {
       date: "2022-2023",
-      title: "Partnership & Growth Expansion", 
-      description: "Continued collaboration with PantherHackers, established consistent weekly programming, and maintained strong competitive programming participation.",
-      type: "achievement"
+      title: "The 400+ Club: Discord Community Explosion",
+      description: "Discord community exploded to over 400 active members, establishing PROGgsu as the go-to programming community at GSU.",
+      type: "milestone"
     }
   ],
 
   currentEra: [
     {
-      date: "2022-2025",
-      title: "Prahbir Virk Presidential Era (3rd President)",
-      description: "Prahbir Virk serves as 3rd President from 2022-2025, including a unique co-presidency period with Ethan Munji during 2023-2024.",
+      date: "2021-2023",
+      title: "Beethoven's Revolution: From HackJams to Interview Mastery",
+      description: "Beethoven (2nd President) transformed PROGgsu from basic HackJams to comprehensive technical interview preparation, revolutionizing the club's impact.",
       type: "milestone"
     },
     {
-      date: "2023-2024",
-      title: "Co-Presidency Innovation",
-      description: "Unique collaborative leadership period with Prahbir Virk (3rd President) and Ethan Munji (4th President) serving as co-presidents, ensuring continuity and shared governance.",
+      date: "Fall 2023",
+      title: "The Great Skateboard Plot Twist: Ethan's Brief but Memorable Reign",
+      description: "Ethan Munji's 3rd Presidential tenure proved that sometimes life has other plans - showcasing that even presidents need to watch out for rogue skateboards and cars.",
+      type: "milestone"
+    },
+    {
+      date: "Fall 2023-2025", 
+      title: "Prahbir Steps Up: 4th President's Emergency Leadership",
+      description: "Prahbir Virk stepped in as 4th President during Fall 2023 when circumstances required a leadership transition, demonstrating dedication and ensuring club continuity through to 2025.",
       type: "milestone"
     },
     {
       date: "2025-Present",
-      title: "Joey Zhang Leadership Era (5th President)",
-      description: "Joey Zhang becomes the 5th President in 2025, leading PROGgsu into the future with continued innovation and community building.",
+      title: "Joey's Era: The Fifth Element of Leadership",
+      description: "Joey Zhang becomes the 5th President, leading PROGgsu into the future with continued innovation and community building.",
       type: "milestone"
     },
     {
       date: "2020-Present",
-      title: "Five-President Legacy",
-      description: "5+ years demonstrating resilient leadership transitions: Jenny (Founding) → Beethoven (2nd) → Prahbir (3rd) → Ethan (4th) → Joey (5th).",
+      title: "The Five-President Legacy: Resilience Through Challenges",
+      description: "5+ years demonstrating successful leadership transitions and resilient community building through various challenges: Jenny → Beethoven → Ethan → Prahbir → Joey.",
       type: "achievement"
     }
   ]

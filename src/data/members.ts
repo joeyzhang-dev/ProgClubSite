@@ -33,24 +33,26 @@ export const membersByYear: MembersByYear = {
       linkedin: "joeyzhangdev",
       specialties: ["Leadership", "Community Building", "Full Stack", "TypeScript", "React"]
     },
-    // Add current officers here as they join
-  ],
-  
-  "2022-2025": [
     {
-      name: "Prahbir Virk",
-      role: "3rd President",
-      description: "3rd President who led PROGgsu from 2022-2025. During 2023-2024, served as co-president alongside Ethan Munji, demonstrating collaborative leadership and ensuring smooth club operations.",
-      specialties: ["Leadership", "Project Management", "Software Development", "Community Growth"]
+      name: "Evan Anderson",
+      role: "Vice President",
+      description: "Vice President serving under Joey Zhang's leadership, bringing a unique blend of creative and technical skills to help guide PROGgsu's continued growth.",
+      specialties: ["Fashion Design", "Cooking", "App Dev", "Data Analytics"]
     }
   ],
   
-  "2023-2024": [
+  "2023-2025": [
     {
       name: "Ethan Munji",
+      role: "3rd President",
+      description: "3rd President who served during Fall 2023. His leadership period was cut short due to a skateboarding accident, but his contributions helped maintain club momentum during his tenure.",
+      specialties: ["Leadership", "Software Engineering", "Team Building", "Community Engagement", "Skateboarding"]
+    },
+    {
+      name: "Prahbir Virk",
       role: "4th President",
-      description: "4th President who served as co-president with Prahbir Virk during 2023-2024. This collaborative leadership model ensured continued club growth and member engagement during a transitional period.",
-      specialties: ["Leadership", "Software Engineering", "Team Building", "Collaborative Management"]
+      description: "4th President who stepped in during Fall 2023 when Ethan was unable to continue, demonstrating leadership and commitment to the club during a challenging transition period.",
+      specialties: ["Leadership", "Project Management", "Software Development", "Crisis Management"]
     }
   ],
   
@@ -58,9 +60,10 @@ export const membersByYear: MembersByYear = {
     {
       name: "Beethoven",
       role: "2nd President",
-      description: "2nd President (2021-2023) who transformed PROGgsu from HackJams and DSA reviews to hackathons and mock interviews. Expanded to 400+ Discord members, achieved official RSO status, and secured SAFC funding. Originally a founding member and Director of Events.",
-      github: "beesmalley",
-      specialties: ["Leadership", "Community Growth", "Event Innovation", "Strategic Partnerships"]
+      description: "2nd President who transformed PROGgsu from basic HackJams to comprehensive technical interview preparation. Led the club's evolution into a powerhouse for competitive programming and career development.",
+      specialties: ["Technical Interviews", "Competitive Programming", "Leadership", "Mentorship"],
+      github: "https://github.com/beethoven", // Coming soon placeholder
+      linkedin: "https://linkedin.com/in/beethoven" // Coming soon placeholder
     },
     {
       name: "John Martin",
