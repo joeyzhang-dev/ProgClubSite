@@ -44,6 +44,46 @@ const membersByYear = {
       github: "beethoven",
       linkedin: "beethoven",
       specialties: ["Leadership", "Community Growth", "Programming"]
+    },
+    {
+      name: "Shardul",
+      role: "Former VP",
+      description: "Vice President during Fall 2021 who worked closely with Jenny and the founding team. Key contributor to early club planning and logistics.",
+      github: "shardul",
+      linkedin: "shardul",
+      specialties: ["Event Planning", "Logistics", "Team Coordination"]
+    },
+    {
+      name: "Ikenna",
+      role: "Former Secretary",
+      description: "Secretary/Librarian during Fall 2021. Helped establish club documentation and organizational systems in the early days.",
+      github: "ikenna",
+      linkedin: "ikenna",
+      specialties: ["Documentation", "Organization", "Communication"]
+    },
+    {
+      name: "Adithya",
+      role: "Event Lead",
+      description: "Event Lead during Fall 2021. Co-organized early club events and helped establish PROGgsu's event programming traditions.",
+      github: "adithya",
+      linkedin: "adithya",
+      specialties: ["Event Planning", "Workshop Organization", "Community Engagement"]
+    },
+    {
+      name: "Bee",
+      role: "Event Lead", 
+      description: "Event Lead during Fall 2021. Partnered with Adithya to create engaging programming events and workshops for the growing community.",
+      github: "bee",
+      linkedin: "bee",
+      specialties: ["Event Coordination", "Workshop Development", "Student Outreach"]
+    },
+    {
+      name: "Gyan",
+      role: "Tech Chair",
+      description: "Tech Chair during Fall 2021. Managed technical infrastructure and helped establish the club's technology foundations.",
+      github: "gyan",
+      linkedin: "gyan", 
+      specialties: ["Technical Infrastructure", "Web Development", "System Administration"]
     }
   ],
   "2020-2021": [
@@ -80,9 +120,11 @@ function getRolePriority(role: string): number {
     "Secretary": 3,
     "Former Secretary": 3,
     "Treasurer": 4,
+    "Event Lead": 5,
     "Events Coordinator": 5,
     "Workshop Lead": 6,
-    "Founding VP": 7
+    "Tech Chair": 7,
+    "Founding VP": 8
   };
   return priorities[role] || 99;
 }
