@@ -1,13 +1,56 @@
 ---
-// Individual Member Card Component
-// This handles all the complex styling, sparkle effects, and member display logic
-// Future editors: Modify this file to change how member cards look and behave
+/**
+ * =============================================================================
+ * MEMBER CARD COMPONENT - INDIVIDUAL MEMBER DISPLAY
+ * =============================================================================
+ * 
+ * This component handles the display of individual member cards with all their
+ * special effects, conditional rendering, and responsive styling.
+ * 
+ * ✨ SPECIAL EFFECTS SYSTEM:
+ * - Founding President (Jenny Liu): Violet sparkles + extra special glares
+ * - Presidents (2nd-5th): Golden sparkles + liquid glass effects
+ * - All Others: Standard styling with hover effects
+ * 
+ * 🎨 VISUAL FEATURES:
+ * - Liquid glass background effects
+ * - Floating bubble animations
+ * - Responsive sparkle glares on hover
+ * - Role-based gradient borders
+ * - Smooth hover transitions and scaling
+ * 
+ * 🔧 CONDITIONAL RENDERING:
+ * - Description: Shows placeholder if member.description is missing
+ * - Specialties: Only displays if member.specialties array exists and has items
+ * - Social Links: Shows "Coming Soon" for missing GitHub/LinkedIn
+ * - Role Styling: Different colors for different role types
+ * 
+ * 📱 RESPONSIVE DESIGN:
+ * - Cards scale and adapt to different screen sizes
+ * - Text sizes adjust for mobile vs desktop
+ * - Hover effects work on both touch and pointer devices
+ * 
+ * 🔧 FOR FUTURE DEVELOPERS:
+ * - To add new special effects: Modify the conditional classes below
+ * - To change sparkle behavior: Edit the CSS animations at the bottom
+ * - To add new role types: Update the role checking logic
+ * - To modify layout: Adjust the HTML structure and Tailwind classes
+ * 
+ * 💡 DEBUGGING TIPS:
+ * - Check isPresidentRole() and isFoundingPresident() functions
+ * - Verify member data structure matches the Member interface
+ * - Test hover effects on different devices and browsers
+ * =============================================================================
+ */
 
 import type { Member } from '@/data/members';
 import { isPresidentRole, isFoundingPresident, getPlaceholderDescription } from '@/utils/memberUtils';
 
 interface Props {
+  /** The member data object containing all information to display */
   member: Member;
+  
+  /** The academic year string for context (used in placeholder generation) */
   year: string;
 }
 

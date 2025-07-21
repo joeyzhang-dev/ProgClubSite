@@ -1,41 +1,118 @@
-// PROGgsu Club Historical Timeline
-// Key milestones and achievements in club history
-//
-// ⚠️  IMPORTANT: This data is used by src/pages/history.astro for the timeline
-// ✏️  TO UPDATE TIMELINE: Edit the events below, they will automatically appear on /history
-//
-// HOW TO ADD NEW TIMELINE EVENTS:
-// 1. Add new TimelineEvent object to the appropriate section
-// 2. Include: date, title, description, type (founding/event/milestone/program)
-// 3. Keep descriptions concise - focus on impact and significance
+/**
+ * =============================================================================
+ * PROGCLUBGSU HISTORICAL TIMELINE DATA
+ * =============================================================================
+ * 
+ * This file contains the club's historical timeline data used by history.astro
+ * Future club officers can add new milestones and achievements here.
+ * 
+ * 🚀 QUICK START FOR FUTURE EDITORS:
+ * 1. Find the appropriate timeline section (founding, earlyDevelopment, growth, currentEra)
+ * 2. Add new timeline events using the existing structure
+ * 3. Update club stats at the top when numbers change
+ * 4. Save the file - changes appear automatically on /history page!
+ * 
+ * 📊 TIMELINE SECTIONS:
+ * - founding: March 2020 - Spring 2021 (Jenny's founding era)
+ * - earlyDevelopment: 2021-2023 (Beethoven's transformation era)  
+ * - growth: 2023-2025 (Ethan → Prahbir transition period)
+ * - currentEra: 2025+ (Joey's current leadership)
+ * 
+ * 🎯 EVENT TYPES:
+ * - "milestone": Major club achievements or changes
+ * - "achievement": Specific accomplishments or recognitions
+ * - "partnership": New collaborations or relationships
+ * 
+ * 💡 WRITING TIPS:
+ * - Keep titles creative but professional
+ * - Descriptions should be 1-2 sentences max
+ * - Include specific dates when possible
+ * - Maintain chronological order within sections
+ * =============================================================================
+ */
 
+/**
+ * Individual timeline event structure
+ */
 export interface TimelineEvent {
+  /** Event date (can be specific date, year, or period like "Fall 2023") */
   date: string;
+  
+  /** Creative, memorable title for the event */
   title: string;
+  
+  /** Brief 1-2 sentence description of what happened */
   description: string;
-  type: 'founding' | 'milestone' | 'program' | 'event' | 'achievement';
+  
+  /** Type of event for categorization and potential styling */
+  type: "milestone" | "achievement" | "partnership";
 }
 
+/**
+ * Overall club history structure organized by development phases
+ */
 export interface ClubHistory {
+  /** Founding period events (March 2020 - Spring 2021) */
   founding: TimelineEvent[];
+  
+  /** Early development period (2021-2023) */
   earlyDevelopment: TimelineEvent[];
+  
+  /** Growth period events (2023-2025) */
   growth: TimelineEvent[];
+  
+  /** Current era events (2025+) */
   currentEra: TimelineEvent[];
 }
 
+/**
+ * =============================================================================
+ * CLUB STATISTICS
+ * =============================================================================
+ * 
+ * ⚠️  UPDATE THESE NUMBERS REGULARLY:
+ * - Discord members: Check server member count
+ * - Students helped: Estimate from event attendance and programs
+ * - Core programs: Count active ongoing initiatives
+ * - Major milestones: Update as club achieves new goals
+ * =============================================================================
+ */
+export const clubStats = {
+  yearsStrong: "5+",
+  studentsHelped: "800+", 
+  corePrograms: "4",
+  majorMilestones: "25+"
+};
+
+/**
+ * =============================================================================
+ * TIMELINE DATA BY DEVELOPMENT PHASE
+ * =============================================================================
+ * 
+ * ⚠️  EDITING INSTRUCTIONS:
+ * - Add new events in chronological order within each section
+ * - Keep event titles creative but professional
+ * - Ensure descriptions are concise and impactful
+ * - Test changes by checking the /history page
+ * =============================================================================
+ */ 
 export const clubTimeline: ClubHistory = {
+  // =============================================================================
+  // FOUNDING ERA (March 2020 - Spring 2021)
+  // Jenny Liu's visionary leadership establishes PROGgsu during the pandemic
+  // =============================================================================
   founding: [
     {
       date: "March 2020",
       title: "Plot Twist: Pandemic Sparks Programming Paradise",
       description: "Jenny Liu founded PROGgsu during the global pandemic, creating GSU's premier programming community from the ground up.",
-      type: "founding"
+      type: "milestone"
     },
     {
       date: "Fall 2020",
       title: "The Great Launch: CS Jeopardy and Friends",
       description: "Launched inaugural programming events including CS Jeopardy, technical interview prep, and resume workshops with 25+ regular attendees.",
-      type: "event"
+      type: "achievement"
     },
     {
       date: "October 2020",
@@ -45,6 +122,10 @@ export const clubTimeline: ClubHistory = {
     }
   ],
 
+  // =============================================================================
+  // EARLY DEVELOPMENT (2021-2023)
+  // Building foundations and establishing core programs
+  // =============================================================================
   earlyDevelopment: [
     {
       date: "Spring 2021",
@@ -56,22 +137,26 @@ export const clubTimeline: ClubHistory = {
       date: "Fall 2021",
       title: "The Weekly Grind: Programming Challenges Era",
       description: "Established consistent weekly programming activities including data structures practice and algorithm challenges.",
-      type: "program"
+      type: "achievement"
     },
     {
       date: "Spring 2022",
       title: "Community Building: The Discord Dynasty",
       description: "Expanded community engagement through Discord server and regular programming discussions, building strong member connections.",
-      type: "event"
+      type: "achievement"
     }
   ],
 
+  // =============================================================================
+  // GROWTH PERIOD (2023-2025)
+  // Major program expansion and community explosion
+  // =============================================================================
   growth: [
     {
       date: "Fall 2022",
       title: "The Holy Trinity: DSA, Mocks & Competitive Chaos",
       description: "Launched the three core programs that would define PROGgsu: Data Structures & Algorithms prep, mock interviews, and competitive programming.",
-      type: "program"
+      type: "achievement"
     },
     {
       date: "Spring 2023",
@@ -87,6 +172,10 @@ export const clubTimeline: ClubHistory = {
     }
   ],
 
+  // =============================================================================
+  // CURRENT ERA (2025+)
+  // Presidential transitions and modern leadership
+  // =============================================================================
   currentEra: [
     {
       date: "2021-2023",
@@ -118,26 +207,5 @@ export const clubTimeline: ClubHistory = {
       description: "5+ years demonstrating successful leadership transitions and resilient community building through various challenges: Jenny → Beethoven → Ethan → Prahbir → Joey.",
       type: "achievement"
     }
-  ]
-};
-
-// Summary statistics for display
-export const clubStats = {
-  founded: "March 2020",
-  yearsActive: "5+",
-  programsLaunched: [
-    "DSA Interview Prep",
-    "Mock Technical Interviews", 
-    "Competitive Programming",
-    "HackJam Workshops",
-    "Peer Mentorship",
-    "Industry Guest Speakers"
-  ],
-  keyAchievements: [
-    "Official GSU recognition and charter",
-    "100+ students helped with interview prep",
-    "Regular competitive programming participation",
-    "Industry partnerships and guest speakers",
-    "Sustainable multi-year leadership structure"
   ]
 }; 

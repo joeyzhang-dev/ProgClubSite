@@ -1,29 +1,93 @@
-// Member data structure and types for easy editing by future club members
-// 
-// HOW TO ADD NEW MEMBERS:
-// 1. Add member object to the appropriate year section
-// 2. Include: name, role, description (optional), github (optional), linkedin (optional), specialties (optional)
-// 3. Real social links only - others will show as "coming soon"
-//
-// HOW TO ADD NEW ACADEMIC YEARS:
-// 1. Add new key like "2027-2029" to membersByYear object
-// 2. Add members array with member objects
-// 3. They will automatically appear on the site
+/**
+ * =============================================================================
+ * PROGCLUBGSU MEMBER DATA MANAGEMENT
+ * =============================================================================
+ * 
+ * This file contains all member information organized by academic year.
+ * Future club officers can easily add/edit member information here.
+ * 
+ * 🚀 QUICK START FOR FUTURE EDITORS:
+ * 1. Find the academic year section you want to edit
+ * 2. Add/modify member objects with the required fields
+ * 3. Social links: Only include REAL links, others will show "Coming Soon"
+ * 4. Save the file - changes appear automatically on the website!
+ * 
+ * 📋 REQUIRED FIELDS: name, role
+ * 🎯 OPTIONAL FIELDS: description, github, linkedin, specialties
+ * 
+ * 🔍 HOW TO ADD NEW MEMBERS:
+ * - Copy an existing member object structure
+ * - Fill in their information (name and role are required)
+ * - Add to the appropriate academic year section
+ * 
+ * 🗓️ HOW TO ADD NEW ACADEMIC YEARS:
+ * - Add new key like "2027-2029" to membersByYear object
+ * - Add members array with member objects
+ * - The website will automatically display the new section
+ * 
+ * ⚡ SPECIAL ROLES (get special styling):
+ * - "Founding President" (Jenny Liu - gets violet sparkles)
+ * - "President", "2nd President", "3rd President", etc. (get golden sparkles)
+ * - "Founding Member", "Founding Academic Advisor" (special priority)
+ * - All other roles get standard styling
+ * 
+ * 💡 TIPS:
+ * - Keep descriptions concise but informative
+ * - Use consistent role naming (see existing examples)
+ * - Specialties should be relevant skills/interests
+ * - GitHub usernames: just the username, not full URL
+ * - LinkedIn: can be username or full URL
+ * =============================================================================
+ */
 
+/**
+ * Individual member data structure
+ * All fields except name and role are optional
+ */
 export interface Member {
+  /** Full name of the member (required) */
   name: string;
+  
+  /** Official role/position in the club (required) */
   role: string;
+  
+  /** Brief description of their contributions and background (optional) */
   description?: string;
+  
+  /** GitHub username or profile URL (optional - only include if verified/real) */
   github?: string;
+  
+  /** LinkedIn username or profile URL (optional - only include if verified/real) */
   linkedin?: string;
+  
+  /** Array of skills, interests, or specialties (optional) */
   specialties?: string[];
 }
 
+/**
+ * Organization structure: members grouped by academic year
+ * Key format: "YYYY-YYYY" (e.g., "2025-2027")
+ */
 export interface MembersByYear {
-  [year: string]: Member[];
+  [academicYear: string]: Member[];
 }
 
+/**
+ * =============================================================================
+ * MEMBER DATA BY ACADEMIC YEAR
+ * =============================================================================
+ * 
+ * ⚠️  EDITING INSTRUCTIONS:
+ * - Keep members within their correct academic year section
+ * - Maintain chronological order (newest years first)
+ * - Copy the structure of existing entries when adding new members
+ * - Test changes by running `npm run dev` and checking /members page
+ * =============================================================================
+ */
 export const membersByYear: MembersByYear = {
+  // =============================================================================
+  // CURRENT LEADERSHIP (2025-2027)
+  // =============================================================================
   "2025-2027": [
     {
       name: "Joey Zhang",
@@ -41,6 +105,10 @@ export const membersByYear: MembersByYear = {
     }
   ],
   
+  // =============================================================================
+  // TRANSITION PERIOD (2023-2025) 
+  // Ethan (3rd President) → Prahbir (4th President) leadership transition
+  // =============================================================================
   "2023-2025": [
     {
       name: "Ethan Munji",
@@ -55,7 +123,11 @@ export const membersByYear: MembersByYear = {
       specialties: ["Leadership", "Project Management", "Software Development", "Crisis Management"]
     }
   ],
-  
+
+  // =============================================================================
+  // BEETHOVEN ERA (2021-2023)
+  // 2nd President period with major club transformations and growth
+  // =============================================================================
   "2021-2023": [
     {
       name: "Beethoven",
@@ -115,8 +187,12 @@ export const membersByYear: MembersByYear = {
       name: "Srikumar",
       role: "Exec"
     }
-  ],
-  
+    ],
+
+  // =============================================================================
+  // THE FOUNDING ERA (2020-2021) 
+  // Jenny Liu's founding presidency and the original team that started it all
+  // =============================================================================
   "2020-2021": [
     {
       name: "Jenny Liu",

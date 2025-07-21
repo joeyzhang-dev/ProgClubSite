@@ -1,20 +1,50 @@
 ---
-// Main Members Page - Clean and maintainable structure
-// Future editors: This page just imports data and renders components
-// 
-// TO EDIT MEMBER DATA: Go to src/data/members.ts
-// TO EDIT MEMBER CARDS: Go to src/components/MemberCard.astro
-// TO EDIT SORTING/ROLES: Go to src/utils/memberUtils.ts
+/**
+ * =============================================================================
+ * MEMBERS PAGE - MAIN DISPLAY CONTROLLER
+ * =============================================================================
+ * 
+ * This page serves as the main orchestrator for displaying all club members.
+ * It imports data and components from the modular structure we've built.
+ * 
+ * 🏗️  ARCHITECTURE OVERVIEW:
+ * - Data: Imported from src/data/members.ts (easy to edit member info)
+ * - Utilities: Imported from src/utils/memberUtils.ts (sorting and logic)
+ * - Components: Uses src/components/MemberCard.astro (individual card display)
+ * - Layout: Uses standard Layout wrapper with Section component
+ * 
+ * 🎯 WHAT THIS FILE DOES:
+ * 1. Imports member data and utility functions
+ * 2. Sorts members by role priority within each academic year
+ * 3. Renders year headers and member card grids
+ * 4. Provides a call-to-action section at the bottom
+ * 
+ * 🔧 FOR FUTURE DEVELOPERS:
+ * - To add members: Edit src/data/members.ts
+ * - To change card styling: Edit src/components/MemberCard.astro  
+ * - To modify sorting: Edit src/utils/memberUtils.ts
+ * - To change page layout: Edit this file
+ * 
+ * 💡 TESTING CHANGES:
+ * - Run `npm run dev` and visit /members
+ * - Check that sorting is correct within each year
+ * - Verify special effects work on president cards
+ * - Ensure responsive design works on mobile
+ * =============================================================================
+ */
 
+// Layout and UI Components
 import Layout from "@/layouts/Layout.astro";
 import Section from "@/components/Section.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import MemberCard from "@/components/MemberCard.astro";
 
+// Data and Business Logic
 import { membersByYear } from "@/data/members";
 import { sortMembersByRole } from "@/utils/memberUtils";
 
-// Sort all members by their role priority within each year
+// Sort all members by their role priority within each academic year
+// This ensures Presidents appear first, then VPs, then other roles
 const sortedMembers = sortMembersByRole(membersByYear);
 ---
 
