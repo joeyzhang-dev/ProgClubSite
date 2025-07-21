@@ -101,6 +101,7 @@ export const membersByYear: MembersByYear = {
       name: "Evan Anderson",
       role: "Vice President",
       description: "Vice President serving under Joey Zhang's leadership, bringing a unique blend of creative and technical skills to help guide PROGgsu's continued growth.",
+      linkedin: "evan-anderson636",
       specialties: ["Fashion Design", "Cooking", "App Dev", "Data Analytics"]
     }
   ],
@@ -114,12 +115,15 @@ export const membersByYear: MembersByYear = {
       name: "Ethan Munji",
       role: "3rd President",
       description: "3rd President who served during Fall 2023. His leadership period was cut short due to a skateboarding accident, but his contributions helped maintain club momentum during his tenure.",
+      github: "xMunji",
       specialties: ["Leadership", "Software Engineering", "Team Building", "Community Engagement", "Skateboarding"]
     },
     {
       name: "Prahbir Virk",
       role: "4th President",
       description: "4th President who stepped in during Fall 2023 when Ethan was unable to continue, demonstrating leadership and commitment to the club during a challenging transition period.",
+      github: "PrahbirVirk",
+      linkedin: "Prahbirvirk",
       specialties: ["Leadership", "Project Management", "Software Development", "Crisis Management"]
     }
   ],
@@ -134,8 +138,7 @@ export const membersByYear: MembersByYear = {
       role: "2nd President",
       description: "2nd President who transformed PROGgsu from basic HackJams to comprehensive technical interview preparation. Led the club's evolution into a powerhouse for competitive programming and career development.",
       specialties: ["Technical Interviews", "Competitive Programming", "Leadership", "Mentorship"],
-      github: "https://github.com/beethoven", // Coming soon placeholder
-      linkedin: "https://linkedin.com/in/beethoven" // Coming soon placeholder
+      github: "beesmalley"
     },
     {
       name: "John Martin",
