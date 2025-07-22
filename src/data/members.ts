@@ -82,6 +82,7 @@ export interface MembersByYear {
  * - Maintain chronological order (newest years first)
  * - Copy the structure of existing entries when adding new members
  * - Test changes by running `npm run dev` and checking /members page
+ * - Items ommited will have a default "coming soon" placeholder
  * =============================================================================
  */
 export const membersByYear: MembersByYear = {
@@ -95,7 +96,7 @@ export const membersByYear: MembersByYear = {
       description: "Current 5th President leading PROGgsu into the future! Passionate about building community and helping fellow programmers grow. Math + CS @ GSU, building InfiniteMonke.",
       github: "joeyzhang-dev",
       linkedin: "joeyzhangdev",
-      specialties: ["Leadership", "Community Building", "Full Stack", "TypeScript", "React"]
+      specialties: ["Leadership", "Bench Press", "Monkeytype", "Eating food", "Height: 6'5\""]
     },
     {
       name: "Evan Anderson",
@@ -209,7 +210,6 @@ export const membersByYear: MembersByYear = {
       name: "Andrew Huang",
       role: "Founding Academic Advisor",
       description: "Facebook Engineer In Residence (EIR) and founding academic advisor who provided crucial guidance and industry expertise during PROGgsu's creation in 2020.",
-      github: "andrewhuang",
       linkedin: "shidihuang",
       specialties: ["Industry Mentorship", "Academic Guidance", "Software Engineering"]
     },
