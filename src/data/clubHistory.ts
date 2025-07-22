@@ -86,6 +86,71 @@ export const clubStats = {
 
 /**
  * =============================================================================
+ * KEY ACHIEVEMENTS DATA (for /history page)
+ * =============================================================================
+ *
+ * Edit this array to update the "Key Achievements" section on the history page.
+ * Each item should have a title and a description.
+ * =============================================================================
+ */
+export interface KeyAchievement {
+  title: string;
+  description: string;
+  color: string; // e.g. 'purple', 'blue', etc. for the dot
+}
+
+export const keyAchievements: KeyAchievement[] = [
+  {
+    title: "5+ Years Strong",
+    description: "Continuous operation since March 2020",
+    color: "purple"
+  },
+  {
+    title: "100+ Students Helped",
+    description: "Through interview prep and programming guidance",
+    color: "blue"
+  },
+  {
+    title: "6 Core Programs",
+    description: "DSA prep, mock interviews, competitive programming",
+    color: "green"
+  },
+  {
+    title: "5 Presidents",
+    description: "Successful leadership transitions",
+    color: "amber"
+  },
+  {
+    title: "Official Recognition",
+    description: "RSO status and SAFC funding secured",
+    color: "red"
+  },
+  {
+    title: "1100+ Discord Members",
+    description: "Active programming community built",
+    color: "cyan"
+  }
+];
+
+/**
+ * =============================================================================
+ * DID YOU KNOW FACTS DATA (for /history page)
+ * =============================================================================
+ *
+ * Edit this array to update the "Did You Know?" section on the history page.
+ * Each item is a single fact string.
+ * =============================================================================
+ */
+export const didYouKnowFacts: string[] = [
+  "PROGgsu was founded during the COVID-19 pandemic, proving that great communities can emerge from challenging times!",
+  "We had a unique co-presidency period where Prahbir and Ethan shared leadership duties - a first in club history!",
+  "Our \"Holy Trinity\" programs (DSA, Mocks, Competitive Programming) have helped dozens of students land internships at top tech companies.",
+  "Andrew Huang, a Facebook Engineer in Residence, was our founding academic advisor who helped establish our foundation.",
+  "We transformed from basic HackJams to comprehensive interview prep, revolutionizing how GSU students approach technical interviews."
+];
+
+/**
+ * =============================================================================
  * TIMELINE DATA BY DEVELOPMENT PHASE
  * =============================================================================
  * 
@@ -198,8 +263,14 @@ export const clubTimeline: ClubHistory = {
     {
       date: "2025-Present",
       title: "Joey's Era: The Fifth Element of Leadership",
-      description: "Joey Zhang becomes the 5th President, leading PROGgsu into the future with continued innovation and community building.",
+      description: "Joey Zhang doesn't just lead—he rebrands, reboots, and re-energizes! As the 5th President, Joey launches a full-on club renaissance: new look, new vibe, and a tidal wave of student activity. If there's a spark of energy on campus, it's probably Joey lighting the fire. The most proactive president yet—PROGgsu's future is now running on pure caffeine and Joey's vision.",
       type: "milestone"
+    },
+    {
+      date: "2025",
+      title: "The Rebirth: Ctrl+Alt+Refresh",
+      description: "PROGgsu gets a glow-up! New website, fresh branding, and a total event overhaul. It's not just a rebrand—it's a full system reboot. Members are still trying to figure out if they joined a club or accidentally walked into a tech startup. Welcome to the new era, where even the logo has more energy!",
+      type: "achievement"
     },
     {
       date: "2020-Present",
