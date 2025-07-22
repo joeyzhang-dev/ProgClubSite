@@ -95,7 +95,7 @@ export const membersByYear: MembersByYear = {
       description: "Current 5th President leading PROGgsu into the future! Passionate about building community and helping fellow programmers grow. Math + CS @ GSU, building InfiniteMonke.",
       github: "joeyzhang-dev",
       linkedin: "joeyzhangdev",
-      specialties: ["Leadership", "Community Building", "Full Stack", "TypeScript", "React"]
+      specialties: ["Leadership", "Bench Press", "Monkeytype", "Eating food", "6'5\""]
     },
     {
       name: "Evan Anderson",
