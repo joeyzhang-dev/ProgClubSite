@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Section from "@/components/Section.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
 import ResourceButtons from "@/components/ResourceButtons.astro";
 import { getEvents, renderPortableText } from "@/lib/sanity.js";
 import { DISCORD_LINK } from "@/consts";
@@ -43,7 +44,16 @@ const upcomingEvents = [
 ---
 
 <Layout title="Resources">
-  <Section title="Resources">
+  <Fragment slot="breadcrumb">
+    <div class="mb-6 mt-2">
+      <nav class="flex items-center gap-2 text-white/80 text-sm" aria-label="Breadcrumb">
+        <a href="/" class="hover:underline">Home</a>
+        <span>/</span>
+        <Breadcrumb title="Resources" />
+      </nav>
+    </div>
+  </Fragment>
+  <Section title="Resources" className="pt-16">
     <div class="w-full grid place-items-center">
       <div class="max-w-6xl w-full space-y-12">
         

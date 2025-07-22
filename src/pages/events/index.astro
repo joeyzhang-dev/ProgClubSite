@@ -3,6 +3,7 @@ import { getEvents, renderPortableText } from "@/lib/sanity.js";
 import BlogPostCard from "@/components/BlogPostCard.astro";
 import Section from "@/components/Section.astro";
 import Layout from "@/layouts/Layout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
 
 const events = await getEvents();
 
@@ -43,7 +44,16 @@ function getEventStatus(date) {
 ---
 
 <Layout title="Events">
-  <Section title="Events">
+  <Fragment slot="breadcrumb">
+    <div class="mb-6 mt-2">
+      <nav class="flex items-center gap-2 text-white/80 text-sm" aria-label="Breadcrumb">
+        <a href="/" class="hover:underline">Home</a>
+        <span>/</span>
+        <Breadcrumb title="Events" />
+      </nav>
+    </div>
+  </Fragment>
+  <Section title="Events" className="pt-16">
     <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {
         events.map((event) => {
