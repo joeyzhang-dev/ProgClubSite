@@ -267,6 +267,12 @@ export const clubTimeline: ClubHistory = {
       type: "milestone"
     },
     {
+      date: "2025",
+      title: "The Rebirth: Ctrl+Alt+Refresh",
+      description: "PROGgsu gets a glow-up! New website, fresh branding, and a total event overhaul. It's not just a rebrand—it's a full system reboot. Members are still trying to figure out if they joined a club or accidentally walked into a tech startup. Welcome to the new era, where even the logo has more energy!",
+      type: "achievement"
+    },
+    {
       date: "2020-Present",
       title: "The Five-President Legacy: Resilience Through Challenges",
       description: "5+ years demonstrating successful leadership transitions and resilient community building through various challenges: Jenny → Beethoven → Ethan → Prahbir → Joey.",
