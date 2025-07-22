@@ -145,7 +145,8 @@ export const membersByYear: MembersByYear = {
       name: "John Martin",
       role: "Academic Advisor",
       description: "Facebook Engineer In Residence (EIR) who served as Academic Advisor from 2021-2022. Worked closely with Beethoven and the second executive board to expand club programming and industry partnerships.",
-      specialties: ["Industry Mentorship", "Academic Guidance", "Facebook/Meta Partnerships"]
+      specialties: ["Industry Mentorship", "Academic Guidance", "Facebook/Meta Partnerships"],
+      linkedin: "ilovecodereview"
     },
     {
       name: "Batya Zamansky",
