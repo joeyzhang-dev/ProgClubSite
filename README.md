@@ -355,9 +355,6 @@ This project is open source under the MIT License. Feel free to use this code as
 ## Contact
 
 - **Discord**: Join our server for daily discussions and help
-- **Email**: progclub@gsu.edu for official inquiries
-- **GitHub**: Report bugs and request features through issues
-- **Meetings**: Every Thursday at 6:30 PM in classroom building
 
 ---
 
