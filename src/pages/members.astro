@@ -42,6 +42,7 @@ import MemberCard from "@/components/MemberCard.astro";
 // Data and Business Logic
 import { membersByYear } from "@/data/members";
 import { sortMembersByRole } from "@/utils/memberUtils";
+import { DISCORD_LINK } from "@/consts";
 
 // Sort all members by their role priority within each academic year
 // This ensures Presidents appear first, then VPs, then other roles
@@ -52,10 +53,18 @@ const sortedMembers = sortMembersByRole(membersByYear);
   title="Members - PROGgsu"
   description="Meet the amazing members of PROGgsu across the years. From founding members to current leadership, discover the people building GSU's programming community."
 >
+  <Fragment slot="breadcrumb">
+    <div class="mb-6 mt-2">
+      <nav class="flex items-center gap-2 text-white/80 text-sm" aria-label="Breadcrumb">
+        <a href="/" class="hover:underline">Home</a>
+        <span>/</span>
+        <Breadcrumb title="Members" />
+      </nav>
+    </div>
+  </Fragment>
   <Section title="Our Amazing Members" className="pt-16">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-12">
-        <Breadcrumb title="Members" />
         <p class="text-white/80 text-lg mt-6 max-w-3xl mx-auto leading-relaxed">
           Meet the incredible people who make PROGgsu possible! From our founding members who started this journey
           to our current leadership team, each person contributes to building GSU's vibrant programming community.
@@ -100,7 +109,7 @@ const sortedMembers = sortMembersByRole(membersByYear);
             Check Out Our Events
           </a>
           <a 
-            href="//discord.gg/your-discord-link" 
+            href={String(DISCORD_LINK)}
             target="_blank"
             class="px-8 py-3 rounded-lg border border-white/30 text-white hover:bg-white/10 font-medium transition-all duration-300 hover:scale-105"
           >

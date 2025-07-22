@@ -135,10 +135,18 @@ const timelineEvents = [
   title="History - PROGgsu"
   description="Discover the journey of PROGgsu from its founding to today. Explore our milestones, achievements, and the growth of GSU's programming community."
 >
+  <Fragment slot="breadcrumb">
+    <div class="mb-6 mt-2">
+      <nav class="flex items-center gap-2 text-white/80 text-sm" aria-label="Breadcrumb">
+        <a href="/" class="hover:underline">Home</a>
+        <span>/</span>
+        <Breadcrumb title="History" />
+      </nav>
+    </div>
+  </Fragment>
   <Section title="Our Journey" className="pt-16">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-12">
-        <Breadcrumb title="Club History" />
         <p class="text-white/80 text-lg mt-6 max-w-3xl mx-auto leading-relaxed">
           From a visionary idea during the COVID-19 pandemic to a thriving community with proven programs, 
           discover how PROGgsu has evolved since March 2020 to become Georgia State University's premier programming organization.

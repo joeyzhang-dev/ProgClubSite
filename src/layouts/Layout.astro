@@ -7,7 +7,8 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 import Analytics from '@vercel/analytics/astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const { title = SITE_TITLE, description = SITE_DESCRIPTION, hideHomeButton = false } = Astro.props;
+const isHome = Astro.url.pathname === "/";
 ---
 
 <html lang="en" class="!overflow-x-hidden">
@@ -17,7 +18,13 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 
   <body class="bg-black text-white tracking-wide !overflow-x-hidden">
     <header class="fixed top-0 w-screen z-[9999]"><Navbar /></header>
-    <main class="pt-28 md:pt-20"><slot /></main>
+    <main class="pt-28 md:pt-20">
+      {/* Breadcrumb slot for subpages */}
+      <div class="max-w-7xl mx-auto px-4">
+        <slot name="breadcrumb" />
+      </div>
+      <slot />
+    </main>
     <footer class="w-screen bottom-0 overflow-x-hidden"><Footer /></footer>
     
     <!-- Cursor glow element -->

@@ -27,12 +27,19 @@ import { SITE_TITLE, NAV_LINKS as links } from "@/consts";
           const subpath = pathname.match(/[^\/]+/g);
           const isActive =
             href === pathname || href === "/" + (subpath?.[0] || "");
+          
+          // Check if href is an absolute URL (external link)
+          const isExternalLink = href.startsWith("http://") || href.startsWith("https://");
+          const finalHref = isExternalLink ? href : `/${href}`;
+          
           return (
             <>
               <a
                 class:list={[{ "bg-white text-black": isActive }]}
                 class="hover:bg-white hover:text-black transition-all ease-in-out px-2 max-w-fit"
-                href={`/${href}`}
+                href={finalHref}
+                target={isExternalLink ? "_blank" : undefined}
+                rel={isExternalLink ? "noopener noreferrer" : undefined}
               >
                 <div>
                   {link.title === "Join" ? (<span><span aria-label="love" role="img">❤️</span> Join</span>) : link.title}

@@ -18,8 +18,11 @@ interface Props {
 const { title, pubDate, updatedDate, heroImage, resources } = Astro.props;
 ---
 
-<Layout>
+<Layout hideHomeButton={true}>
   <article class="pb-10 grid place-items-center grid-cols-1">
+    <div class="w-full flex justify-start max-w-4xl mx-auto px-4 mb-1">
+      <slot name="breadcrumb" />
+    </div>
     <div class="w-full grid place-items-center my-10 px-10 overflow-x-hidden">
       {
         heroImage && (
