@@ -1,6 +1,7 @@
 ---
 import { getEvents, getEvent, renderPortableText } from "@/lib/sanity.js";
 import BlogPost from "@/layouts/BlogPost.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
 
 export async function getStaticPaths() {
   const events = await getEvents();
@@ -21,6 +22,17 @@ const postHtml = renderPortableText(event.post);
   pubDate={event.date && event.date.value ? new Date(event.date.value) : undefined}
   resources={event.resources}
 >
+  <Fragment slot="breadcrumb">
+    <div class="mb-6 mt-2">
+      <nav class="flex items-center gap-2 text-white/80 text-sm" aria-label="Breadcrumb">
+        <a href="/" class="hover:underline">Home</a>
+        <span>/</span>
+        <a href="/events" class="hover:underline">Events</a>
+        <span>/</span>
+        <Breadcrumb title={event.title} />
+      </nav>
+    </div>
+  </Fragment>
   <div class="event-info-card relative mb-8 max-w-4xl mx-auto overflow-hidden backdrop-blur-md border border-white/20 bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] shadow-lg rounded-xl p-6">
     <!-- Glass effect overlay -->
     <div class="absolute inset-0 bg-gradient-to-br from-white/[0.1] via-transparent to-transparent opacity-60"></div>

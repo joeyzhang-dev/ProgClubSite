@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Section from "@/components/Section.astro";
 import ResourceButtons from "@/components/ResourceButtons.astro";
 import { getEvents, renderPortableText } from "@/lib/sanity.js";
+import { DISCORD_LINK } from "@/consts";
 
 // Get all events and sort by date
 const events = await getEvents();
@@ -228,7 +229,7 @@ const upcomingEvents = [
               <h3 class="text-lg font-semibold mb-3">Club Resources</h3>
               <div class="space-y-3">
                 <a href="/events" class="block text-white/80 hover:text-white transition-colors">→ All Events</a>
-                <a href="https://discord.gg/KTsEzTuWs7" target="_blank" class="block text-white/80 hover:text-white transition-colors">→ Discord Server</a>
+                <a href={String(DISCORD_LINK)} target="_blank" class="block text-white/80 hover:text-white transition-colors">→ Discord Server</a>
                 <span class="block text-gray-500 cursor-not-allowed select-none">→ Meeting Schedule (Coming Soon)</span>
                 <span class="block text-gray-500 cursor-not-allowed select-none">→ Contact Information (Coming Soon)</span>
               </div>

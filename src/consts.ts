@@ -8,6 +8,14 @@ export const KNOWN_TECH =
 export const ABOUT_ME = "ProgClub@GSU is a student-run organization at Georgia State University dedicated to coding, learning, and building a supportive tech community. We host workshops, hackathons, and social events for all skill levels!";
 export const GITHUB_USERNAME = "ArnavK-09";
 export const QUOTE = "everyone is welcome";
+// Centralized social links for easy editing
+export const DISCORD_LINK = "https://discord.gg/BgKg9gskM2";
+export const SOCIAL_LINKS = {
+  discord: DISCORD_LINK,
+  // Add more as needed, e.g.:
+  // github: "https://github.com/ProgClubGSU",
+  // linkedin: "https://linkedin.com/in/your-profile",
+};
 export const NAV_LINKS: Array<{ title: string; href?: string }> = [
   {
     title: "Events",
@@ -23,7 +31,7 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
   },
   {
     title: "Join",
-    href: "//discord.gg/your-discord-link",
+    href: DISCORD_LINK,
   },
 ];
 
