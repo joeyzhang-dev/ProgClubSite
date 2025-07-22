@@ -263,7 +263,7 @@ export const clubTimeline: ClubHistory = {
     {
       date: "2025-Present",
       title: "Joey's Era: The Fifth Element of Leadership",
-      description: "Joey Zhang becomes the 5th President, leading PROGgsu into the future with continued innovation and community building.",
+      description: "Joey Zhang doesn't just lead—he rebrands, reboots, and re-energizes! As the 5th President, Joey launches a full-on club renaissance: new look, new vibe, and a tidal wave of student activity. If there's a spark of energy on campus, it's probably Joey lighting the fire. The most proactive president yet—PROGgsu's future is now running on pure caffeine and Joey's vision.",
       type: "milestone"
     },
     {
