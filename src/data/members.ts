@@ -82,6 +82,7 @@ export interface MembersByYear {
  * - Maintain chronological order (newest years first)
  * - Copy the structure of existing entries when adding new members
  * - Test changes by running `npm run dev` and checking /members page
+ * - Items ommited will have a default "coming soon" placeholder
  * =============================================================================
  */
 export const membersByYear: MembersByYear = {
