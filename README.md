@@ -1,407 +1,364 @@
-# PROGgsu 🚀
+# PROGgsu Website
 
-<h2 align="center">Official Website for Georgia State University's Programming Club</h2>
+Official website for Georgia State University's Programming Club, built with modern web technologies to serve our growing community of developers and programming enthusiasts.
 
-<p align="center">
-    <img alt="ProgClub GSU Logo" width="450" src="public/image.png" />
-</p>
+## About PROGgsu
 
-<p align="center">
-    <strong>Built with Astro • Tailwind CSS • Sanity CMS</strong>
-</p>
+PROGgsu is Georgia State University's premier programming club, dedicated to fostering an inclusive and supportive technology community for students at all skill levels. Our mission is to provide learning opportunities, networking events, and practical programming experience to help students grow as developers and professionals.
 
----
+### What We Offer
 
-## 🌟 About PROGgsu
+- **Workshops and Learning Sessions**: Hands-on coding workshops covering web development, algorithms, AI/ML, and emerging technologies
+- **Hackathons and Competitions**: Team-based coding challenges and project-building events
+- **Networking Opportunities**: Connect with fellow students, alumni, and industry professionals
+- **Project Collaboration**: Contribute to open-source projects and build your portfolio
+- **Career Development**: Resume reviews, mock interviews, and internship guidance
 
-**PROGgsu** is Georgia State University's premier programming club, dedicated to fostering a supportive and inclusive tech community for students of all skill levels. Whether you're writing your first "Hello World" or building the next big startup, **everyone is welcome** here! 
+## Technology Stack
 
-### 🎯 What We Do
-- **🛠️ Workshops & Learning Sessions** – Hands-on coding workshops covering everything from web dev to AI
-- **🏆 Hackathons & Competitions** – Team up for coding challenges and build amazing projects
-- **🤝 Networking & Community** – Connect with fellow programmers, alumni, and industry professionals  
-- **💡 Project Collaboration** – Contribute to open-source projects and build your portfolio
-- **📈 Career Development** – Get mentorship, internship opportunities, and career guidance
+- **Astro**: Modern static site generator for optimal performance
+- **TypeScript**: Type-safe development with enhanced developer experience
+- **Tailwind CSS**: Utility-first CSS framework for responsive design
+- **Sanity CMS**: Headless content management system for events and announcements
+- **MDX**: Enhanced Markdown with React component support
+- **Vercel**: Fast deployment and hosting platform
 
----
-
-## ✨ Website Features
-
-This modern, fast-loading website showcases everything our club has to offer:
-
-### 🎨 **Modern Design & Performance**
-- **Lightning Fast** – Built with Astro for optimal static site generation
-- **Mobile-First** – Responsive design that works beautifully on all devices
-- **Accessible** – Designed with accessibility best practices in mind
-
-### 📝 **Content Management**
-- **Sanity CMS Integration** – Easy-to-use headless CMS for managing events and content
-- **MDX Support** – Rich content creation with Markdown and React components
-- **Real-time Updates** – Content changes reflect immediately on the live site
-
-### 🎉 **Club Features**
-- **Event Announcements** – Stay updated on workshops, meetings, and social events
-- **Resource Library** – Curated learning materials and helpful links
-- **Member Spotlights** – Showcase amazing work from our community
-- **Discord Integration** – Direct link to our active Discord community
-
----
-
-## 🛠️ Technologies Used
-
-- **⚡ [Astro](https://astro.build/)** - Modern static site generator
-- **🎨 [Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework  
-- **📝 [Sanity CMS](https://www.sanity.io/)** - Headless content management
-- **🔧 [TypeScript](https://www.typescriptlang.org/)** - Type-safe development
-- **📖 [MDX](https://mdxjs.com/)** - Enhanced Markdown with components
-- **🚀 [Vercel](https://vercel.com/)** - Fast deployment and hosting
-
----
-
-## 🚀 Quick Start
+## Getting Started
 
 ### Prerequisites
-Make sure you have these installed:
-- **Node.js** (version 16 or higher) - [Download here](https://nodejs.org/)
-- **npm** (comes with Node.js) or **yarn**
 
-### 📦 Installation
+- Node.js (version 18 or higher)
+- npm or yarn package manager
+- Git for version control
 
+### Installation
+
+1. Clone the repository:
 ```bash
-# 1. Clone the repository
-git clone https://github.com/joeyzhang-dev/ProgClubSite.git
+git clone https://github.com/ProgClubGSU/ProgClubSite.git
 cd ProgClubSite
+```
 
-# 2. Install dependencies
+2. Install dependencies:
+```bash
 npm install
+```
 
-# 3. Start the development server
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-🎉 **That's it!** Visit [http://localhost:4321](http://localhost:4321) to see the site running locally.
+4. Open your browser to `http://localhost:4321`
 
-### 🎛️ Configuration
-
-Customize the site by editing [`src/consts.ts`](src/consts.ts):
-
-```typescript
-// Update these values to match your club's information
-export const SITE_TITLE = "PROGgsu";
-export const SITE_DESCRIPTION = "Georgia State University's Programming Club...";
-export const ABOUT_ME = "ProgClub@GSU is a student-run organization...";
-
-// Add your social links
-export const NAV_LINKS = [
-  { title: "Events" },
-  { title: "Resources" },
-  { title: "Join", href: "//discord.gg/your-discord-link" }
-];
-```
-
----
-
-## 🏗️ Project Structure
-
-```
-ProgClubSite/
-├── 📁 src/
-│   ├── 📁 components/          # Reusable UI components
-│   │   ├── Hero.astro         # Landing page hero section
-│   │   ├── BlogPostCard.astro # Event/post preview cards
-│   │   └── ResourceButtons.astro # Quick access buttons
-│   ├── 📁 pages/              # Site pages and routes
-│   │   ├── index.astro        # Homepage
-│   │   ├── events/            # Events listing and detail pages
-│   │   └── resources.astro    # Resources page
-│   ├── 📁 layouts/            # Page layouts
-│   ├── 📁 lib/               # Utility functions
-│   │   └── sanity.js         # Sanity CMS client setup
-│   ├── 📁 styles/            # Global styles and Tailwind config
-│   └── consts.ts             # Site configuration
-├── 📁 studio/                 # Sanity CMS studio
-│   ├── 📁 schemaTypes/       # Content models (events, tags, etc.)
-│   └── sanity.config.ts      # CMS configuration
-├── 📁 public/                # Static assets (images, favicon, etc.)
-└── astro.config.mjs          # Astro build configuration
-```
-
----
-
-## 🎨 Development
-
-### Available Scripts
+### Development Commands
 
 ```bash
-# Development
 npm run dev          # Start development server with hot reload
 npm run build        # Build for production
 npm run preview      # Preview production build locally
-
-# Code Quality  
 npm run fmt          # Format code with Prettier
-
-# CMS
-cd studio && npm run dev  # Start Sanity Studio (CMS interface)
 ```
 
-### 🎛️ Content Management with Sanity CMS
+## Project Structure
 
-#### Initial Sanity Setup
-1. **Navigate to the studio directory:**
+```
+ProgClubSite/
+├── src/
+│   ├── components/           # Reusable UI components
+│   │   ├── Navbar.astro     # Site navigation
+│   │   ├── Footer.astro     # Site footer
+│   │   ├── MemberCard.astro # Member profile display
+│   │   └── BlogPostCard.astro # Event card component
+│   ├── layouts/             # Page layout templates
+│   │   ├── Layout.astro     # Base page layout
+│   │   └── BlogPost.astro   # Event detail layout
+│   ├── pages/               # Site pages and routing
+│   │   ├── index.astro      # Homepage
+│   │   ├── members.astro    # Member directory
+│   │   ├── history.astro    # Club timeline
+│   │   ├── events/          # Event pages
+│   │   └── resources.astro  # Learning resources
+│   ├── data/                # Static data files
+│   │   ├── members.ts       # Member information
+│   │   ├── clubHistory.ts   # Historical timeline
+│   │   └── README.md        # Data editing guide
+│   ├── utils/               # Helper functions
+│   │   └── memberUtils.ts   # Member sorting and utilities
+│   ├── lib/                 # External integrations
+│   │   └── sanity.js        # Sanity CMS client
+│   ├── styles/              # Global styles
+│   └── consts.ts            # Site configuration
+├── studio/                  # Sanity CMS studio
+│   ├── schemaTypes/         # Content models
+│   └── sanity.config.ts     # CMS configuration
+├── public/                  # Static assets
+└── astro.config.mjs         # Astro configuration
+```
+
+## Contributing
+
+We welcome contributions from all club members, regardless of technical experience. There are multiple ways to contribute to the website, from content updates to code improvements.
+
+### For Non-Technical Contributors
+
+#### Content Management with Sanity CMS
+
+Our website uses Sanity CMS for managing events, announcements, and other dynamic content. This allows non-technical members to update website content without touching code.
+
+**Getting Access:**
+1. Contact a club officer on Discord or at club meetings
+2. Request access to the Sanity CMS workspace
+3. You'll receive an invitation to join the PROGgsuSite project
+
+**Using Sanity Studio:**
+1. Navigate to the studio directory: `cd studio`
+2. Install dependencies: `npm install`
+3. Start the CMS interface: `npm run dev`
+4. Open `http://localhost:3333` in your browser
+5. Sign in with your Google or GitHub account
+
+**Content Types Available:**
+- **Events**: Create workshop announcements, meeting notices, and social events
+- **Tags**: Organize content by topics like "Web Development," "AI/ML," or "Beginner-Friendly"
+
+**Adding Events:**
+1. Click "Events" in the Sanity Studio sidebar
+2. Click "Create new Event"
+3. Fill in the required fields (title, description, date)
+4. Add optional information (location, registration links, images)
+5. Set appropriate tags for categorization
+6. Click "Publish" when ready
+
+**Content Guidelines:**
+- Use clear, descriptive titles that indicate the event type and target audience
+- Include specific dates, times, and locations when available
+- Write engaging descriptions that explain what attendees will learn or experience
+- Add relevant tags to help users find content
+- Include images when possible to make events more appealing
+- Proofread content before publishing
+
+#### Editing Static Data Files
+
+Some content is managed through TypeScript files that can be edited directly. These files are well-documented and designed for easy editing by non-technical members.
+
+##### Member Directory (src/data/members.ts)
+
+This file contains information about all club members, organized by academic year.
+
+**Adding New Members:**
+1. Open `src/data/members.ts`
+2. Find the appropriate academic year section (e.g., "2025-2027")
+3. Copy an existing member object and modify it:
+
+```typescript
+{
+  name: "Your Name",
+  role: "Member",  // or "Vice President", "Secretary", etc.
+  description: "Brief description of your interests and contributions",
+  github: "your-github-username",  // Optional, only if you have one
+  linkedin: "your-linkedin-profile",  // Optional
+  specialties: ["JavaScript", "React", "Node.js"]  // Optional skills list
+}
+```
+
+4. Save the file and the website will update automatically
+
+**Adding New Academic Years:**
+Add a new section to the `membersByYear` object:
+
+```typescript
+"2027-2029": [
+  // Add member objects here
+]
+```
+
+**Special Roles:**
+- Presidents receive special visual effects (golden sparkles)
+- "Founding President" receives ultra-special effects (violet sparkles)
+- "Founding Member" and "Founding Academic Advisor" get priority placement
+
+##### Club History (src/data/clubHistory.ts)
+
+This file contains the club's historical timeline displayed on the `/history` page.
+
+**Adding Timeline Events:**
+1. Open `src/data/clubHistory.ts`
+2. Find the appropriate timeline section:
+   - `founding`: March 2020 - Spring 2021
+   - `earlyDevelopment`: 2021-2023
+   - `growth`: 2023-2025
+   - `currentEra`: 2025+
+
+3. Add new events using this structure:
+
+```typescript
+{
+  date: "Fall 2025",  // Can be specific date or general period
+  title: "Creative Event Title",
+  description: "Brief 1-2 sentence description of what happened.",
+  type: "milestone"  // "milestone", "achievement", or "partnership"
+}
+```
+
+**Event Types:**
+- **milestone**: Major club achievements or organizational changes
+- **achievement**: Specific accomplishments or recognitions
+- **partnership**: New collaborations with other organizations
+
+### For Technical Contributors
+
+#### Development Guidelines
+
+**Code Standards:**
+- Use TypeScript for all new code
+- Follow existing code patterns and conventions
+- Create reusable components when possible
+- Ensure mobile responsiveness
+- Test changes across different browsers
+- Follow accessibility best practices (WCAG guidelines)
+
+**Component Development:**
+- Use Astro components for static content
+- Keep components focused and single-purpose
+- Include proper TypeScript interfaces
+- Add JSDoc comments for complex logic
+- Use semantic HTML elements
+
+**Styling Guidelines:**
+- Use Tailwind CSS utility classes
+- Follow the existing design system
+- Ensure responsive design (mobile-first approach)
+- Test on various screen sizes
+- Maintain consistent spacing and typography
+
+#### Contribution Workflow
+
+1. **Fork the repository** on GitHub
+2. **Clone your fork** locally:
    ```bash
-   cd studio
-   npm install
+   git clone https://github.com/YOUR-USERNAME/ProgClubSite.git
+   cd ProgClubSite
+   ```
+
+3. **Create a feature branch:**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+4. **Make your changes** and test locally:
+   ```bash
    npm run dev
    ```
 
-2. **Access Sanity Studio** at [http://localhost:3333](http://localhost:3333)
-
-3. **First-time setup:**
-   - Sign in with your Google/GitHub account
-   - You'll be granted access to the PROGgsuSite project
-   - Familiarize yourself with the Studio interface
-
-#### Content Types Available
-
-**📅 Events**
-- Create workshop announcements
-- Add event details (date, time, location, description)
-- Set featured images and tags
-- Mark events as upcoming or past
-
-**🏷️ Tags**
-- Organize content by topics (e.g., "Web Development", "AI/ML", "Beginner-Friendly")
-- Create visual categories for easy browsing
-- Associate with events and posts
-
-#### How to Add Content
-
-1. **Adding a New Event:**
-   - Click "Events" in the Studio sidebar
-   - Click "Create new Event"
-   - Fill in required fields (title, description, date)
-   - Add optional fields (image, location, registration link)
-   - Set appropriate tags
-   - Click "Publish" when ready
-
-2. **Managing Tags:**
-   - Go to "Tags" section
-   - Create descriptive tags with clear names
-   - Use consistent naming (e.g., "Web Development" not "webdev")
-
-3. **Content Tips:**
-   - Use clear, descriptive titles
-   - Add engaging descriptions
-   - Include event images when possible
-   - Always tag content appropriately
-
----
-
-## 🚀 Deployment
-
-### Build for Production
-
-```bash
-# Create optimized production build
-npm run build
-
-# Test the production build locally
-npm run preview
-```
-
-### Deploy to Vercel (Our Current Setup)
-
-**Option 1: Automatic Deployment (Recommended)**
-1. **Push your code to GitHub**
-2. **Connect to Vercel:**
-   - Go to [vercel.com](https://vercel.com) and sign in
-   - Click "New Project"
-   - Import your GitHub repository
-3. **Vercel auto-detects Astro:**
-   - Build command: `npm run build`
-   - Output directory: `dist`
-   - Install command: `npm install`
-4. **Deploy automatically!** 🚀
-
-**Option 2: CLI Deployment**
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel --prod
-```
-
-### Alternative Platforms
-The site generates static files and can be deployed to any static hosting platform:
-- **Netlify** - Great alternative with similar features
-- **GitHub Pages** - Free for public repositories
-- **Cloudflare Pages** - Fast global CDN
-
----
-
-## 🤝 Contributing
-
-We'd love your help making this website even better! Here's how to get involved:
-
-### 🌟 For Club Members
-
-1. **🍴 Fork the repository** on GitHub
-2. **🌿 Create a feature branch:**
+5. **Test the production build:**
    ```bash
-   git checkout -b feature/awesome-new-feature
-   ```
-3. **💻 Make your changes** and test them locally
-4. **📝 Commit with a clear message:**
-   ```bash
-   git commit -m "feat: add member spotlight section"
-   ```
-5. **📤 Push and create a Pull Request:**
-   ```bash
-   git push origin feature/awesome-new-feature
+   npm run build
+   npm run preview
    ```
 
-### 💡 Contribution Ideas
+6. **Commit your changes** with a descriptive message:
+   ```bash
+   git add .
+   git commit -m "Add member profile image upload feature"
+   ```
 
-**🎨 Design & UX:**
-- Improve mobile responsiveness
-- Add dark/light theme toggle
-- Create loading animations
-- Design new page layouts
+7. **Push to your fork:**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
 
-**✨ Features:**
-- Member directory and profiles
+8. **Create a Pull Request** on GitHub with:
+   - Clear description of changes
+   - Screenshots for UI changes
+   - Testing instructions
+   - Reference to any related issues
+
+#### Feature Ideas
+
+**High Priority:**
+- Member profile pages with project showcases
 - Interactive events calendar
-- Project showcase gallery
+- Resource rating and review system
 - Newsletter signup integration
+- Search functionality for events and resources
 
-**🐛 Bug Fixes:**
-- Report issues you find
-- Fix accessibility problems
-- Optimize performance bottlenecks
+**Design Improvements:**
+- Dark/light theme toggle
+- Improved mobile navigation
+- Loading animations and micro-interactions
+- Better image optimization
+- Enhanced accessibility features
 
-**📝 Content:**
-- Write blog posts about tech topics
-- Create coding tutorials
-- Add learning resources
-- Update club information
+**Content Features:**
+- Blog system for technical articles
+- Project gallery for member work
+- Resource categorization and filtering
+- Event RSVP system
+- Member achievement badges
 
-### 📋 Code Guidelines
+### Code Review Process
 
-- **TypeScript First** – Use TypeScript for all new code
-- **Component-Based** – Create reusable Astro components
-- **Accessible** – Follow WCAG accessibility guidelines
-- **Mobile-Responsive** – Test on different screen sizes
-- **Performance-Minded** – Optimize images and minimize bundle size
+All contributions go through a review process to maintain code quality and consistency:
 
-### 🔍 Code Review Process
+1. **Automated Checks**: Code is automatically checked for formatting and build errors
+2. **Peer Review**: Another club member reviews the code for functionality and style
+3. **Testing**: Changes are tested across different devices and browsers
+4. **Documentation**: New features must include appropriate documentation
 
-1. All contributions go through pull request review
-2. Maintain the existing code style and conventions
-3. Add comments for complex logic
-4. Test your changes thoroughly before submitting
+## Deployment
 
----
+The website is automatically deployed to Vercel when changes are pushed to the main branch. Pull requests generate preview deployments for testing.
 
-## 📝 Contributing Content (Non-Developers)
+**Manual Deployment:**
+1. Build the project: `npm run build`
+2. Deploy to Vercel: `vercel --prod` (requires Vercel CLI)
 
-**Don't code but want to help with content?** Perfect! We need club members to keep our events and information up-to-date.
+**Environment Requirements:**
+- Node.js 18+
+- Build command: `npm run build`
+- Output directory: `dist`
 
-### 🎯 **Content We Need Help With:**
+## Site Configuration
 
-**📅 Event Management:**
-- Add upcoming workshops and meetings
-- Update event descriptions and details
-- Upload event photos and promotional images
-- Create post-event summaries
+Key configuration files:
 
-**📚 Learning Resources:**
-- Curate helpful coding tutorials
-- Add book recommendations
-- Share useful development tools
-- Write beginner-friendly guides
+- **src/consts.ts**: Site title, description, navigation links, and social media links
+- **astro.config.mjs**: Build settings and integrations
+- **tailwind.config.mjs**: Design system and styling configuration
+- **studio/sanity.config.ts**: CMS configuration and schema
 
-**📰 News & Announcements:**
-- Club meeting notes
-- Member achievements and spotlights
-- Partnership announcements
-- Workshop recaps
+## Getting Help
 
-### 🚀 **How to Get Started:**
+**For Club Members:**
+- Join our Discord server for real-time help
+- Attend our weekly meetings for in-person assistance
+- Contact club officers for administrative access
+- Check the `/resources` page for learning materials
 
-1. **Get Sanity Access:**
-   - Contact a club officer on Discord
-   - Request access to our content management system
-   - We'll add you to the PROGgsuSite project
+**For Developers:**
+- Read the detailed documentation in `src/data/README.md`
+- Check existing components for implementation examples
+- Review the TypeScript interfaces for data structures
+- Test changes thoroughly before submitting pull requests
 
-2. **Learn the Basics:**
-   - Join our #content-team channel on Discord
-   - Attend our monthly content contributor training
-   - Use our content style guide (ask for link!)
+**Common Issues:**
+- **Build Errors**: Check the console for TypeScript errors and missing imports
+- **Content Not Updating**: Ensure data files are saved and the development server is running
+- **Sanity Access**: Contact club officers for CMS workspace invitations
+- **Git Issues**: Make sure you're working on a feature branch and your fork is up to date
 
-3. **Start Contributing:**
-   - Log into [Sanity Studio](http://localhost:3333) (when running locally)
-   - Follow the content management guide above
-   - Ask questions in Discord - we're here to help!
+## License
 
-### 📋 **Content Guidelines:**
+This project is open source under the MIT License. Feel free to use this code as a foundation for other student organization websites.
 
-**✅ Do:**
-- Use clear, engaging language
-- Include relevant details (dates, times, locations)
-- Add images when possible
-- Tag content appropriately
-- Proofread before publishing
+## Contact
 
-**❌ Avoid:**
-- Publishing without review for major events
-- Using unclear or vague titles
-- Forgetting to set event dates
-- Leaving required fields empty
-
-### 🤝 **Content Team Benefits:**
-- Learn content management skills
-- Build your digital portfolio
-- Network with other club members
-- Get priority access to workshops
-- Potential leadership opportunities
-
-**Questions?** Reach out in our Discord #content-team channel or ask any officer!
+- **Discord**: Join our server for daily discussions and help
+- **Email**: progclub@gsu.edu for official inquiries
+- **GitHub**: Report bugs and request features through issues
+- **Meetings**: Every Thursday at 6:30 PM in classroom building
 
 ---
 
-## 📞 Get Involved
-
-### 💬 Join Our Community
-
-- **🎮 Discord**: [Join our server](https://discord.gg/your-discord-link) for daily discussions and help
-- **📧 Email**: [progclub@gsu.edu](mailto:progclub@gsu.edu) for official inquiries
-- **📱 Instagram**: [@progclub_gsu](https://instagram.com/progclub_gsu) for updates and photos
-
-### 🕐 Weekly Meetings
-- **When**: Every [Day] at [Time]
-- **Where**: [Building Name], Room [Number]
-- **Virtual**: Discord voice channel for remote participation
-
-**New to programming?** Perfect! We have beginner-friendly workshops and mentorship programs to help you get started.
-
----
-
-## 📄 License
-
-This project is open source under the [MIT License](LICENSE). Feel free to use this code for your own student organization websites!
-
----
-
-<p align="center">
-    <strong>⭐ Star this repo if it helped your student organization!</strong>
-</p>
-
-<p align="center">
-    <em>Built with ❤️ by PROGgsu members • Powered by the GSU tech community</em>
-</p>
-
-<p align="center">
-    <strong>"Everyone is welcome" - Our club motto</strong>
-</p>
+Built with care by PROGgsu members. Everyone is welcome to contribute and learn together.
