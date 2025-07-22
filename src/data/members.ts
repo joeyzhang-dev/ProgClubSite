@@ -209,7 +209,6 @@ export const membersByYear: MembersByYear = {
       name: "Andrew Huang",
       role: "Founding Academic Advisor",
       description: "Facebook Engineer In Residence (EIR) and founding academic advisor who provided crucial guidance and industry expertise during PROGgsu's creation in 2020.",
-      github: "andrewhuang",
       linkedin: "shidihuang",
       specialties: ["Industry Mentorship", "Academic Guidance", "Software Engineering"]
     },
