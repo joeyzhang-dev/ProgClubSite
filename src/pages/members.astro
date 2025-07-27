@@ -41,7 +41,7 @@ import MemberCard from "@/components/MemberCard.astro";
 
 // Data and Business Logic
 import { membersByYear } from "@/data/members";
-import { sortMembersByRole } from "@/utils/memberUtils";
+import { sortMembersByRole, separateMembersByDisplayType } from "@/utils/memberUtils";
 import { DISCORD_LINK } from "@/consts";
 
 // Sort all members by their role priority within each academic year
@@ -71,26 +71,79 @@ const sortedMembers = sortMembersByRole(membersByYear);
         </p>
       </div>
 
-      <!-- Members by Year -->
-      {Object.entries(sortedMembers).map(([year, members]) => (
-        <div class="mb-16">
-          <!-- Year Header -->
-          <div class="flex items-center justify-center mb-8">
-            <div class="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-400/30 rounded-full px-8 py-3 backdrop-blur-sm">
-              <h2 class="text-2xl md:text-3xl font-bold text-white glow-pulse-title">
-                Academic Year {year}
-              </h2>
-            </div>
-          </div>
+      <!-- Tab Navigation -->
+      <div class="flex flex-wrap justify-center mb-12 gap-3">
+        {Object.keys(sortedMembers).map((year, index) => (
+          <button 
+            class={`tab-btn px-4 md:px-6 py-2 md:py-3 rounded-lg border transition-all duration-300 font-medium text-sm md:text-base ${
+              index === 0 
+                ? 'bg-purple-600 text-white border-purple-600 shadow-lg shadow-purple-600/30' 
+                : 'bg-transparent text-white border-white/30 hover:border-purple-400 hover:bg-purple-600/20 hover:text-purple-200'
+            }`}
+            data-tab={year}
+            id={`tab-${year}`}
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`panel-${year}`}
+          >
+            {year}
+          </button>
+        ))}
+      </div>
 
-          <!-- Member Cards Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-            {members.map((member) => (
-              <MemberCard member={member} year={year} />
-            ))}
+      <!-- Tab Content -->
+      {Object.entries(sortedMembers).map(([year, members], index) => {
+        const { cardMembers, listMembers } = separateMembersByDisplayType(members);
+        return (
+          <div 
+            class={`tab-content ${index === 0 ? 'block' : 'hidden'}`}
+            data-tab-content={year}
+            role="tabpanel"
+            id={`panel-${year}`}
+            aria-labelledby={`tab-${year}`}
+          >
+            <!-- Member Count -->
+            <div class="text-center mb-8">
+              <p class="text-white/70 text-lg">
+                {members.length} amazing member{members.length !== 1 ? 's' : ''}
+              </p>
+            </div>
+            
+            <!-- Important Role Cards -->
+            {cardMembers.length > 0 && (
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+                {cardMembers.map((member) => (
+                  <MemberCard member={member} year={year} />
+                ))}
+              </div>
+            )}
+            
+            <!-- Simple Member List -->
+            {listMembers.length > 0 && (
+              <div class="mt-8 mb-16">
+                <h3 class="text-xl font-semibold text-white mb-6 text-center">
+                  Additional Members
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                  {listMembers.map((member) => (
+                    <div class="bg-white/5 border border-white/10 rounded-lg p-4 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-sm">
+                          {member.name.charAt(0)}
+                        </div>
+                        <div>
+                          <h4 class="text-white font-medium text-sm">{member.name}</h4>
+                          <p class="text-white/60 text-xs">{member.role}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       <!-- Call to Action -->
       <div class="text-center mt-16 py-12 px-8 rounded-2xl border border-white/20 bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] backdrop-blur-md">
@@ -122,8 +175,52 @@ const sortedMembers = sortMembersByRole(membersByYear);
 </Layout>
 
 <style>
+  /* Scroll performance optimizations */
+  body {
+    /* Optimize scroll behavior */
+    scroll-behavior: smooth;
+    /* Prevent horizontal overflow issues */
+    overflow-x: hidden;
+  }
+  
   .glow-pulse-title {
     animation: titlePulse 2.5s infinite;
+    /* GPU acceleration for title animations */
+    transform: translateZ(0);
+    will-change: text-shadow, color;
+  }
+  
+  /* Tab styling and animations */
+  .tab-btn {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  .tab-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(147, 51, 234, 0.3);
+  }
+  
+  .tab-btn.active {
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #c084fc 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
+  }
+  
+  /* Smooth tab content transitions */
+  .tab-content {
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { 
+      opacity: 0; 
+      transform: translateY(10px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
   }
 
   @keyframes titlePulse {
@@ -142,4 +239,60 @@ const sortedMembers = sortMembersByRole(membersByYear);
       color: #f4faff;
     }
   }
-</style> 
+</style>
+
+<script>
+  /**
+   * Academic Year Tab Navigation
+   * Handles tab switching for better performance and UX
+   */
+  
+  function initTabs() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    // Set first tab as active
+    if (tabBtns.length > 0) {
+      tabBtns[0].classList.add('active');
+    }
+    
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetYear = btn.getAttribute('data-tab');
+        const targetContent = document.querySelector(`[data-tab-content="${targetYear}"]`);
+        
+        if (!targetContent) return;
+        
+        // Update button states
+        tabBtns.forEach(b => {
+          b.classList.remove('active');
+          b.classList.remove('bg-purple-600', 'text-white', 'border-purple-600', 'shadow-lg', 'shadow-purple-600/30');
+          b.classList.add('bg-transparent', 'text-white', 'border-white/30');
+          b.setAttribute('aria-selected', 'false');
+        });
+        
+        // Activate clicked tab
+        btn.classList.add('active');
+        btn.classList.add('bg-purple-600', 'text-white', 'border-purple-600', 'shadow-lg', 'shadow-purple-600/30');
+        btn.classList.remove('bg-transparent', 'border-white/30');
+        btn.setAttribute('aria-selected', 'true');
+        
+        // Update content visibility
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+        targetContent.classList.remove('hidden');
+      });
+    });
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTabs);
+  } else {
+    initTabs();
+  }
+  
+  // Handle Astro page transitions
+  document.addEventListener('astro:page-load', initTabs);
+</script> 

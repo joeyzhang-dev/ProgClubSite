@@ -165,6 +165,56 @@ export function sortMembersByRole(membersByYear: MembersByYear): MembersByYear {
 }
 
 /**
+ * Determines if a member should be displayed as a simple list item instead of a full card
+ * 
+ * 🎯 PERFORMANCE OPTIMIZATION:
+ * - "Founding Member" and "Exec" roles are shown in simple list format
+ * - Reduces number of heavy animated cards for better scroll performance
+ * - Important roles still get full card treatment
+ * 
+ * @param role - The member's role string
+ * @returns true if should be in simple list, false if should get full card
+ * 
+ * @example
+ * isSimpleListRole("Founding Member")  // true - simple list
+ * isSimpleListRole("Exec")             // true - simple list  
+ * isSimpleListRole("President")        // false - full card
+ * isSimpleListRole("Vice President")   // false - full card
+ */
+export function isSimpleListRole(role: string): boolean {
+  return role === "Founding Member" || role === "Exec";
+}
+
+/**
+ * Separates members into card display vs simple list display groups
+ * 
+ * 🚀 PERFORMANCE BENEFIT:
+ * - Reduces animated cards for better scroll performance
+ * - Keeps important roles as prominent cards
+ * - Simple roles shown in clean list format
+ * 
+ * @param members - Array of members to separate
+ * @returns Object with cardMembers and listMembers arrays
+ */
+export function separateMembersByDisplayType(members: Member[]): {
+  cardMembers: Member[];
+  listMembers: Member[];
+} {
+  const cardMembers: Member[] = [];
+  const listMembers: Member[] = [];
+  
+  members.forEach(member => {
+    if (isSimpleListRole(member.role)) {
+      listMembers.push(member);
+    } else {
+      cardMembers.push(member);
+    }
+  });
+  
+  return { cardMembers, listMembers };
+}
+
+/**
  * Generates contextual placeholder descriptions for members without detailed info
  * 
  * 💬 PLACEHOLDER STRATEGY:

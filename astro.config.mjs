@@ -22,6 +22,14 @@ export default defineConfig({
     },
   },
   vite: {
+    server: {
+      watch: {
+        // Ignore studio directory to prevent conflicts
+        ignored: ['**/studio/**', '**/node_modules/**', '**/.git/**'],
+        // Reduce CPU usage
+        usePolling: false,
+      },
+    },
     build: {
       // Inline CSS for critical styles
       cssCodeSplit: false,
@@ -32,10 +40,19 @@ export default defineConfig({
       // Transform CSS for better browser support
       transformer: 'postcss',
     },
+    // Optimize dependency handling
+    optimizeDeps: {
+      // Prevent dependency conflicts
+      force: false,
+      include: ['@astrojs/mdx', '@astrojs/tailwind'],
+    },
   },
   // Build optimizations
   build: {
     // Inline stylesheets smaller than 4kb
     inlineStylesheets: 'auto',
   },
+  // Exclude studio from main site processing
+  srcDir: './src',
+  publicDir: './public',
 });
