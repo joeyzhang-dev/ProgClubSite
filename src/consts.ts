@@ -16,18 +16,23 @@ export const SOCIAL_LINKS = {
   // github: "https://github.com/ProgClubGSU",
   // linkedin: "https://linkedin.com/in/your-profile",
 };
-export const NAV_LINKS: Array<{ title: string; href?: string }> = [
+export const NAV_LINKS: Array<{ title: string; href?: string; children?: Array<{ title: string; href?: string }> }> = [
   {
     title: "Events",
   },
   {
-    title: "Members",
-  },
-  {
-    title: "History",
-  },
-  {
     title: "Resources",
+  },
+  {
+    title: "About",
+    children: [
+      {
+        title: "Members",
+      },
+      {
+        title: "History",
+      },
+    ],
   },
   {
     title: "Join",
