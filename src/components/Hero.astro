@@ -57,6 +57,10 @@ import { QUOTE, SITE_TITLE } from "@/consts";
       binaryText += Math.floor(Math.random() * 2).toString();
     }
     hero_bg.textContent = binaryText;
+    
+    // Make visible after content is set
+    hero_bg.style.color = "rgba(255, 255, 255, 0.4)";
+    hero_bg.style.textShadow = "0 0 10px rgba(255, 255, 255, 0.2)";
 
     // Start the interval - faster updates for more dynamic effect
     heroInterval = setInterval(() => {

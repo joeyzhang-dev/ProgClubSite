@@ -3,38 +3,37 @@
 import "@/styles/animations.css";
 ---
 
-<!-- This component handles loading of non-critical CSS after page load -->
+<!-- This component handles loading of non-critical CSS after DOM is ready -->
 <script>
   // Defer non-critical animations until after initial render
   const loadNonCriticalStyles = () => {
-    // Add class to enable animations after page loads
+    // Add class to enable animations after DOM is ready
     document.body.classList.add('animations-ready');
     
     // Ensure smooth scrolling is enabled
     document.documentElement.style.scrollBehavior = 'smooth';
   };
 
-  // Load after page is fully loaded
-  if (document.readyState === 'complete') {
-    loadNonCriticalStyles();
+  // Load after DOM is ready (much faster than waiting for full page load)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadNonCriticalStyles);
   } else {
-    window.addEventListener('load', loadNonCriticalStyles);
+    // DOM is already ready
+    loadNonCriticalStyles();
   }
 </script>
 
 <style>
   /* Hide animations until page is ready */
   body:not(.animations-ready) .cursor-glow,
-  body:not(.animations-ready) .binary-trail,
-  body:not(.animations-ready) .hero-bg {
+  body:not(.animations-ready) .binary-trail {
     opacity: 0 !important;
     animation: none !important;
   }
   
   /* Enable animations once ready */
   body.animations-ready .cursor-glow,
-  body.animations-ready .binary-trail,
-  body.animations-ready .hero-bg {
+  body.animations-ready .binary-trail {
     opacity: initial;
     animation: initial;
   }
