@@ -186,32 +186,39 @@ export function isSimpleListRole(role: string): boolean {
 }
 
 /**
- * Separates members into card display vs simple list display groups
+ * Separates members into three display types for optimal performance
  * 
- * 🚀 PERFORMANCE BENEFIT:
- * - Reduces animated cards for better scroll performance
- * - Keeps important roles as prominent cards
- * - Simple roles shown in clean list format
+ * 🚀 PERFORMANCE STRATEGY:
+ * - Full animated cards: Important leadership (Presidents, VPs, Advisors)
+ * - Lite cards: Mid-level roles (Secretary, Treasurer, Directors) - same design, no heavy animations
+ * - Simple list: Basic roles (Founding Member, Exec) - lightweight list format
  * 
  * @param members - Array of members to separate
- * @returns Object with cardMembers and listMembers arrays
+ * @returns Object with fullCardMembers, liteCardMembers, and listMembers arrays
  */
 export function separateMembersByDisplayType(members: Member[]): {
-  cardMembers: Member[];
+  fullCardMembers: Member[];
+  liteCardMembers: Member[];
   listMembers: Member[];
 } {
-  const cardMembers: Member[] = [];
+  const fullCardMembers: Member[] = [];
+  const liteCardMembers: Member[] = [];
   const listMembers: Member[] = [];
   
   members.forEach(member => {
     if (isSimpleListRole(member.role)) {
+      // Basic roles get simple list format
       listMembers.push(member);
+    } else if (shouldGetFullAnimatedCard(member.role)) {
+      // Important leadership gets full animated cards
+      fullCardMembers.push(member);
     } else {
-      cardMembers.push(member);
+      // Mid-level roles get lite cards (same design, no heavy animations)
+      liteCardMembers.push(member);
     }
   });
   
-  return { cardMembers, listMembers };
+  return { fullCardMembers, liteCardMembers, listMembers };
 }
 
 /**
@@ -249,4 +256,32 @@ export function getPlaceholderDescription(role: string): string {
   } else {
     return "Valued member of PROGgsu. More information coming soon...";
   }
+} 
+
+/**
+ * Determines if a member should get the full animated card with all effects
+ * 
+ * 🎯 PERFORMANCE STRATEGY:
+ * - Important leadership roles get full animated cards with sparkles, liquid effects, etc.
+ * - Lower priority roles get lightweight cards with same design but no heavy animations
+ * 
+ * @param role - The member's role string
+ * @returns true if should get full animated card, false if should get lite card
+ */
+export function shouldGetFullAnimatedCard(role: string): boolean {
+  // Full animated cards for important leadership roles only
+  const importantRoles = [
+    "President",
+    "Founding President", 
+    "2nd President",
+    "3rd President", 
+    "4th President",
+    "5th President",
+    "Vice President",
+    "Founding VP", 
+    "Academic Advisor",
+    "Founding Academic Advisor"
+  ];
+  
+  return importantRoles.includes(role);
 } 

@@ -38,6 +38,7 @@ import Layout from "@/layouts/Layout.astro";
 import Section from "@/components/Section.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import MemberCard from "@/components/MemberCard.astro";
+import LiteMemberCard from "@/components/LiteMemberCard.astro";
 
 // Data and Business Logic
 import { membersByYear } from "@/data/members";
@@ -93,7 +94,7 @@ const sortedMembers = sortMembersByRole(membersByYear);
 
       <!-- Tab Content -->
       {Object.entries(sortedMembers).map(([year, members], index) => {
-        const { cardMembers, listMembers } = separateMembersByDisplayType(members);
+        const { fullCardMembers, liteCardMembers, listMembers } = separateMembersByDisplayType(members);
         return (
           <div 
             class={`tab-content ${index === 0 ? 'block' : 'hidden'}`}
@@ -109,16 +110,25 @@ const sortedMembers = sortMembersByRole(membersByYear);
               </p>
             </div>
             
-            <!-- Important Role Cards -->
-            {cardMembers.length > 0 && (
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-                {cardMembers.map((member) => (
+            <!-- Full Animated Cards (Presidents, VPs, Advisors) -->
+            {fullCardMembers.length > 0 && (
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                {fullCardMembers.map((member) => (
                   <MemberCard member={member} year={year} />
                 ))}
               </div>
             )}
             
-            <!-- Simple Member List -->
+            <!-- Lite Cards (Mid-level roles) -->
+            {liteCardMembers.length > 0 && (
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                {liteCardMembers.map((member) => (
+                  <LiteMemberCard member={member} year={year} />
+                ))}
+              </div>
+            )}
+            
+            <!-- Simple Member List (Basic roles) -->
             {listMembers.length > 0 && (
               <div class="mt-8 mb-16">
                 <h3 class="text-xl font-semibold text-white mb-6 text-center">
