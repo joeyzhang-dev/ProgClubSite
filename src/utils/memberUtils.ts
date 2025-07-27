@@ -109,6 +109,7 @@ export function getRolePriority(role: string): number {
     
     // === LEADERSHIP ROLES ===
     "Vice President": 4,
+    "Founding VP": 4,
     "Founding Member": 5,
     
     // === OFFICER ROLES ===
