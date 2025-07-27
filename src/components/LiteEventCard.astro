@@ -1,0 +1,247 @@
+---
+/**
+ * =============================================================================
+ * LITE EVENT CARD COMPONENT - PERFORMANCE OPTIMIZED VERSION
+ * =============================================================================
+ * 
+ * This is a lightweight version of BlogPostCard that maintains the EXACT same 
+ * structure and layout but removes heavy animations for better performance.
+ * 
+ * 🚫 WHAT'S REMOVED FOR PERFORMANCE:
+ * - Sparkle animations (very GPU intensive)
+ * - Liquid floating bubbles (complex transforms)
+ * - Heavy backdrop filters (expensive)
+ * - Complex morphing animations (resource intensive)
+ * - Multi-layer gradient animations (expensive)
+ * 
+ * ✅ WHAT'S KEPT:
+ * - EXACT same layout and structure as BlogPostCard
+ * - Same positioning and sizing
+ * - Same typography and colors
+ * - Basic hover effects only
+ * =============================================================================
+ */
+
+type Props = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  date: Date | null;
+  time?: string | null;
+  location?: string | null;
+  status?: 'upcoming' | 'active' | 'past';
+  pinned?: boolean;
+  specialTags?: Array<{
+    _id: string;
+    name: string;
+    slug: { current: string };
+    color: string;
+    isActive: boolean;
+  }>;
+  resources?: any[];
+};
+
+const { title, slug, excerpt, date, time, location, status = 'upcoming', pinned = false, specialTags = [], resources } = Astro.props;
+
+// Helper function to determine status based on date
+function getEventStatus(date: Date | null): 'upcoming' | 'active' | 'past' {
+  if (!date) return 'upcoming';
+  
+  const now = new Date();
+  const eventDate = new Date(date);
+  
+  // Set event date to start of day for comparison
+  eventDate.setHours(0, 0, 0, 0);
+  const today = new Date(now);
+  today.setHours(0, 0, 0, 0);
+  
+  if (eventDate < today) return 'past';
+  if (eventDate.getTime() === today.getTime()) return 'active';
+  return 'upcoming';
+}
+
+// Use provided status or calculate from date
+const eventStatus = status || getEventStatus(date);
+
+// Status configuration
+const statusConfig = {
+  upcoming: {
+    text: 'UPCOMING',
+    color: 'text-green-400',
+    bgColor: 'bg-green-400/20',
+    borderColor: 'border-green-400/30'
+  },
+  active: {
+    text: 'TODAY',
+    color: 'text-yellow-400',
+    bgColor: 'bg-yellow-400/20',
+    borderColor: 'border-yellow-400/30'
+  },
+  past: {
+    text: 'PAST',
+    color: 'text-gray-400',
+    bgColor: 'bg-gray-400/20',
+    borderColor: 'border-gray-400/30'
+  }
+};
+
+const currentStatus = statusConfig[eventStatus];
+---
+
+<div
+  class={`w-full mx-auto relative pb-5 overflow-hidden transition-all duration-300 ease-out cursor-pointer group h-64 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.015] hover:-translate-y-1 ${
+    pinned 
+      ? 'bg-gradient-to-br from-amber-500/[0.15] via-yellow-400/[0.10] to-amber-400/[0.08] border-2 border-amber-400/40 hover:border-amber-300/60 hover:shadow-amber-400/20' 
+      : 'border border-white/20 bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] hover:border-white/40'
+  }`}
+>
+  <!-- Simple hover background effect (replaces liquid glass effects) -->
+  <div class={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl ${
+    pinned
+      ? 'bg-gradient-to-br from-amber-400/10 via-yellow-400/5 to-amber-300/8'
+      : 'bg-gradient-to-br from-white/[0.08] via-transparent to-transparent'
+  }`}></div>
+  
+  <!-- NO liquid bubbles or sparkle effects for performance -->
+  
+  <!-- Simple morphing shape (replaces complex liquid glass morphing) -->
+  {pinned && (
+    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-300/[0.12] to-transparent transform translate-x-6 -translate-y-6 group-hover:scale-110 transition-transform duration-300"></div>
+  )}
+  
+  <!-- Browser window header with simple glass effect -->
+  <div class={`relative flex items-center justify-start px-4 py-3 border-b ${
+    pinned
+      ? 'bg-gradient-to-r from-amber-500/[0.15] to-yellow-500/[0.08] border-amber-400/30'
+      : 'bg-gradient-to-r from-white/[0.12] to-white/[0.06] border-white/20'
+  }`}>
+    <div class="flex space-x-2">
+      <div class="w-3 h-3 rounded-full bg-black/80 group-hover:bg-red-500 transition-all duration-300 shadow-sm"></div>
+      <div class="w-3 h-3 rounded-full bg-black/80 group-hover:bg-yellow-500 transition-all duration-300 shadow-sm"></div>
+      <div class="w-3 h-3 rounded-full bg-black/80 group-hover:bg-green-500 transition-all duration-300 shadow-sm"></div>
+    </div>
+    <!-- Browser tab indicator -->
+    <div class={`ml-4 h-1 w-16 rounded-full transition-all duration-300 ${
+      pinned
+        ? 'bg-gradient-to-r from-amber-400/60 to-yellow-500/60 group-hover:from-amber-400 group-hover:to-yellow-500'
+        : 'bg-gradient-to-r from-blue-400/60 to-purple-400/60 group-hover:from-blue-400 group-hover:to-purple-400'
+    }`}></div>
+  </div>
+
+  <!-- Content area with same structure as original -->
+  <div class="relative p-6 tracking-wider z-10">
+    <a href={`/events/${slug}`} class="block group">
+      <!-- Title and Status Row (EXACT same structure) -->
+      <div class="flex items-start justify-between mb-3">
+        <h2 class={`text-xl font-medium text-white transition-colors duration-300 drop-shadow-sm flex-1 ${
+          pinned 
+            ? 'group-hover:text-amber-200' 
+            : 'group-hover:text-blue-300'
+        }`}>
+          <span class={`text-white/70 mr-2 transition-colors duration-300 ${
+            pinned 
+              ? 'group-hover:text-amber-300' 
+              : 'group-hover:text-blue-400'
+          }`}>❯</span>
+          {title}
+        </h2>
+        <!-- Status and Pinned Badge Row (EXACT same structure) -->
+        <div class="flex items-center gap-2">
+          <!-- Status Badge -->
+          <div class={`px-1.5 py-0.5 rounded text-xs font-bold uppercase tracking-wide ${currentStatus.bgColor} ${currentStatus.borderColor} border ${currentStatus.color}`}>
+            {currentStatus.text}
+          </div>
+          <!-- Pinned Badge -->
+          {pinned && (
+            <div class="px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-500/40 to-yellow-500/40 border border-amber-400/50 shadow-lg hover:shadow-amber-500/20 transition-shadow duration-300">
+              <div class="flex items-center gap-1">
+                <svg class="w-3 h-3 text-amber-200" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M3 3.5A1.5 1.5 0 014.5 2h11A1.5 1.5 0 0117 3.5v11A1.5 1.5 0 0115.5 16h-5.379a1.5 1.5 0 01-1.06-.44L3 9.5v-6z"/>
+                </svg>
+                <span class="text-xs font-medium text-amber-200 uppercase tracking-wide">PINNED</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      <!-- Event Info Cards - Date, Time, Location (EXACT same structure) -->
+      <div class="flex gap-2 mb-4">
+        <!-- Date Card -->
+        <div class="flex items-center gap-1 px-2 py-1 rounded-md bg-white/[0.1] border border-white/20">
+          <svg xmlns="http://www.w3.org/2000/svg" class={`h-3 w-3 ${pinned ? 'text-amber-300' : 'text-purple-300'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          <span class="text-xs font-medium text-white drop-shadow-sm">{date ? date.toLocaleDateString("en-us", { month: "short", day: "numeric" }) : 'TBD'}</span>
+        </div>
+        
+        <!-- Time Card -->
+        <div class="flex items-center gap-1 px-2 py-1 rounded-md bg-white/[0.1] border border-white/20">
+          <svg xmlns="http://www.w3.org/2000/svg" class={`h-3 w-3 ${pinned ? 'text-amber-300' : 'text-purple-300'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span class="text-xs font-medium text-white drop-shadow-sm">{time || 'TBD'}</span>
+        </div>
+        
+        <!-- Location Card -->
+        <div class="flex items-center gap-1 px-2 py-1 rounded-md bg-white/[0.1] border border-white/20">
+          <svg xmlns="http://www.w3.org/2000/svg" class={`h-3 w-3 ${pinned ? 'text-amber-300' : 'text-purple-300'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 12.414a4 4 0 10-1.414 1.414l4.243 4.243a1 1 0 001.414-1.414z" /></svg>
+          <span class="text-xs font-medium text-white drop-shadow-sm line-clamp-1">{location || 'TBD'}</span>
+        </div>
+      </div>
+      
+      <p class="text-white/80 text-sm font-thin mb-4 line-clamp-3 leading-relaxed">{excerpt}</p>
+      
+      <!-- Special Tags Row (EXACT same structure) -->
+      {specialTags && specialTags.length > 0 && (
+        <div class="flex flex-wrap gap-1 mt-auto">
+          {specialTags.filter(tag => tag.isActive).map((tag) => {
+            const colorClasses = {
+              purple: 'bg-purple-400/20 border-purple-400/30 text-purple-300',
+              blue: 'bg-blue-400/20 border-blue-400/30 text-blue-300',
+              green: 'bg-green-400/20 border-green-400/30 text-green-300',
+              yellow: 'bg-yellow-400/20 border-yellow-400/30 text-yellow-300',
+              red: 'bg-red-400/20 border-red-400/30 text-red-300',
+              orange: 'bg-orange-400/20 border-orange-400/30 text-orange-300',
+              pink: 'bg-pink-400/20 border-pink-400/30 text-pink-300',
+              teal: 'bg-teal-400/20 border-teal-400/30 text-teal-300'
+            };
+            const tagColor = colorClasses[tag.color] || colorClasses.purple;
+            
+            return (
+              <span class={`px-1.5 py-0.5 rounded text-xs font-medium ${tagColor}`}>
+                {tag.name}
+              </span>
+            );
+          })}
+        </div>
+      )}
+    </a>
+  </div>
+  
+  <!-- Simple bottom glow (replaces liquid glass bottom glow) -->
+  <div class={`absolute bottom-0 left-0 right-0 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-xl ${
+    pinned
+      ? 'bg-gradient-to-t from-amber-400/10 via-yellow-400/5 to-transparent'
+      : 'bg-gradient-to-t from-purple-500/8 via-blue-500/4 to-transparent'
+  }`}></div>
+  
+  <!-- Simple ambient light effect (replaces complex ambient lighting) -->
+  <div class={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl ${
+    pinned
+      ? 'bg-gradient-to-br from-amber-400/5 via-transparent to-amber-300/5'
+      : 'bg-gradient-to-br from-blue-400/3 via-transparent to-purple-400/3'
+  }`}></div>
+</div>
+
+<style>
+  /* Performance optimizations - GPU acceleration for smooth hover effects */
+  .group {
+    transform: translateZ(0);
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+  }
+
+  /* Simple hover effects only - no complex animations */
+  .group:hover {
+    transform: translateZ(0) scale(1.015) translateY(-4px);
+  }
+
+  /* NO sparkle animations, liquid effects, or complex keyframes for performance */
+</style> 
