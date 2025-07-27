@@ -57,7 +57,7 @@ interface Props {
 const { member, year } = Astro.props;
 ---
 
-<div class={`group relative overflow-hidden rounded-2xl liquid-glass shadow-xl transition-all duration-700 ease-out hover:scale-[1.025] hover:-translate-y-1.5 ${
+<div class={`group relative overflow-hidden rounded-2xl liquid-glass shadow-xl transition-all duration-700 ease-out hover:scale-[1.025] hover:translate-y-[-6px] ${
     isFoundingPresident(member.role)
       ? 'bg-gradient-to-br from-violet-500/[0.18] via-purple-400/[0.12] to-pink-400/[0.10] border-2 border-violet-400/50 hover:border-violet-300/70 hover:shadow-violet-400/40 founding-president-glow'
       : isPresidentRole(member.role) 
@@ -348,23 +348,46 @@ const { member, year } = Astro.props;
 </div>
 
 <style>
-  /* Enhanced glass blur effect */
+  /* Performance optimizations for smooth scrolling */
+  .group {
+    /* Force GPU compositing layer for smooth animations */
+    transform: translateZ(0);
+    /* Isolate expensive rendering operations */
+    contain: layout style paint;
+    /* Optimize will-change for known animations */
+    will-change: transform, box-shadow;
+    /* Prevent unnecessary backface rendering */
+    backface-visibility: hidden;
+  }
+  
+  /* Enhanced glass blur effect with performance optimization */
   .liquid-glass {
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
+    /* Force hardware acceleration */
+    transform: translateZ(0);
+    /* Optimize for blur operations */
+    will-change: transform, opacity;
   }
 
-  /* Liquid Glass Animations */
+  /* GPU-accelerated Liquid Glass Animations */
   @keyframes liquidFloat {
     0%, 100% {
-      transform: translate(0, 0) scale(1);
+      transform: translate3d(0, 0, 0) scale(1);
     }
     33% {
-      transform: translate(10px, -10px) scale(1.05);
+      transform: translate3d(10px, -10px, 0) scale(1.05);
     }
     66% {
-      transform: translate(-5px, 5px) scale(0.95);
+      transform: translate3d(-5px, 5px, 0) scale(0.95);
     }
+  }
+  
+  /* Optimize floating elements for performance */
+  .liquid-float {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   @keyframes morphGlow {
@@ -394,9 +417,13 @@ const { member, year } = Astro.props;
     animation: liquidFloat 6s ease-in-out infinite;
   }
 
-  /* President Card Special Effects */
+  /* President Card Special Effects - Performance Optimized */
   .president-glow {
     position: relative;
+    /* GPU acceleration for glow effects */
+    transform: translateZ(0);
+    /* Isolate expensive glow rendering */
+    contain: layout style paint;
   }
 
   .president-glow::before {
@@ -426,9 +453,13 @@ const { member, year } = Astro.props;
     }
   }
 
-  /* Founding President Ultra Special Effects */
+  /* Founding President Ultra Special Effects - Performance Optimized */
   .founding-president-glow {
     position: relative;
+    /* GPU acceleration for ultra glow effects */
+    transform: translateZ(0);
+    /* Isolate expensive ultra glow rendering */
+    contain: layout style paint;
   }
 
   .founding-president-glow::before {
@@ -523,58 +554,66 @@ const { member, year } = Astro.props;
     height: 3px;
   }
 
-  /* Performance-optimized sparkle animations */
+  /* GPU-accelerated sparkle animations */
   @keyframes sparkleGlare {
     0%, 100% {
-      transform: scale(0.7) rotate(0deg);
+      transform: scale3d(0.7, 0.7, 1) rotateZ(0deg);
       filter: brightness(1);
     }
     25% {
-      transform: scale(1) rotate(45deg);
+      transform: scale3d(1, 1, 1) rotateZ(45deg);
       filter: brightness(1.5);
     }
     50% {
-      transform: scale(1.2) rotate(90deg);
+      transform: scale3d(1.2, 1.2, 1) rotateZ(90deg);
       filter: brightness(2);
     }
     75% {
-      transform: scale(1) rotate(135deg);
+      transform: scale3d(1, 1, 1) rotateZ(135deg);
       filter: brightness(1.5);
     }
   }
 
   @keyframes sparkleGlare2 {
     0%, 100% {
-      transform: scale(0.8) rotate(45deg);
+      transform: scale3d(0.8, 0.8, 1) rotateZ(45deg);
       filter: brightness(1.2);
     }
     33% {
-      transform: scale(1.1) rotate(135deg);
+      transform: scale3d(1.1, 1.1, 1) rotateZ(135deg);
       filter: brightness(1.8);
     }
     66% {
-      transform: scale(0.9) rotate(225deg);
+      transform: scale3d(0.9, 0.9, 1) rotateZ(225deg);
       filter: brightness(1.4);
     }
   }
 
   @keyframes sparkleGlare3 {
     0%, 100% {
-      transform: scale(0.6) rotate(90deg);
+      transform: scale3d(0.6, 0.6, 1) rotateZ(90deg);
       filter: brightness(1);
     }
     40% {
-      transform: scale(1.3) rotate(180deg);
+      transform: scale3d(1.3, 1.3, 1) rotateZ(180deg);
       filter: brightness(2.2);
     }
     80% {
-      transform: scale(0.8) rotate(270deg);
+      transform: scale3d(0.8, 0.8, 1) rotateZ(270deg);
       filter: brightness(1.3);
     }
   }
 
   .sparkle-glare {
     will-change: transform, filter;
+    /* Force GPU layer for sparkles */
+    transform: translateZ(0);
+    /* Prevent unnecessary repaints */
+    backface-visibility: hidden;
+    /* Isolate sparkle rendering */
+    contain: layout style paint;
+    /* Optimize pointer events for decorative elements */
+    pointer-events: none;
   }
 
   .sparkle-1, .sparkle-4, .sparkle-7 {

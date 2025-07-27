@@ -1,11 +1,13 @@
 ---
 import { getEvents, renderPortableText } from "@/lib/sanity.js";
 import BlogPostCard from "@/components/BlogPostCard.astro";
+import LiteEventCard from "@/components/LiteEventCard.astro";
 import Section from "@/components/Section.astro";
 import Layout from "@/layouts/Layout.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
+import { separateEventsByDisplayType, sortEventsByPriority, type Event } from "@/utils/eventUtils";
 
-const events = await getEvents();
+const rawEvents = await getEvents();
 
 // Helper function to extract plain text from description
 function getPlainTextExcerpt(description) {
@@ -41,6 +43,17 @@ function getEventStatus(date) {
   if (eventDate.getTime() === today.getTime()) return 'active';
   return 'upcoming';
 }
+
+// Convert raw events to Event type and sort by priority
+const events: Event[] = rawEvents.map(event => ({
+  ...event,
+  slug: { current: event.slug.current }
+}));
+
+const sortedEvents = sortEventsByPriority(events);
+
+// Separate events into three display tiers for performance
+const { fullCardEvents, liteCardEvents, listEvents } = separateEventsByDisplayType(sortedEvents);
 ---
 
 <Layout title="Events">
@@ -54,26 +67,113 @@ function getEventStatus(date) {
     </div>
   </Fragment>
   <Section title="Events" className="pt-16">
-    <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {
-        events.map((event) => {
-          const eventDate = event.date?.isTBD ? null : (event.date?.value ? new Date(event.date.value) : null);
-          return (
-            <BlogPostCard
-              slug={event.slug.current}
-              title={event.title}
-              excerpt={getPlainTextExcerpt(event.description)}
-              date={eventDate}
-              time={event.time?.isTBD ? null : event.time?.value}
-              location={event.location?.isTBD ? null : event.location?.value}
-              status={getEventStatus(eventDate)}
-              pinned={event.pinned || false}
-              specialTags={event.specialTags || []}
-              resources={event.resources}
-            />
-          );
-        })
-      }
-    </div>
+    <!-- Combined Featured and Upcoming Events -->
+    {(fullCardEvents.length > 0 || liteCardEvents.length > 0) && (
+      <div class="mb-12">
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Full animated cards first (pinned, featured, today's events) */}
+          {fullCardEvents.map((event) => {
+            const eventDate = event.date?.isTBD ? null : (event.date?.value ? new Date(event.date.value) : null);
+            return (
+              <BlogPostCard
+                slug={event.slug.current}
+                title={event.title}
+                excerpt={getPlainTextExcerpt(event.description)}
+                date={eventDate}
+                time={event.time?.isTBD ? null : event.time?.value}
+                location={event.location?.isTBD ? null : event.location?.value}
+                status={getEventStatus(eventDate)}
+                pinned={event.pinned || false}
+                specialTags={event.specialTags || []}
+                resources={event.resources}
+              />
+            );
+          })}
+          
+          {/* Lite cards follow (regular upcoming events) */}
+          {liteCardEvents.map((event) => {
+            const eventDate = event.date?.isTBD ? null : (event.date?.value ? new Date(event.date.value) : null);
+            return (
+              <LiteEventCard
+                slug={event.slug.current}
+                title={event.title}
+                excerpt={getPlainTextExcerpt(event.description)}
+                date={eventDate}
+                time={event.time?.isTBD ? null : event.time?.value}
+                location={event.location?.isTBD ? null : event.location?.value}
+                status={getEventStatus(eventDate)}
+                pinned={event.pinned || false}
+                specialTags={event.specialTags || []}
+                resources={event.resources}
+              />
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    <!-- Simple Event List (Past Events) -->
+    {listEvents.length > 0 && (
+      <div class="mt-12">
+        <h2 class="text-2xl font-bold text-white mb-6 text-center">Past Events</h2>
+        <div class="max-w-4xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {listEvents.map((event) => {
+              const eventDate = event.date?.isTBD ? null : (event.date?.value ? new Date(event.date.value) : null);
+              return (
+                <a 
+                  href={`/events/${event.slug.current}`}
+                  class="group bg-white/5 border border-white/10 rounded-lg p-4 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div class="flex items-start justify-between mb-2">
+                    <h3 class="text-white font-medium text-sm group-hover:text-blue-300 transition-colors duration-300 flex-1 mr-3">
+                      {event.title}
+                    </h3>
+                    <div class="flex items-center gap-2 text-xs text-white/60">
+                      {eventDate && (
+                        <span class="bg-gray-400/20 border border-gray-400/30 px-1.5 py-0.5 rounded text-gray-400">
+                          {eventDate.toLocaleDateString("en-us", { month: "short", day: "numeric" })}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {event.description && (
+                    <p class="text-white/60 text-xs line-clamp-2 leading-relaxed">
+                      {getPlainTextExcerpt(event.description)}
+                    </p>
+                  )}
+                  
+                  <div class="flex items-center justify-between mt-3">
+                    <div class="flex items-center gap-3 text-xs text-white/50">
+                      {event.time && !event.time.isTBD && (
+                        <span class="flex items-center gap-1">
+                          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                          </svg>
+                          {event.time.value}
+                        </span>
+                      )}
+                      {event.location && !event.location.isTBD && (
+                        <span class="flex items-center gap-1">
+                          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 12.414a4 4 0 10-1.414 1.414l4.243 4.243a1 1 0 001.414-1.414z"></path>
+                          </svg>
+                          {event.location.value}
+                        </span>
+                      )}
+                    </div>
+                    
+                    <span class="text-xs text-blue-300 group-hover:text-blue-200 transition-colors duration-300">
+                      View Details →
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    )}
   </Section>
 </Layout>

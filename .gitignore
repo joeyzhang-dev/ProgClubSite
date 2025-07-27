@@ -13,6 +13,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# dev server logs and cache
+dev.log
+.vite/
+.cache/
 
 # environment variables
 .env
@@ -23,3 +27,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Sanity studio build
+studio/dist/
+studio/.sanity/
+
+# Temporary files
+*.tmp
+*.temp
