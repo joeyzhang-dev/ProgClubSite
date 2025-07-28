@@ -10,5 +10,12 @@
 /* Any remaining styles that don't fit in critical or animations */
 /* Most styles have been moved to improve performance */
 
+/* progsu Brand Font Styling */
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@700&display=swap');
 
-
+.progsu-brand {
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -0.02em;
+}
