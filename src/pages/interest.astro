@@ -429,6 +429,13 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
     const form = document.getElementById('join-form');
     const submitBtn = document.getElementById('submit-btn');
     
+    if (!form) {
+      console.error('Form not found!');
+      return;
+    }
+    
+
+    
     // Validation functions
     const validators = {
       required: (value) => {
@@ -567,7 +574,9 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
     
     // Form submission with validation
     form.addEventListener('submit', function(e) {
+      console.log('Form submit event triggered');
       e.preventDefault();
+      e.stopPropagation();
       
       // Validate all fields
       let isValid = true;
@@ -578,8 +587,8 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
       });
       
       // Check if at least one interest is selected
-      const checkboxes = form.querySelectorAll('input[name="entry.1453136131"]:checked');
-      if (checkboxes.length === 0) {
+      const checkedInterests = form.querySelectorAll('input[name="entry.1453136131"]:checked');
+      if (checkedInterests.length === 0) {
         showCheckboxGroupError('Please select at least one event interest');
         isValid = false;
       } else {
@@ -612,10 +621,15 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
       
       console.log('Form data being submitted:');
       for (let [name, value] of formData.entries()) {
+        // Skip SMS checkbox here - we'll handle it separately
+        if (name === 'entry.372796838') continue;
+        
         if (value) {
-          // Clean phone number
+          // Clean phone number - only include digits
           if (name === 'entry.2095083110') {
             value = value.replace(/\D/g, '');
+            // Skip if phone number is empty after cleaning
+            if (!value) continue;
           }
           
           console.log(name + ': ' + value);
@@ -625,6 +639,19 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
           input.value = value;
           submitForm.appendChild(input);
         }
+      }
+      
+      // Handle SMS consent separately - only add if checked
+      const smsCheckbox = form.querySelector('input[name="entry.372796838"]');
+      if (smsCheckbox && smsCheckbox.checked) {
+        console.log('SMS consent: checked');
+        const smsInput = document.createElement('input');
+        smsInput.type = 'hidden';
+        smsInput.name = 'entry.372796838';
+        smsInput.value = smsCheckbox.value;
+        submitForm.appendChild(smsInput);
+      } else {
+        console.log('SMS consent: not checked');
       }
       
       // Submit the form
@@ -643,5 +670,7 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
         console.log('Redirecting to thank-you page');
       }, 1500);
     });
+    
+
   });
 </script> 
