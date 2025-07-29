@@ -455,6 +455,16 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
     jsIndicator.style.display = 'none';
     document.body.appendChild(jsIndicator);
     
+    // TEST: Add a simple click test to verify button is working
+    submitBtn.style.border = '2px solid green';
+    console.log('Added green border to submit button as test');
+    
+    // TEST: Add immediate click test
+    submitBtn.addEventListener('click', function(e) {
+      console.log('🚨 BUTTON CLICKED - TEST EVENT FIRING');
+      alert('Button click detected!');
+    }, true); // Use capture phase
+    
 
     
     // Validation functions
