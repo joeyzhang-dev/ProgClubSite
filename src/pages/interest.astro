@@ -433,270 +433,333 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
 <script>
 console.log('🚀 Form script loading...');
 
+// Add error tracking
+window.addEventListener('error', function(e) {
+  console.error('JavaScript Error:', e.error, e.filename, e.lineno, e.colno);
+  console.error('Error details:', e.error?.stack);
+});
+
+console.log('📝 Error handler added');
+
 document.addEventListener('DOMContentLoaded', function() {
   console.log('✅ DOM loaded - initializing form');
   
-  const form = document.getElementById('join-form');
-  const submitBtn = document.getElementById('submit-btn');
-  
-  if (!form || !submitBtn) {
-    console.error('Form or button not found!');
-    return;
-  }
-  
-  console.log('✅ Form and button found');
-  
-  // Validation functions
-  const validators = {
-    required: (value) => {
-      return value.trim().length > 0 ? null : 'This field is required';
-    },
-    email: (value) => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!value.trim()) return 'Email is required';
-      if (!emailRegex.test(value)) return 'Please enter a valid email address';
-      return null;
-    },
-    phone: (value) => {
-      if (!value.trim()) return null; // Phone is optional
-      const cleaned = value.replace(/\D/g, '');
-      if (cleaned.length < 7 || cleaned.length > 15) {
-        return 'Please enter a valid phone number (7-15 digits)';
-      }
-      return null;
-    }
-  };
-  
-  // Error display functions
-  function showError(input, message) {
-    const errorDiv = document.getElementById(input.id + '-error');
-    if (errorDiv) {
-      errorDiv.textContent = message;
-      errorDiv.classList.add('show');
-    }
-    input.classList.remove('success');
-    input.classList.add('error');
-  }
-  
-  function hideError(input) {
-    const errorDiv = document.getElementById(input.id + '-error');
-    if (errorDiv) {
-      errorDiv.classList.remove('show');
-    }
-    input.classList.remove('error');
-  }
-  
-  function showSuccess(input) {
-    input.classList.remove('error');
-    input.classList.add('success');
-  }
-  
-  // Checkbox group error handling
-  function showCheckboxGroupError(message) {
-    const errorDiv = document.getElementById('interests-error');
-    const group = document.getElementById('interests-group');
-    if (errorDiv) {
-      errorDiv.textContent = message;
-      errorDiv.classList.add('show');
-    }
-    if (group) {
-      group.classList.remove('success');
-      group.classList.add('error');
-    }
-  }
-  
-  function hideCheckboxGroupError() {
-    const errorDiv = document.getElementById('interests-error');
-    const group = document.getElementById('interests-group');
-    if (errorDiv) {
-      errorDiv.classList.remove('show');
-    }
-    if (group) {
-      group.classList.remove('error');
-    }
-  }
-  
-  function showCheckboxGroupSuccess() {
-    const group = document.getElementById('interests-group');
-    if (group) {
-      group.classList.remove('error');
-      group.classList.add('success');
-    }
-  }
-  
-  // Field validation
-  function validateField(input) {
-    const validationType = input.dataset.validate;
-    const value = input.value;
+  try {
+    console.log('🔍 Looking for form elements...');
+    const form = document.getElementById('join-form');
+    const submitBtn = document.getElementById('submit-btn');
     
-    if (!validationType) return true;
+    console.log('Form element:', form);
+    console.log('Submit button:', submitBtn);
     
-    const validator = validators[validationType];
-    if (!validator) return true;
-    
-    const error = validator(value);
-    
-    if (error) {
-      showError(input, error);
-      return false;
-    } else {
-      hideError(input);
-      if (value.trim()) {
-        showSuccess(input);
-      }
-      return true;
-    }
-  }
-  
-  // Add validation to inputs
-  const inputs = form.querySelectorAll('input[data-validate]');
-  inputs.forEach(input => {
-    input.addEventListener('blur', () => {
-      validateField(input);
-    });
-    
-    input.addEventListener('input', () => {
-      if (input.classList.contains('error')) {
-        validateField(input);
-      }
-    });
-  });
-  
-  // Add validation to checkboxes
-  const checkboxes = form.querySelectorAll('input[name="entry.1453136131"]');
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-      const checkedBoxes = form.querySelectorAll('input[name="entry.1453136131"]:checked');
-      if (checkedBoxes.length > 0) {
-        hideCheckboxGroupError();
-        showCheckboxGroupSuccess();
-      } else {
-        const group = document.getElementById('interests-group');
-        if (group.classList.contains('error') || group.classList.contains('success')) {
-          showCheckboxGroupError('Please select at least one event interest');
-        }
-      }
-    });
-  });
-  
-  // Form submission
-  submitBtn.addEventListener('click', function(e) {
-    console.log('🔥 Submit button clicked');
-    e.preventDefault();
-    e.stopPropagation();
-    
-    try {
-      handleFormSubmission();
-    } catch (error) {
-      console.error('Form submission error:', error);
-      alert('There was an error submitting the form. Please try again.');
-      submitBtn.disabled = false;
-      submitBtn.querySelector('.btn-text').textContent = 'Submit Application';
-    }
-  });
-  
-  function handleFormSubmission() {
-    console.log('Starting form validation...');
-    
-    // Validate all fields
-    let isValid = true;
-    const inputs = form.querySelectorAll('input[data-validate]');
-    
-    inputs.forEach(input => {
-      const fieldValid = validateField(input);
-      if (!fieldValid) {
-        isValid = false;
-      }
-    });
-    
-    // Check interests
-    const checkedInterests = form.querySelectorAll('input[name="entry.1453136131"]:checked');
-    if (checkedInterests.length === 0) {
-      showCheckboxGroupError('Please select at least one event interest');
-      isValid = false;
-    } else {
-      hideCheckboxGroupError();
-      showCheckboxGroupSuccess();
-    }
-    
-    if (!isValid) {
-      console.log('Validation failed');
-      const firstError = form.querySelector('.error');
-      if (firstError) {
-        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+    if (!form || !submitBtn) {
+      console.error('Form or button not found!');
+      console.error('Available form elements:', document.querySelectorAll('form'));
+      console.error('Available buttons:', document.querySelectorAll('button'));
       return;
     }
     
-    console.log('✅ Validation passed - submitting form');
+    console.log('✅ Form and button found');
     
-    // Show loading state
-    submitBtn.disabled = true;
-    submitBtn.querySelector('.btn-text').textContent = 'Submitting...';
+    // Add a visible indicator that we got this far
+    const debugIndicator = document.createElement('div');
+    debugIndicator.style.cssText = 'position:fixed;top:10px;left:10px;background:blue;color:white;padding:5px;z-index:9999;font-size:10px;';
+    debugIndicator.innerHTML = 'JS WORKING';
+    document.body.appendChild(debugIndicator);
     
-    // Create Google Forms submission
-    const submitForm = document.createElement('form');
-    submitForm.method = 'POST';
-    submitForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdIuhYbn3uP0_3k9bAF7bhtqMaQTkGQLD9-lmY6NKgrumGqXw/formResponse';
-    submitForm.style.display = 'none';
+    console.log('🎯 Starting validation setup...');
     
-    // Get form data
-    const formData = new FormData(form);
-    
-    console.log('Form data being submitted:');
-    for (let [name, value] of formData.entries()) {
-      // Skip SMS checkbox - handle separately
-      if (name === 'entry.372796838') continue;
-      
-      if (value) {
-        // Clean phone number
-        if (name === 'entry.2095083110') {
-          value = value.replace(/\D/g, '');
-          if (!value) continue;
+    // Validation functions
+    const validators = {
+      required: (value) => {
+        return value.trim().length > 0 ? null : 'This field is required';
+      },
+      email: (value) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!value.trim()) return 'Email is required';
+        if (!emailRegex.test(value)) return 'Please enter a valid email address';
+        return null;
+      },
+      phone: (value) => {
+        if (!value.trim()) return null; // Phone is optional
+        const cleaned = value.replace(/\D/g, '');
+        if (cleaned.length < 7 || cleaned.length > 15) {
+          return 'Please enter a valid phone number (7-15 digits)';
         }
-        
-        console.log(name + ':', value);
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = value;
-        submitForm.appendChild(input);
+        return null;
+      }
+    };
+    
+    console.log('✅ Validators defined');
+    
+    // Error display functions
+    function showError(input, message) {
+      const errorDiv = document.getElementById(input.id + '-error');
+      if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.classList.add('show');
+      }
+      input.classList.remove('success');
+      input.classList.add('error');
+    }
+    
+    function hideError(input) {
+      const errorDiv = document.getElementById(input.id + '-error');
+      if (errorDiv) {
+        errorDiv.classList.remove('show');
+      }
+      input.classList.remove('error');
+    }
+    
+    function showSuccess(input) {
+      input.classList.remove('error');
+      input.classList.add('success');
+    }
+    
+    console.log('✅ Error display functions defined');
+    
+    // Checkbox group error handling
+    function showCheckboxGroupError(message) {
+      const errorDiv = document.getElementById('interests-error');
+      const group = document.getElementById('interests-group');
+      if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.classList.add('show');
+      }
+      if (group) {
+        group.classList.remove('success');
+        group.classList.add('error');
       }
     }
     
-    // Handle SMS consent
-    const smsCheckbox = form.querySelector('input[name="entry.372796838"]');
-    if (smsCheckbox && smsCheckbox.checked) {
-      console.log('SMS consent: checked');
-      const smsInput = document.createElement('input');
-      smsInput.type = 'hidden';
-      smsInput.name = 'entry.372796838';
-      smsInput.value = smsCheckbox.value;
-      submitForm.appendChild(smsInput);
+    function hideCheckboxGroupError() {
+      const errorDiv = document.getElementById('interests-error');
+      const group = document.getElementById('interests-group');
+      if (errorDiv) {
+        errorDiv.classList.remove('show');
+      }
+      if (group) {
+        group.classList.remove('error');
+      }
     }
     
-    // Submit form
-    document.body.appendChild(submitForm);
-    console.log('📤 Submitting to Google Forms...');
-    submitForm.submit();
+    function showCheckboxGroupSuccess() {
+      const group = document.getElementById('interests-group');
+      if (group) {
+        group.classList.remove('error');
+        group.classList.add('success');
+      }
+    }
     
-    // Cleanup and redirect
-    setTimeout(() => {
-      document.body.removeChild(submitForm);
-      console.log('✅ Form submitted successfully');
-    }, 1000);
+    console.log('✅ Checkbox functions defined');
     
-    setTimeout(() => {
-      console.log('🔄 Redirecting to thank-you page...');
-      window.location.href = '/thank-you';
-    }, 1500);
+    // Field validation
+    function validateField(input) {
+      const validationType = input.dataset.validate;
+      const value = input.value;
+      
+      if (!validationType) return true;
+      
+      const validator = validators[validationType];
+      if (!validator) return true;
+      
+      const error = validator(value);
+      
+      if (error) {
+        showError(input, error);
+        return false;
+      } else {
+        hideError(input);
+        if (value.trim()) {
+          showSuccess(input);
+        }
+        return true;
+      }
+    }
+    
+    console.log('✅ validateField function defined');
+    
+    // Add validation to inputs
+    console.log('🔧 Setting up input validation...');
+    const inputs = form.querySelectorAll('input[data-validate]');
+    console.log('Found inputs with validation:', inputs.length);
+    
+    inputs.forEach(input => {
+      input.addEventListener('blur', () => {
+        validateField(input);
+      });
+      
+      input.addEventListener('input', () => {
+        if (input.classList.contains('error')) {
+          validateField(input);
+        }
+      });
+    });
+    
+    console.log('✅ Input validation setup complete');
+    
+    // Add validation to checkboxes
+    console.log('🔧 Setting up checkbox validation...');
+    const checkboxes = form.querySelectorAll('input[name="entry.1453136131"]');
+    console.log('Found checkboxes:', checkboxes.length);
+    
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        const checkedBoxes = form.querySelectorAll('input[name="entry.1453136131"]:checked');
+        if (checkedBoxes.length > 0) {
+          hideCheckboxGroupError();
+          showCheckboxGroupSuccess();
+        } else {
+          const group = document.getElementById('interests-group');
+          if (group.classList.contains('error') || group.classList.contains('success')) {
+            showCheckboxGroupError('Please select at least one event interest');
+          }
+        }
+      });
+    });
+    
+    console.log('✅ Checkbox validation setup complete');
+    
+    // Form submission
+    console.log('🔧 Setting up form submission...');
+    submitBtn.addEventListener('click', function(e) {
+      console.log('🔥 Submit button clicked');
+      debugIndicator.innerHTML = 'BUTTON CLICKED';
+      debugIndicator.style.background = 'green';
+      
+      e.preventDefault();
+      e.stopPropagation();
+      
+      try {
+        handleFormSubmission();
+      } catch (error) {
+        console.error('Form submission error:', error);
+        debugIndicator.innerHTML = 'SUBMIT ERROR';
+        debugIndicator.style.background = 'red';
+        alert('There was an error submitting the form. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.querySelector('.btn-text').textContent = 'Submit Application';
+      }
+    });
+    
+    console.log('✅ Click handler added');
+    
+    function handleFormSubmission() {
+      console.log('Starting form validation...');
+      debugIndicator.innerHTML = 'VALIDATING';
+      debugIndicator.style.background = 'orange';
+      
+      // Validate all fields
+      let isValid = true;
+      const inputs = form.querySelectorAll('input[data-validate]');
+      
+      inputs.forEach(input => {
+        const fieldValid = validateField(input);
+        if (!fieldValid) {
+          isValid = false;
+        }
+      });
+      
+      // Check interests
+      const checkedInterests = form.querySelectorAll('input[name="entry.1453136131"]:checked');
+      if (checkedInterests.length === 0) {
+        showCheckboxGroupError('Please select at least one event interest');
+        isValid = false;
+      } else {
+        hideCheckboxGroupError();
+        showCheckboxGroupSuccess();
+      }
+      
+      if (!isValid) {
+        console.log('Validation failed');
+        debugIndicator.innerHTML = 'VALIDATION FAILED';
+        debugIndicator.style.background = 'red';
+        const firstError = form.querySelector('.error');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+      
+      console.log('✅ Validation passed - submitting form');
+      debugIndicator.innerHTML = 'SUBMITTING';
+      debugIndicator.style.background = 'purple';
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.querySelector('.btn-text').textContent = 'Submitting...';
+      
+      // Create Google Forms submission
+      const submitForm = document.createElement('form');
+      submitForm.method = 'POST';
+      submitForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdIuhYbn3uP0_3k9bAF7bhtqMaQTkGQLD9-lmY6NKgrumGqXw/formResponse';
+      submitForm.style.display = 'none';
+      
+      // Get form data
+      const formData = new FormData(form);
+      
+      console.log('Form data being submitted:');
+      for (let [name, value] of formData.entries()) {
+        // Skip SMS checkbox - handle separately
+        if (name === 'entry.372796838') continue;
+        
+        if (value) {
+          // Clean phone number
+          if (name === 'entry.2095083110') {
+            value = value.replace(/\D/g, '');
+            if (!value) continue;
+          }
+          
+          console.log(name + ':', value);
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          input.value = value;
+          submitForm.appendChild(input);
+        }
+      }
+      
+      // Handle SMS consent
+      const smsCheckbox = form.querySelector('input[name="entry.372796838"]');
+      if (smsCheckbox && smsCheckbox.checked) {
+        console.log('SMS consent: checked');
+        const smsInput = document.createElement('input');
+        smsInput.type = 'hidden';
+        smsInput.name = 'entry.372796838';
+        smsInput.value = smsCheckbox.value;
+        submitForm.appendChild(smsInput);
+      }
+      
+      // Submit form
+      document.body.appendChild(submitForm);
+      console.log('📤 Submitting to Google Forms...');
+      debugIndicator.innerHTML = 'FORM SUBMITTED';
+      submitForm.submit();
+      
+      // Cleanup and redirect
+      setTimeout(() => {
+        document.body.removeChild(submitForm);
+        console.log('✅ Form submitted successfully');
+        debugIndicator.innerHTML = 'SUCCESS';
+        debugIndicator.style.background = 'green';
+      }, 1000);
+      
+      setTimeout(() => {
+        console.log('🔄 Redirecting to thank-you page...');
+        debugIndicator.innerHTML = 'REDIRECTING';
+        window.location.href = '/thank-you';
+      }, 1500);
+    }
+    
+    console.log('✅ Form initialization complete');
+    debugIndicator.innerHTML = 'READY TO SUBMIT';
+    debugIndicator.style.background = 'green';
+    
+  } catch (error) {
+    console.error('Setup error:', error);
+    console.error('Error stack:', error.stack);
   }
-  
-  console.log('✅ Form initialization complete');
 });
 
-// Error handler
-window.addEventListener('error', function(e) {
-  console.error('JavaScript Error:', e.error);
-});
+console.log('✅ Script setup complete');
 </script> 
