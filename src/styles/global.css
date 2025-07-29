@@ -1,3 +1,6 @@
+/* progsu Brand Font Styling */
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@700&display=swap');
+
 /* Remaining global styles - Critical styles moved to critical.css, animations moved to animations.css */
 
 /* This file is now much smaller and will load faster */
@@ -9,9 +12,6 @@
 
 /* Any remaining styles that don't fit in critical or animations */
 /* Most styles have been moved to improve performance */
-
-/* progsu Brand Font Styling */
-@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@700&display=swap');
 
 .progsu-brand {
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
