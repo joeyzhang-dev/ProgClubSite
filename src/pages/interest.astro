@@ -434,20 +434,36 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
   document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded - initializing form');
     
+    // Production debugging: Add visible indicators
+    const debugDiv = document.createElement('div');
+    debugDiv.id = 'debug-status';
+    debugDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:black;color:white;padding:10px;z-index:9999;font-size:12px;border-radius:5px;max-width:300px;';
+    debugDiv.innerHTML = 'Debug: DOM Loaded';
+    document.body.appendChild(debugDiv);
+    
+    function updateDebug(message) {
+      if (debugDiv) {
+        debugDiv.innerHTML += '<br>' + message;
+      }
+    }
+    
     const form = document.getElementById('join-form');
     const submitBtn = document.getElementById('submit-btn');
     
     if (!form) {
       console.error('Form not found!');
+      updateDebug('ERROR: Form not found');
       return;
     }
     
     if (!submitBtn) {
       console.error('Submit button not found!');
+      updateDebug('ERROR: Submit button not found');
       return;
     }
     
     console.log('Form and submit button found successfully');
+    updateDebug('✓ Form and button found');
     
     // Add a visual indicator that JavaScript is working
     const jsIndicator = document.createElement('div');
@@ -594,13 +610,16 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
     // Form submission with validation
     submitBtn.addEventListener('click', function(e) {
       console.log('Submit button clicked');
+      updateDebug('🔥 Button clicked!');
       e.preventDefault();
       e.stopPropagation();
       
       try {
+        updateDebug('Calling handleFormSubmission...');
         handleFormSubmission();
       } catch (error) {
         console.error('Form submission error:', error);
+        updateDebug('ERROR: ' + error.message);
         alert('There was an error submitting the form. Please try again.');
         // Re-enable button on error
         submitBtn.disabled = false;
@@ -611,6 +630,7 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
     function handleFormSubmission() {
       
       console.log('Starting validation...');
+      updateDebug('Starting validation...');
       
       // Validate all fields
       let isValid = true;
@@ -652,20 +672,24 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
       }
       
       console.log('Validation passed - proceeding with submission');
+      updateDebug('✓ Validation passed');
       
       // Show loading state
       submitBtn.disabled = true;
       submitBtn.querySelector('.btn-text').textContent = 'Submitting...';
+      updateDebug('Button set to submitting...');
       
       // Create form for Google Forms submission
       const submitForm = document.createElement('form');
       submitForm.method = 'POST';
       submitForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdIuhYbn3uP0_3k9bAF7bhtqMaQTkGQLD9-lmY6NKgrumGqXw/formResponse';
-      submitForm.target = '_blank';
+
       submitForm.style.display = 'none';
+      updateDebug('Form created for Google Forms');
       
       // Get form data
       const formData = new FormData(form);
+      updateDebug('Form data extracted');
       
       console.log('Form data being submitted:');
       for (let [name, value] of formData.entries()) {
@@ -702,20 +726,40 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
         console.log('SMS consent: not checked');
       }
       
+      updateDebug('Form inputs created');
+      
       // Submit the form
       document.body.appendChild(submitForm);
-      submitForm.submit();
+      updateDebug('Form appended to body');
+      
+      try {
+        submitForm.submit();
+        updateDebug('✓ Form submitted!');
+      } catch (submitError) {
+        updateDebug('ERROR submitting: ' + submitError.message);
+        console.error('Submit error:', submitError);
+      }
       
       // Clean up and show success
       setTimeout(() => {
-        document.body.removeChild(submitForm);
-        console.log('Form submitted to Google Forms');
+        try {
+          document.body.removeChild(submitForm);
+          updateDebug('Form cleaned up');
+          console.log('Form submitted to Google Forms');
+        } catch (cleanupError) {
+          updateDebug('Cleanup error: ' + cleanupError.message);
+        }
       }, 1000);
       
             // Redirect to thank-you page
       setTimeout(() => {
-        window.location.href = '/thank-you';
-        console.log('Redirecting to thank-you page');
+        try {
+          updateDebug('Redirecting to thank-you...');
+          window.location.href = '/thank-you';
+          console.log('Redirecting to thank-you page');
+        } catch (redirectError) {
+          updateDebug('Redirect error: ' + redirectError.message);
+        }
       }, 1500);
     }
     

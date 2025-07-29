@@ -33,8 +33,8 @@ export default defineConfig({
     build: {
       // Inline CSS for critical styles
       cssCodeSplit: false,
-      // Minify CSS
-      minify: true,
+      // Minify CSS but disable JS minification temporarily for debugging
+      minify: false,
     },
     css: {
       // Transform CSS for better browser support
