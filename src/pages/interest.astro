@@ -29,7 +29,7 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
         </h2>
         
         <!-- Custom Form -->
-        <form id="join-form" class="space-y-6" novalidate>
+        <form id="join-form" class="space-y-6" novalidate onsubmit="return false;">
           <!-- Event Interests -->
           <div class="form-group">
             <label class="form-label">Which of our events are you interested in? *</label>
@@ -128,13 +128,19 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
 
           <!-- Submit Button -->
           <div class="form-group">
-            <button type="submit" class="submit-btn" id="submit-btn">
+            <button type="button" class="submit-btn" id="submit-btn">
               <span class="btn-text">Submit Application</span>
               <span class="btn-glow"></span>
             </button>
           </div>
         </form>
         
+        <!-- Fallback message for when JavaScript is disabled -->
+        <noscript>
+          <div class="mt-4 p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
+            <p class="text-red-300 text-center">JavaScript is required for this form to work properly. Please enable JavaScript in your browser.</p>
+          </div>
+        </noscript>
 
         
         <!-- Additional Info -->
@@ -426,6 +432,8 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded - initializing form');
+    
     const form = document.getElementById('join-form');
     const submitBtn = document.getElementById('submit-btn');
     
@@ -434,7 +442,18 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
       return;
     }
     
-
+    if (!submitBtn) {
+      console.error('Submit button not found!');
+      return;
+    }
+    
+    console.log('Form and submit button found successfully');
+    
+    // Add a visual indicator that JavaScript is working
+    const jsIndicator = document.createElement('div');
+    jsIndicator.id = 'js-loaded';
+    jsIndicator.style.display = 'none';
+    document.body.appendChild(jsIndicator);
     
     // Validation functions
     const validators = {
@@ -573,30 +592,57 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
     });
     
     // Form submission with validation
-    form.addEventListener('submit', function(e) {
-      console.log('Form submit event triggered');
+    submitBtn.addEventListener('click', function(e) {
+      console.log('Submit button clicked');
       e.preventDefault();
       e.stopPropagation();
       
+      try {
+        handleFormSubmission();
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('There was an error submitting the form. Please try again.');
+        // Re-enable button on error
+        submitBtn.disabled = false;
+        submitBtn.querySelector('.btn-text').textContent = 'Submit Application';
+      }
+    });
+    
+    function handleFormSubmission() {
+      
+      console.log('Starting validation...');
+      
       // Validate all fields
       let isValid = true;
+      const inputs = form.querySelectorAll('input[data-validate]');
+      console.log('Found inputs to validate:', inputs.length);
+      
       inputs.forEach(input => {
-        if (!validateField(input)) {
+        const fieldValid = validateField(input);
+        console.log(`Field ${input.name} validation:`, fieldValid);
+        if (!fieldValid) {
           isValid = false;
         }
       });
       
       // Check if at least one interest is selected
       const checkedInterests = form.querySelectorAll('input[name="entry.1453136131"]:checked');
+      console.log('Checked interests:', checkedInterests.length);
+      
       if (checkedInterests.length === 0) {
+        console.log('No interests selected - validation failed');
         showCheckboxGroupError('Please select at least one event interest');
         isValid = false;
       } else {
+        console.log('Interests validation passed');
         hideCheckboxGroupError();
         showCheckboxGroupSuccess();
       }
       
+      console.log('Overall validation result:', isValid);
+      
       if (!isValid) {
+        console.log('Validation failed - scrolling to error');
         // Scroll to first error
         const firstError = form.querySelector('.error');
         if (firstError) {
@@ -604,6 +650,8 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
         }
         return;
       }
+      
+      console.log('Validation passed - proceeding with submission');
       
       // Show loading state
       submitBtn.disabled = true;
@@ -664,13 +712,16 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
         console.log('Form submitted to Google Forms');
       }, 1000);
       
-      // Redirect to thank-you page
+            // Redirect to thank-you page
       setTimeout(() => {
         window.location.href = '/thank-you';
         console.log('Redirecting to thank-you page');
       }, 1500);
-    });
+    }
     
-
+    // Add window error handler for debugging
+    window.addEventListener('error', function(e) {
+      console.error('JavaScript error:', e.error, e.filename, e.lineno);
+    });
   });
 </script> 
