@@ -33,8 +33,8 @@ export default defineConfig({
     build: {
       // Inline CSS for critical styles
       cssCodeSplit: false,
-      // Re-enable minification now that issue is resolved
-      minify: true,
+      // Disable minification - it breaks the form JavaScript
+      minify: false,
     },
     css: {
       // Transform CSS for better browser support
