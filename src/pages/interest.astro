@@ -29,7 +29,7 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
         </h2>
         
         <!-- Custom Form -->
-        <form id="join-form" class="space-y-6" novalidate>
+        <form id="join-form" class="space-y-6" novalidate onsubmit="return false;">
           <!-- Event Interests -->
           <div class="form-group">
             <label class="form-label">Which of our events are you interested in? *</label>
@@ -128,7 +128,7 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
 
           <!-- Submit Button -->
           <div class="form-group">
-            <button type="submit" class="submit-btn" id="submit-btn">
+            <button type="button" class="submit-btn" id="submit-btn">
               <span class="btn-text">Submit Application</span>
               <span class="btn-glow"></span>
             </button>
@@ -594,8 +594,8 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
     });
     
     // Form submission with validation
-    form.addEventListener('submit', function(e) {
-      console.log('Form submit event triggered');
+    submitBtn.addEventListener('click', function(e) {
+      console.log('Submit button clicked');
       e.preventDefault();
       e.stopPropagation();
       
