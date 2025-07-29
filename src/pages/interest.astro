@@ -433,7 +433,7 @@ import { SITE_TITLE, DISCORD_LINK } from "@/consts";
 <script>
 console.log('🚀 Form script loading...');
 
-// Add error tracking
+// Enhanced error tracking
 window.addEventListener('error', function(e) {
   console.error('JavaScript Error:', e.error, e.filename, e.lineno, e.colno);
   console.error('Error details:', e.error?.stack);
@@ -441,8 +441,9 @@ window.addEventListener('error', function(e) {
 
 console.log('📝 Error handler added');
 
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('✅ DOM loaded - initializing form');
+// More robust initialization that handles conflicts
+function initializeForm() {
+  console.log('🔄 Attempting form initialization...');
   
   try {
     console.log('🔍 Looking for form elements...');
@@ -456,15 +457,27 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Form or button not found!');
       console.error('Available form elements:', document.querySelectorAll('form'));
       console.error('Available buttons:', document.querySelectorAll('button'));
-      return;
+      
+      // Retry after a delay if elements not found
+      console.log('⏳ Retrying form initialization in 200ms...');
+      setTimeout(initializeForm, 200);
+      return false;
     }
     
     console.log('✅ Form and button found');
     
     // Simple debug indicator to confirm JS is working
     const debugDiv = document.createElement('div');
+    debugDiv.id = 'form-debug-indicator';
     debugDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:green;color:white;padding:5px;z-index:9999;font-size:11px;border-radius:3px;';
     debugDiv.innerHTML = 'FORM READY';
+    
+    // Remove any existing debug indicator first
+    const existingDebug = document.getElementById('form-debug-indicator');
+    if (existingDebug) {
+      existingDebug.remove();
+    }
+    
     document.body.appendChild(debugDiv);
     
     console.log('🎯 Starting validation setup...');
@@ -620,9 +633,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('✅ Checkbox validation setup complete');
     
+    // Remove any existing click listeners to prevent duplicates
+    const newSubmitBtn = submitBtn.cloneNode(true);
+    submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
+    
     // Form submission
     console.log('🔧 Setting up form submission...');
-    submitBtn.addEventListener('click', function(e) {
+    newSubmitBtn.addEventListener('click', function(e) {
       console.log('🔥 Submit button clicked');
       
       e.preventDefault();
@@ -633,8 +650,8 @@ document.addEventListener('DOMContentLoaded', function() {
       } catch (error) {
         console.error('Form submission error:', error);
         alert('There was an error submitting the form. Please try again.');
-        submitBtn.disabled = false;
-        submitBtn.querySelector('.btn-text').textContent = 'Submit Application';
+        newSubmitBtn.disabled = false;
+        newSubmitBtn.querySelector('.btn-text').textContent = 'Submit Application';
       }
     });
     
@@ -676,8 +693,8 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('✅ Validation passed - submitting form');
       
       // Show loading state
-      submitBtn.disabled = true;
-      submitBtn.querySelector('.btn-text').textContent = 'Submitting...';
+      newSubmitBtn.disabled = true;
+      newSubmitBtn.querySelector('.btn-text').textContent = 'Submitting...';
       
       // Create Google Forms submission
       const submitForm = document.createElement('form');
@@ -735,25 +752,43 @@ document.addEventListener('DOMContentLoaded', function() {
       submitForm.submit();
       
       // Cleanup and redirect immediately (don't wait for Google response)
-              setTimeout(() => {
-          document.body.removeChild(submitForm);
-          document.body.removeChild(iframe);
-          console.log('✅ Form submitted successfully');
-        }, 500);
-        
-        setTimeout(() => {
-          console.log('🔄 Redirecting to thank-you page...');
-          window.location.href = '/thank-you';
-        }, 1000);
+      setTimeout(() => {
+        document.body.removeChild(submitForm);
+        document.body.removeChild(iframe);
+        console.log('✅ Form submitted successfully');
+      }, 500);
+      
+      setTimeout(() => {
+        console.log('🔄 Redirecting to thank-you page...');
+        window.location.href = '/thank-you';
+      }, 1000);
     }
     
     console.log('✅ Form initialization complete');
+    return true;
     
   } catch (error) {
     console.error('Setup error:', error);
     console.error('Error stack:', error.stack);
+    return false;
   }
-});
+}
+
+// Multiple initialization strategies to handle conflicts
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeForm);
+} else {
+  // Document already loaded
+  initializeForm();
+}
+
+// Backup initialization after a delay
+setTimeout(() => {
+  if (!document.getElementById('form-debug-indicator')) {
+    console.log('🔄 Backup initialization triggered...');
+    initializeForm();
+  }
+}, 1000);
 
 console.log('✅ Script setup complete');
 </script> 
