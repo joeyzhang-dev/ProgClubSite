@@ -461,12 +461,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('✅ Form and button found');
     
-    // Add a visible indicator that we got this far
-    const debugIndicator = document.createElement('div');
-    debugIndicator.style.cssText = 'position:fixed;top:10px;left:10px;background:blue;color:white;padding:5px;z-index:9999;font-size:10px;';
-    debugIndicator.innerHTML = 'JS WORKING';
-    document.body.appendChild(debugIndicator);
-    
     console.log('🎯 Starting validation setup...');
     
     // Validation functions
@@ -624,8 +618,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔧 Setting up form submission...');
     submitBtn.addEventListener('click', function(e) {
       console.log('🔥 Submit button clicked');
-      debugIndicator.innerHTML = 'BUTTON CLICKED';
-      debugIndicator.style.background = 'green';
       
       e.preventDefault();
       e.stopPropagation();
@@ -634,8 +626,6 @@ document.addEventListener('DOMContentLoaded', function() {
         handleFormSubmission();
       } catch (error) {
         console.error('Form submission error:', error);
-        debugIndicator.innerHTML = 'SUBMIT ERROR';
-        debugIndicator.style.background = 'red';
         alert('There was an error submitting the form. Please try again.');
         submitBtn.disabled = false;
         submitBtn.querySelector('.btn-text').textContent = 'Submit Application';
@@ -646,8 +636,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function handleFormSubmission() {
       console.log('Starting form validation...');
-      debugIndicator.innerHTML = 'VALIDATING';
-      debugIndicator.style.background = 'orange';
       
       // Validate all fields
       let isValid = true;
@@ -672,8 +660,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (!isValid) {
         console.log('Validation failed');
-        debugIndicator.innerHTML = 'VALIDATION FAILED';
-        debugIndicator.style.background = 'red';
         const firstError = form.querySelector('.error');
         if (firstError) {
           firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -682,8 +668,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       console.log('✅ Validation passed - submitting form');
-      debugIndicator.innerHTML = 'SUBMITTING';
-      debugIndicator.style.background = 'purple';
       
       // Show loading state
       submitBtn.disabled = true;
@@ -733,27 +717,31 @@ document.addEventListener('DOMContentLoaded', function() {
       // Submit form
       document.body.appendChild(submitForm);
       console.log('📤 Submitting to Google Forms...');
-      debugIndicator.innerHTML = 'FORM SUBMITTED';
+      
+      // Create hidden iframe for submission to prevent redirect
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hidden_iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      
+      // Set form target to iframe
+      submitForm.target = 'hidden_iframe';
       submitForm.submit();
       
-      // Cleanup and redirect
-      setTimeout(() => {
-        document.body.removeChild(submitForm);
-        console.log('✅ Form submitted successfully');
-        debugIndicator.innerHTML = 'SUCCESS';
-        debugIndicator.style.background = 'green';
-      }, 1000);
-      
-      setTimeout(() => {
-        console.log('🔄 Redirecting to thank-you page...');
-        debugIndicator.innerHTML = 'REDIRECTING';
-        window.location.href = '/thank-you';
-      }, 1500);
+      // Cleanup and redirect immediately (don't wait for Google response)
+              setTimeout(() => {
+          document.body.removeChild(submitForm);
+          document.body.removeChild(iframe);
+          console.log('✅ Form submitted successfully');
+        }, 500);
+        
+        setTimeout(() => {
+          console.log('🔄 Redirecting to thank-you page...');
+          window.location.href = '/thank-you';
+        }, 1000);
     }
     
     console.log('✅ Form initialization complete');
-    debugIndicator.innerHTML = 'READY TO SUBMIT';
-    debugIndicator.style.background = 'green';
     
   } catch (error) {
     console.error('Setup error:', error);
