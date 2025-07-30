@@ -43,15 +43,7 @@ function getEventStatus(date) {
   const today = new Date(now);
   today.setHours(0, 0, 0, 0);
   
-  // Debug logging
-  console.log('Date comparison:', {
-    date,
-    eventDate,
-    today,
-    eventTime: eventDate.getTime(),
-    todayTime: today.getTime(),
-    comparison: eventDate.getTime() === today.getTime() ? 'equal' : (eventDate < today ? 'past' : 'future')
-  });
+  // Debug logging removed for production
   
   if (eventDate < today) return 'past';
   if (eventDate.getTime() === today.getTime()) return 'active';
@@ -117,36 +109,7 @@ const events: Event[] = rawEvents.map(event => ({
 const sortedEvents = sortEventsByPriority(events);
 const eventGroups = groupEventsByTime(sortedEvents);
 
-// Debug: Log event counts (remove this later)
-console.log('Event counts:', {
-  total: events.length,
-  featured: eventGroups.featured.length,
-  thisWeek: eventGroups.thisWeek.length,
-  thisMonth: eventGroups.thisMonth.length,
-  upcoming: eventGroups.upcoming.length,
-  past: eventGroups.past.length,
-  totalUpcoming: eventGroups.thisWeek.length + eventGroups.thisMonth.length + eventGroups.upcoming.length
-});
-
-// Debug: Log some event details
-events.slice(0, 5).forEach((event, i) => {
-  const eventDate = event.date?.isTBD ? null : (event.date?.value ? new Date(event.date.value) : null);
-  const status = getEventStatus(eventDate);
-  const hasFeaturedTag = event.specialTags && event.specialTags.some(tag => 
-    (typeof tag === 'string' && tag.toLowerCase() === 'featured') || 
-    (typeof tag === 'object' && (tag?.name?.toLowerCase() === 'featured' || tag?.title?.toLowerCase() === 'featured'))
-  );
-  console.log(`Event ${i + 1}:`, {
-    title: event.title,
-    dateRaw: event.date,
-    eventDate,
-    status,
-    pinned: event.pinned,
-    specialTags: event.specialTags,
-    hasFeaturedTag,
-    willBeFeatured: event.pinned || status === 'active' || hasFeaturedTag
-  });
-});
+// Debug logging removed for production
 
 // Separate events into three display tiers for performance
 const { fullCardEvents, liteCardEvents, listEvents } = separateEventsByDisplayType(sortedEvents);
