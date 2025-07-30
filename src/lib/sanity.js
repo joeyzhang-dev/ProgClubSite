@@ -4,7 +4,7 @@ import { toHTML } from '@portabletext/to-html'
 export const sanityClient = createClient({
   projectId: '44jj75h0', // Your project ID from studio/sanity.config.ts
   dataset: 'production',
-  useCdn: true, // Use CDN for faster reads
+  useCdn: false, // Disable CDN for development to get fresh data
   apiVersion: '2023-05-03', // Use current date in YYYY-MM-DD format
 })
 

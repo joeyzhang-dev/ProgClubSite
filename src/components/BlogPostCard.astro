@@ -59,14 +59,20 @@ const statusConfig = {
     color: 'text-gray-400',
     bgColor: 'bg-gray-400/20',
     borderColor: 'border-gray-400/30'
+  },
+  tbd: {
+    text: 'TBD',
+    color: 'text-orange-400',
+    bgColor: 'bg-orange-400/20',
+    borderColor: 'border-orange-400/30'
   }
 };
 
-const currentStatus = statusConfig[eventStatus];
+const currentStatus = statusConfig[eventStatus] || statusConfig.upcoming;
 ---
 
 <div
-  class={`w-full mx-auto relative pb-5 overflow-hidden transition-all duration-700 ease-out cursor-pointer group h-64 rounded-xl backdrop-blur-xl shadow-lg hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-1 ${
+  class={`w-full mx-auto relative pb-5 overflow-hidden transition-all duration-300 ease-out cursor-pointer group h-64 rounded-xl shadow-lg hover:shadow-xl ${
     pinned 
       ? 'bg-gradient-to-br from-amber-500/[0.15] via-yellow-400/[0.10] to-amber-400/[0.08] border-2 border-amber-400/40 hover:border-amber-300/60 hover:shadow-amber-400/25 pinned-event-glow' 
       : 'border border-white/20 bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] hover:border-white/40'
@@ -82,8 +88,8 @@ const currentStatus = statusConfig[eventStatus];
   {/* Floating Liquid Bubbles for Pinned Events */}
   {pinned && (
     <>
-      <div class="absolute top-3 right-4 w-16 h-16 bg-gradient-to-br from-amber-400/25 to-yellow-500/25 rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500 liquid-float"></div>
-      <div class="absolute bottom-6 left-4 w-12 h-12 bg-gradient-to-br from-amber-400/20 to-yellow-400/20 rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-700 liquid-float" style="animation-delay: 1.5s;"></div>
+      <div class="absolute top-3 right-4 w-16 h-16 bg-gradient-to-br from-amber-400/25 to-yellow-500/25 rounded-full opacity-30 liquid-float"></div>
+      <div class="absolute bottom-6 left-4 w-12 h-12 bg-gradient-to-br from-amber-400/20 to-yellow-400/20 rounded-full opacity-20 liquid-float" style="animation-delay: 1.5s;"></div>
       
       {/* Golden Sparkle Glares for Pinned Events */}
       <div class="absolute top-8 right-14 opacity-0 group-hover:opacity-80 transition-opacity duration-500 sparkle-glare sparkle-1" style="animation-delay: 0.3s;">
@@ -162,7 +168,7 @@ const currentStatus = statusConfig[eventStatus];
           </div>
           <!-- Pinned Badge -->
           {pinned && (
-            <div class="px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-500/40 to-yellow-500/40 backdrop-blur-md border border-amber-400/50 shadow-lg hover:shadow-amber-500/30 transition-shadow duration-300">
+            <div class="px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-500/40 to-yellow-500/40 border border-amber-400/50 shadow-lg transition-shadow duration-300">
               <div class="flex items-center gap-1">
                 <svg class="w-3 h-3 text-amber-200" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M3 3.5A1.5 1.5 0 014.5 2h11A1.5 1.5 0 0117 3.5v11A1.5 1.5 0 0115.5 16h-5.379a1.5 1.5 0 01-1.06-.44L3 9.5v-6z"/>
