@@ -349,7 +349,7 @@ import { SITE_TITLE, NAV_LINKS as links } from "@/consts";
         this.mobileMenu.setAttribute("aria-hidden", "false");
         
         // Show menu with optimized CSS classes
-        this.mobileMenu.classList.remove("scale-y-0", "opacity-0", "pointer-events-none");
+        this.mobileMenu.classList.remove("scale-y-0", "opacity-0", "pointer-events-none", "mobile-menu-closing");
         this.mobileMenu.classList.add("mobile-menu-opening");
         
         // Animate hamburger to X using CSS class
