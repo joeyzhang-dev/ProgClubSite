@@ -33,12 +33,13 @@ const { title, pubDate, updatedDate, heroImage, resources } = Astro.props;
     <div
       class="prose !max-w-[90vw] overflow-x-hidden !break-words brightness-110 prose-img:scale-90 prose-img:rounded-2xl prose-invert prose-hr:border-white prose-hr:bg-white px-4 md:px-0 md:max-w-4xl"
     >
-      <div>
-        {resources && resources.length > 0 && (
-          <div class="mb-4">
-            <h3 class="text-base font-semibold mb-2">Resources</h3>
-            <ResourceButtons resources={resources} class="compact" />
-          </div>
+      {/* Always render this div to maintain consistent spacing */}
+      <div class="mb-4">
+        <h3 class="text-base font-semibold mb-2">Resources</h3>
+        {resources && resources.length > 0 ? (
+          <ResourceButtons resources={resources} class="compact" />
+        ) : (
+          <p class="text-sm text-white/60 italic">No resources available for this event.</p>
         )}
       </div>
       <slot />

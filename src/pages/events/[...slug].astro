@@ -69,21 +69,10 @@ const eventStatus = getEventStatus(eventDate);
             {event.description}
           </p>
         )}
-        
-        <!-- Special Tags - moved here below title -->
-        {event.specialTags && event.specialTags.length > 0 && (
-          <div class="flex flex-wrap gap-2 justify-center mt-4">
-            {event.specialTags.map((tag) => (
-              <span class="bg-purple-500/20 border border-purple-400/30 text-purple-300 px-3 py-1 rounded-full text-sm font-medium">
-                {typeof tag === 'string' ? tag : (tag?.title || tag?.name || String(tag))}
-              </span>
-            ))}
-          </div>
-        )}
       </header>
 
       <!-- Event Meta Information -->
-      <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-sm mb-6">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-sm mb-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="flex flex-col items-center text-center">
             <div class="flex items-center gap-2 mb-2">
@@ -127,7 +116,7 @@ const eventStatus = getEventStatus(eventDate);
 
   <!-- Table of Contents (if content is long) -->
   {((event.description && typeof event.description === 'object') || event.post || (event.gallery && event.gallery.length > 0)) && (
-    <div class="max-w-4xl mx-auto mb-6 px-4">
+    <div class="max-w-4xl mx-auto mb-8 px-4">
       <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-sm">
         <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,6 +145,13 @@ const eventStatus = getEventStatus(eventDate);
     </div>
   )}
 
+  <!-- Additional spacing for events without content sections -->
+  {!((event.description && typeof event.description === 'object') || event.post || (event.gallery && event.gallery.length > 0)) && (
+    <div class="max-w-4xl mx-auto mb-8 px-4">
+      <!-- Empty div to maintain spacing when no content sections exist -->
+    </div>
+  )}
+
   <!-- Event Details Section -->
   {event.description && typeof event.description === 'object' && descriptionHtml && (
     <div id="event-details" class="max-w-4xl mx-auto mb-12">
@@ -166,6 +162,18 @@ const eventStatus = getEventStatus(eventDate);
           </svg>
           Event Details
         </h2>
+        
+        <!-- Event Tags -->
+        {event.specialTags && event.specialTags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-6">
+            {event.specialTags.map((tag) => (
+              <span class="bg-purple-500/20 border border-purple-400/30 text-purple-300 px-3 py-1 rounded-full text-sm font-medium">
+                {typeof tag === 'string' ? tag : (tag?.title || tag?.name || String(tag))}
+              </span>
+            ))}
+          </div>
+        )}
+        
         <div class="prose prose-lg prose-invert max-w-none [&>*:last-child]:mb-0 [&>p:last-child]:mb-0 [&>p]:text-white/90 [&>p]:leading-relaxed [&>p]:text-lg [&>h1]:text-white [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:mb-4 [&>h2]:text-white [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mb-3 [&>h3]:text-white [&>h3]:text-xl [&>h3]:font-bold [&>h3]:mb-2 [&>h4]:text-white [&>h4]:text-lg [&>h4]:font-bold [&>h4]:mb-2 [&>strong]:text-white [&>strong]:font-bold [&>em]:text-white/90 [&>em]:italic [&>ul]:text-white/90 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-4 [&>ol]:text-white/90 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-4 [&>li]:text-white/90 [&>li]:mb-1 [&>a]:text-blue-300 [&>a]:underline [&>a]:hover:text-blue-200 [&>blockquote]:border-l-4 [&>blockquote]:border-white/30 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-white/80 [&>code]:bg-white/10 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded [&>code]:text-sm [&>pre]:bg-white/10 [&>pre]:p-4 [&>pre]:rounded-lg [&>pre]:overflow-x-auto" set:html={descriptionHtml} />
       </div>
     </div>
