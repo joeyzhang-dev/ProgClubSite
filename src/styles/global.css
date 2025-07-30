@@ -1,12 +1,10 @@
-/* progsu Brand Font Styling */
-@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@700&display=swap');
+/* progsu Brand Font Styling - using system fonts for better performance */
 
 /* Remaining global styles - Critical styles moved to critical.css, animations moved to animations.css */
 
 /* This file is now much smaller and will load faster */
 
-/* Keep any Tailwind base styles if needed */
-@tailwind base;
+/* Keep Tailwind utilities - base styles are now in critical.css */
 @tailwind components;
 @tailwind utilities;
 

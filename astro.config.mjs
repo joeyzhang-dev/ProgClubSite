@@ -12,8 +12,15 @@ export default defineConfig({
     mdx(), 
     sitemap(), 
     tailwind({
-      // Disable Tailwind's base styles to reduce CSS size
-      applyBaseStyles: false,
+      // Re-enable base styles since we've optimized critical CSS
+      applyBaseStyles: true,
+      // Use a custom config that doesn't conflict with critical CSS
+      config: {
+        corePlugins: {
+          // Disable preflight since we handle base styles in critical CSS
+          preflight: false,
+        }
+      }
     })
   ],
   markdown: {
@@ -31,14 +38,18 @@ export default defineConfig({
       },
     },
     build: {
-      // Inline CSS for critical styles
+      // Keep CSS code splitting disabled for consistency
       cssCodeSplit: false,
       // Disable minification - it breaks the form JavaScript
       minify: false,
+      // Inline small CSS files to reduce requests
+      assetsInlineLimit: 4096,
     },
     css: {
       // Transform CSS for better browser support
       transformer: 'postcss',
+      // Optimize CSS processing
+      devSourcemap: true,
     },
     // Optimize dependency handling
     optimizeDeps: {
@@ -49,8 +60,8 @@ export default defineConfig({
   },
   // Build optimizations
   build: {
-    // Inline stylesheets smaller than 4kb
-    inlineStylesheets: 'auto',
+    // Inline stylesheets smaller than 8kb to reduce FOUC
+    inlineStylesheets: 'always',
   },
   // Exclude studio from main site processing
   srcDir: './src',
