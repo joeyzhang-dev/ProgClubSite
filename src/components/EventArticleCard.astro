@@ -79,8 +79,8 @@ const statusStyle = statusConfig[status] || statusConfig.upcoming;
         </h3>
       </div>
 
-      <!-- Body: Event details and excerpt -->
-      <div class="flex-1 space-y-2 min-h-0">
+      <!-- Body: Event details and excerpt - with height constraints -->
+      <div class="flex-1 space-y-2 min-h-0 overflow-hidden">
         <!-- Event Info -->
         {(formattedDate || location) && (
           <div class="space-y-1 text-xs text-white/80">
@@ -106,14 +106,14 @@ const statusStyle = statusConfig[status] || statusConfig.upcoming;
 
         <!-- Excerpt -->
         {excerpt && (
-          <p class="text-white/70 text-xs leading-relaxed line-clamp-3">
+          <p class="text-white/70 text-xs leading-relaxed line-clamp-2">
             {excerpt}
           </p>
         )}
 
-        <!-- Tags -->
+        <!-- Tags - with overflow handling -->
         {specialTags.length > 0 && (
-          <div class="flex flex-wrap gap-1">
+          <div class="flex flex-wrap gap-1 mt-auto">
             {specialTags.slice(0, 2).map((tag) => (
               <span class="bg-purple-500/20 border border-purple-400/30 text-purple-300 px-1.5 py-0.5 rounded-full text-xs">
                 {typeof tag === 'string' ? tag : (tag?.title || tag?.name || String(tag))}
@@ -128,8 +128,8 @@ const statusStyle = statusConfig[status] || statusConfig.upcoming;
         )}
       </div>
 
-      <!-- Footer -->
-      <div class="flex-shrink-0 pt-2 border-t border-white/10 mt-auto">
+      <!-- Footer - with guaranteed space -->
+      <div class="flex-shrink-0 pt-2 border-t border-white/10 mt-2">
         <div class="flex items-center justify-between">
           <div class="text-xs text-white/60">
             {resources && resources.length > 0 && `${resources.length} resource${resources.length !== 1 ? 's' : ''}`}
