@@ -111,9 +111,9 @@ const statusStyle = statusConfig[status] || statusConfig.upcoming;
           </p>
         )}
 
-        <!-- Tags - with overflow handling -->
+        <!-- Tags - with proper bottom spacing -->
         {specialTags.length > 0 && (
-          <div class="flex flex-wrap gap-1 mt-auto">
+          <div class="flex flex-wrap gap-1 pb-1">
             {specialTags.slice(0, 2).map((tag) => (
               <span class="bg-purple-500/20 border border-purple-400/30 text-purple-300 px-1.5 py-0.5 rounded-full text-xs">
                 {typeof tag === 'string' ? tag : (tag?.title || tag?.name || String(tag))}
@@ -128,8 +128,8 @@ const statusStyle = statusConfig[status] || statusConfig.upcoming;
         )}
       </div>
 
-      <!-- Footer - with guaranteed space -->
-      <div class="flex-shrink-0 pt-2 border-t border-white/10 mt-2">
+      <!-- Footer - with guaranteed space and proper separation -->
+      <div class="flex-shrink-0 pt-3 border-t border-white/10 mt-3">
         <div class="flex items-center justify-between">
           <div class="text-xs text-white/60">
             {resources && resources.length > 0 && `${resources.length} resource${resources.length !== 1 ? 's' : ''}`}
