@@ -7,6 +7,25 @@
   font-display: swap;
 }
 
+/* Essential Tailwind base styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "VCR", ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+}
+
 /* Essential base styles */
 body {
   font-family: "VCR", monospace !important;
@@ -15,6 +34,48 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  line-height: inherit;
+}
+
+/* Essential layout styles */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* Basic flexbox and grid support */
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Essential spacing utilities */
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.bg-black {
+  background-color: #000;
 }
 
 /* Basic layout styles for header and main content */
@@ -26,7 +87,13 @@ header {
 }
 
 main {
-  padding-top: 7rem;
+  padding-top: 8rem;
+}
+
+@media (min-width: 640px) {
+  main {
+    padding-top: 7rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -38,6 +105,19 @@ main {
 /* Essential scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* Basic selection styles */
@@ -55,4 +135,57 @@ main {
 img {
   max-width: 100%;
   height: auto;
+  display: block;
+}
+
+/* Essential grid and flexbox utilities for events page */
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Essential responsive grid for events */
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 } 
