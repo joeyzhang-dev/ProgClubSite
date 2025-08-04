@@ -104,6 +104,13 @@ export const membersByYear: MembersByYear = {
       description: "Vice President serving under Joey Zhang's leadership, bringing a unique blend of creative and technical skills to help guide PROGgsu's continued growth.",
       linkedin: "evan-anderson636",
       specialties: ["Fashion Design", "Cooking", "App Dev", "Data Analytics"]
+    },
+    {
+      name: "Ibe Mohammed Ali",
+      role: "Director of Technology",
+      description: "Building and maintaining PROGgsu’s github and projects, mentoring devs, and making sure things break less than my sleep schedule.",
+      github: "ibeeeees",
+      specialties: ["Software Development", "Mentorship", "Debugging at 2 AM", "Good Ball"]
     }
   ],
   
