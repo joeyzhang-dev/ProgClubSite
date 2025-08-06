@@ -16,6 +16,9 @@ export const SOCIAL_LINKS = {
   // github: "https://github.com/ProgClubGSU",
   // linkedin: "https://linkedin.com/in/your-profile",
 };
+
+// Google Form URL for joining the club
+export const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdIuhYbn3uP0_3k9bAF7bhtqMaQTkGQLD9-lmY6NKgrumGqXw/viewform";
 export const NAV_LINKS: Array<{ title: string; href?: string; children?: Array<{ title: string; href?: string }> }> = [
   {
     title: "Events",
@@ -36,7 +39,7 @@ export const NAV_LINKS: Array<{ title: string; href?: string; children?: Array<{
   },
   {
     title: "Join",
-    href: "interest",
+    href: GOOGLE_FORM_URL,
   },
 ];
 
