@@ -639,9 +639,12 @@ function initializeForm() {
     const newSubmitBtn = submitBtn.cloneNode(true);
     submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
     
+    // Also update our reference to the new button
+    const currentSubmitBtn = document.getElementById('submit-btn');
+    
     // Form submission
     console.log('🔧 Setting up form submission...');
-    newSubmitBtn.addEventListener('click', function(e) {
+    currentSubmitBtn.addEventListener('click', function(e) {
       console.log('🔥 Submit button clicked');
       
       e.preventDefault();
@@ -652,8 +655,8 @@ function initializeForm() {
       } catch (error) {
         console.error('Form submission error:', error);
         alert('There was an error submitting the form. Please try again.');
-        newSubmitBtn.disabled = false;
-        newSubmitBtn.querySelector('.btn-text').textContent = 'Submit Application';
+        currentSubmitBtn.disabled = false;
+        currentSubmitBtn.querySelector('.btn-text').textContent = 'Submit Application';
       }
     });
     
@@ -695,8 +698,8 @@ function initializeForm() {
       console.log('✅ Validation passed - submitting form');
       
       // Show loading state
-      newSubmitBtn.disabled = true;
-      newSubmitBtn.querySelector('.btn-text').textContent = 'Submitting...';
+      currentSubmitBtn.disabled = true;
+      currentSubmitBtn.querySelector('.btn-text').textContent = 'Submitting...';
       
       // Create Google Forms submission
       const submitForm = document.createElement('form');
@@ -783,6 +786,17 @@ if (document.readyState === 'loading') {
   // Document already loaded
   initializeForm();
 }
+
+// Listen for Astro navigation events to re-initialize form
+document.addEventListener('astro:page-load', () => {
+  console.log('🔄 Astro page-load event detected, re-initializing form...');
+  initializeForm();
+});
+
+document.addEventListener('astro:after-swap', () => {
+  console.log('🔄 Astro after-swap event detected, re-initializing form...');
+  initializeForm();
+});
 
 // Backup initialization after a delay
 setTimeout(() => {
