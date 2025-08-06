@@ -39,7 +39,7 @@ export const NAV_LINKS: Array<{ title: string; href?: string; children?: Array<{
   },
   {
     title: "Join",
-    href: GOOGLE_FORM_URL,
+    href: "join",
   },
 ];
 
