@@ -10,11 +10,17 @@ export const GITHUB_USERNAME = "ArnavK-09";
 export const QUOTE = "everyone is welcome";
 // Centralized social links for easy editing
 export const DISCORD_LINK = "https://discord.gg/BgKg9gskM2";
+export const EMAIL_LINK = "mailto:programmingclubatgsu@gmail.com";
+export const INSTAGRAM_LINK = "https://www.instagram.com/progclubgsu/";
+export const LINKEDIN_LINK = "https://www.linkedin.com/company/progsu";
 export const SOCIAL_LINKS = {
   discord: DISCORD_LINK,
+  email: EMAIL_LINK,
+  instagram: INSTAGRAM_LINK,
+  linkedin: LINKEDIN_LINK,
   // Add more as needed, e.g.:
   // github: "https://github.com/ProgClubGSU",
-  // linkedin: "https://linkedin.com/in/your-profile",
+  // tiktok: "https://tiktok.com/@progsu",
 };
 
 // Google Form URL for joining the club
