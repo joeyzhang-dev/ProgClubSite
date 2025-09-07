@@ -111,6 +111,14 @@ export const membersByYear: MembersByYear = {
       description: "Building and maintaining PROGgsu’s github and projects, mentoring devs, and making sure things break less than my sleep schedule.",
       github: "ibeeeees",
       specialties: ["Software Development", "Mentorship", "Debugging at 2 AM", "Good Ball"]
+    },
+    {
+      name: "Poorav Rawat",
+      role: "Director of Innovation and Outreach",
+      description: "A guy who loves to talk and build. Driving strategic outreach for the Progsu organization by connecting with campus partners, student organizations, and tech industry leaders.",
+      github: "pooravrawat1",
+      linkedin: "pooravrawat",
+      specialties: ["Leadership", "Soccer and Basketball", "Thrifting","Creativity","Height: NOT 6'5\""]
     }
   ],
   
