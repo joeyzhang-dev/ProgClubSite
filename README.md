@@ -1,4 +1,4 @@
-# PROGgsu Website
+# Progsu Website
 
 Official website for Georgia State University's Programming Club, built with modern web technologies to serve our growing community of developers and programming enthusiasts.
 
